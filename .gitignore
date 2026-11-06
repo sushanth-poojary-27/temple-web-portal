@@ -39,4 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-ojt_assistantant_prompt.md
+ojt_assistant_prompt.md
