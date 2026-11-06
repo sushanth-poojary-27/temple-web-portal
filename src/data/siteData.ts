@@ -1,5 +1,5 @@
 export const siteData = {
-  trustName: "Shree Durgaparameshwari Sannidhana (Regd.)",
+  trustName: "Shree Durgaparameshwari Sannidhana (Regd.) Ullur",
   address: "Ullur, Karnataka",
   registrationNo: "Regd. Trust 2004",
   supervisor: {
