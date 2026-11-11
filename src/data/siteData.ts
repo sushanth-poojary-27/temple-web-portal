@@ -29,6 +29,24 @@ export interface NavItem {
   href: string;
 }
 
+export interface FestivalItem {
+  id: string;
+  name: string;
+  dateLabel: string;
+  isoDate: string;
+  badge: string;
+  description: string;
+  image: string;
+  isPlaceholderDate?: boolean;
+}
+
+export interface GalleryItem {
+  id: string;
+  src: string;
+  alt: string;
+  category: "Deity & Sanctum" | "Varshik Pooja" | "Navaratri" | "Monthly Seva";
+}
+
 export interface SiteData {
   trustName: string;
   shortName: string;
@@ -44,6 +62,8 @@ export interface SiteData {
   committee: CommitteeMember[];
   aartiTimings: AartiTiming[];
   darshanTimings: DarshanTimings;
+  festivals: FestivalItem[];
+  gallery: GalleryItem[];
   placeholders: {
     historyNote: string;
     contactPhone: string;
@@ -142,6 +162,91 @@ export const siteData: SiteData = {
     morning: "6:00 AM - 2:00 PM",
     evening: "4:00 PM - 8:30 PM",
   },
+  festivals: [
+    {
+      id: "varshik-pooja",
+      name: "Varshik Pooja (Annual Temple Festival)",
+      dateLabel: "February 2027 [PLACEHOLDER: Exact Panchanga Date Pending]",
+      isoDate: "2027-02-03T06:00:00+05:30",
+      badge: "Next Major Utsava",
+      description:
+        "Annual Pratishtha & Varshik Mahotsava featuring Kalasha Pooja, Maha Ranga Pooja, Daiva Darshana, and community Annaprasada.",
+      image: "/assets/varshik-pooja/2026/2026-devi.jpg",
+      isPlaceholderDate: true,
+    },
+    {
+      id: "navaratri-utsava",
+      name: "Sharannavaratri Mahotsava",
+      dateLabel: "October 2027 [PLACEHOLDER: Exact Panchanga Date Pending]",
+      isoDate: "2027-10-01T06:00:00+05:30",
+      badge: "9-Day Festival",
+      description:
+        "Nine auspicious days of special Devi Alankara, Chandika Homa, Kumkumarchana, Bhajans, and Maha Mangalarathi.",
+      image: "/assets/navaratri/2026/IMG-20261011-WA0006.jpg",
+      isPlaceholderDate: true,
+    },
+    {
+      id: "monthly-sankramana",
+      name: "Masa Sankramana & Special Ranga Pooja",
+      dateLabel: "Monthly (Solar Transition Day) [PLACEHOLDER: Next Date Pending]",
+      isoDate: "2026-12-16T06:00:00+05:30",
+      badge: "Monthly Seva",
+      description:
+        "Monthly Sankramana special abhisheka, Pushpalankara, and evening Ranga Pooja offered to Goddess Durgaparameshwari.",
+      image: "/assets/gallery/monthly-pooja.webp",
+      isPlaceholderDate: true,
+    },
+  ],
+  gallery: [
+    {
+      id: "gal-1",
+      src: "/assets/gallery/devi-1.webp",
+      alt: "Goddess Shri Durgaparameshwari Sanctum Alankara",
+      category: "Deity & Sanctum",
+    },
+    {
+      id: "gal-2",
+      src: "/assets/varshik-pooja/2026/2026-devi.jpg",
+      alt: "Varshik Pooja 2026 Special Devi Alankara",
+      category: "Varshik Pooja",
+    },
+    {
+      id: "gal-3",
+      src: "/assets/varshik-pooja/2026/2026-kalashadevi.jpg",
+      alt: "Kalasha Pooja Rituals during Varshik Mahotsava",
+      category: "Varshik Pooja",
+    },
+    {
+      id: "gal-4",
+      src: "/assets/gallery/ranga.webp",
+      alt: "Traditional Ranga Pooja Offering",
+      category: "Monthly Seva",
+    },
+    {
+      id: "gal-5",
+      src: "/assets/navaratri/2026/IMG-20261011-WA0006.jpg",
+      alt: "Sharannavaratri Special Floral Decoration",
+      category: "Navaratri",
+    },
+    {
+      id: "gal-6",
+      src: "/assets/varshik-pooja/2026/annaprasada.jpg",
+      alt: "Devotees partaking in Mahaprasada / Annaprasada",
+      category: "Varshik Pooja",
+    },
+    {
+      id: "gal-7",
+      src: "/assets/varshik-pooja/2026/2026-rangoli.jpg",
+      alt: "Traditional Temple Rangoli and Deepa Decoration",
+      category: "Varshik Pooja",
+    },
+    {
+      id: "gal-8",
+      src: "/assets/gallery/monthly-pooja.webp",
+      alt: "Monthly Pooja & Sanctum Deeparadhana",
+      category: "Monthly Seva",
+    },
+  ],
   placeholders: {
     historyNote: "[PLACEHOLDER: Temple history text to be provided by the Trust]",
     contactPhone: "[PLACEHOLDER: Official trust phone number]",

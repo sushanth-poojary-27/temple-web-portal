@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import TimingsSection from "@/components/TimingsSection";
+import EventsSection from "@/components/EventsSection";
+import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -20,6 +22,12 @@ export default function Home() {
 
         {/* Task 6: Timings & Services Section with Tabs */}
         <TimingsSection />
+
+        {/* Task 7: Upcoming Temple Festivals & Events with Countdown */}
+        <EventsSection />
+
+        {/* Task 8: Temple Photo Gallery with Lightbox */}
+        <GallerySection />
       </main>
 
       {/* Temple Trust Footer */}
