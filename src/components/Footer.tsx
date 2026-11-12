@@ -119,7 +119,14 @@ export default function Footer() {
               </p>
               <p className="flex items-start gap-2.5 text-xs text-amber-200">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <span>{siteData.placeholders.contactEmail}</span>
+                <a
+                  href={siteData.contact.emailHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-100 hover:text-amber-300 underline underline-offset-2 break-all transition-colors"
+                >
+                  {siteData.contact.emailDisplay}
+                </a>
               </p>
             </div>
           </div>
