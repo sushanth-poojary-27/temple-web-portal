@@ -47,6 +47,20 @@ export interface GalleryItem {
   category: "Deity & Sanctum" | "Varshik Pooja" | "Navaratri" | "Monthly Seva";
 }
 
+export interface ContactInfo {
+  village: string;
+  post: string;
+  region: string;
+  pincode: string;
+  officeHours: string;
+  phoneDisplay: string;
+  phoneHref: string;
+  emailDisplay: string;
+  emailHref: string;
+  googleMapsEmbedUrl: string;
+  googleMapsDirectionsUrl: string;
+}
+
 export interface SiteData {
   trustName: string;
   shortName: string;
@@ -64,6 +78,8 @@ export interface SiteData {
   darshanTimings: DarshanTimings;
   festivals: FestivalItem[];
   gallery: GalleryItem[];
+  contact: ContactInfo;
+  web3formsKey: string;
   placeholders: {
     historyNote: string;
     contactPhone: string;
@@ -247,11 +263,29 @@ export const siteData: SiteData = {
       category: "Monthly Seva",
     },
   ],
+  contact: {
+    village: "Ulluru Village, Yellur",
+    post: "Post Kemundel",
+    region: "Udupi District, Karnataka",
+    pincode: "574119",
+    officeHours: "Morning 6:00 AM - 2:00 PM | Evening 4:00 PM - 8:30 PM",
+    phoneDisplay: "[PLACEHOLDER: Official Trust Phone Number]",
+    phoneHref: "tel:+910000000000",
+    emailDisplay: "shridurgaparameshwariullur@gmail.com",
+    emailHref:
+      "https://mail.google.com/mail/?view=cm&fs=1&to=shridurgaparameshwariullur@gmail.com",
+    googleMapsEmbedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.228546!2d74.7924429!3d13.1634892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcaddb334977bf%3A0xf294e0dc4628342f!2sUlluru%20Durgaparameshwari!5e0!3m2!1sen!2sin!4v1731314000000!5m2!1sen!2sin",
+    googleMapsDirectionsUrl:
+      "https://www.google.com/maps/dir//5Q7W%2B92R+Ulluru+Durgaparameshwari,+Post,+Kemundel,+Ulluru+Village,+Yellur,+Karnataka+574119/@13.1634892,74.7924429,17z/data=!4m16!1m7!3m6!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2sUlluru+Durgaparameshwari!8m2!3d13.1634892!4d74.7950178!16s%2Fg%2F11hzz5k8rp!4m7!1m0!1m5!1m1!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2m2!1d74.7950178!2d13.1634892?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
+  },
+  web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY_PLACEHOLDER",
   placeholders: {
     historyNote: "[PLACEHOLDER: Temple history text to be provided by the Trust]",
     contactPhone: "[PLACEHOLDER: Official trust phone number]",
-    contactEmail: "[PLACEHOLDER: Official trust email]",
-    googleMapsEmbedUrl: "[PLACEHOLDER: Google Maps embed URL]",
+    contactEmail: "shridurgaparameshwariullur@gmail.com",
+    googleMapsEmbedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.228546!2d74.7924429!3d13.1634892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcaddb334977bf%3A0xf294e0dc4628342f!2sUlluru%20Durgaparameshwari!5e0!3m2!1sen!2sin!4v1731314000000!5m2!1sen!2sin",
     bankDetailsNote: "[PLACEHOLDER: Official trust bank & UPI details]",
   },
 };
