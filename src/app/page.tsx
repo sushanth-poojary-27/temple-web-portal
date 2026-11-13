@@ -4,6 +4,8 @@ import AboutSection from "@/components/AboutSection";
 import TimingsSection from "@/components/TimingsSection";
 import EventsSection from "@/components/EventsSection";
 import GallerySection from "@/components/GallerySection";
+import ContactSection from "@/components/ContactSection";
+import InquiryForm from "@/components/InquiryForm";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -28,6 +30,12 @@ export default function Home() {
 
         {/* Task 8: Temple Photo Gallery with Lightbox */}
         <GallerySection />
+
+        {/* Task 9: Location & Contact Section with Google Maps Embed */}
+        <ContactSection />
+
+        {/* Task 10: Seva Booking & Inquiry Form with Validation & Web3Forms */}
+        <InquiryForm />
       </main>
 
       {/* Temple Trust Footer */}
