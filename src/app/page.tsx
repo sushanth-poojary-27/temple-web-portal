@@ -6,6 +6,7 @@ import EventsSection from "@/components/EventsSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import InquiryForm from "@/components/InquiryForm";
+import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -36,6 +37,9 @@ export default function Home() {
 
         {/* Task 10: Seva Booking & Inquiry Form with Validation & Web3Forms */}
         <InquiryForm />
+
+        {/* Task 11 / 12: Seva Booking & Temple Donations Section */}
+        <DonationSection />
       </main>
 
       {/* Temple Trust Footer */}
