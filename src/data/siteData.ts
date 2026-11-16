@@ -52,6 +52,7 @@ export interface ContactInfo {
   post: string;
   region: string;
   pincode: string;
+  plusCode: string;
   officeHours: string;
   phoneDisplay: string;
   phoneHref: string;
@@ -60,6 +61,26 @@ export interface ContactInfo {
   googleMapsEmbedUrl: string;
   googleMapsDirectionsUrl: string;
 }
+
+export interface SevaItem {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export const sevaList: SevaItem[] = [
+  { id: "alankara-pooja", name: "Alankara Pooja", price: 1000 },
+  { id: "hunnime-pooja", name: "Hunnime Pooja", price: 750 },
+  { id: "huvina-pooja", name: "Huvina Pooja", price: 151 },
+  { id: "trimadhura-naivedya", name: "Trimadhura Naivedya", price: 51 },
+  { id: "kunkumarchane", name: "Kunkumarchane", price: 30 },
+  {
+    id: "lalita-sahasra-namarchane",
+    name: "Lalita Sahasra Namarchane",
+    price: 50,
+  },
+  { id: "karpura-arati", name: "Karpura Arati", price: 25 },
+];
 
 export interface SiteData {
   trustName: string;
@@ -79,6 +100,7 @@ export interface SiteData {
   festivals: FestivalItem[];
   gallery: GalleryItem[];
   contact: ContactInfo;
+  sevaList: SevaItem[];
   web3formsKey: string;
   placeholders: {
     historyNote: string;
@@ -92,12 +114,12 @@ export interface SiteData {
 export const siteData: SiteData = {
   trustName: "Shree Durgaparameshwari Sannidhana (Regd.) Ullur",
   shortName: "Shri Durgaparameshwari Sannidhana",
-  address: "Ullur, Karnataka",
+  address: "Post Kemundel, Ulluru Village, Yellur, Udupi District, Karnataka - 574119",
   fullAddress:
-    "Shri Durgaparameshwari Sannidhana (Regd.), Post Kemundel, Ulluru Village, Yellur, Karnataka 574119",
+    "Post Kemundel, Ulluru Village, Yellur, Udupi District, Karnataka - 574119 (Plus Code: 5Q7W+92R)",
   registrationNo: "Regd. Trust 2007",
   assets: {
-    logo: "/assets/website-assets/trust-logo.png",
+    logo: "/trust-logo.png",
     heroBanner: "/assets/website-assets/banner.png",
   },
   supervisor: {
@@ -268,6 +290,7 @@ export const siteData: SiteData = {
     post: "Post Kemundel",
     region: "Udupi District, Karnataka",
     pincode: "574119",
+    plusCode: "5Q7W+92R",
     officeHours: "Morning 6:00 AM - 2:00 PM | Evening 4:00 PM - 8:30 PM",
     phoneDisplay: "[PLACEHOLDER: Official Trust Phone Number]",
     phoneHref: "tel:+910000000000",
@@ -279,6 +302,7 @@ export const siteData: SiteData = {
     googleMapsDirectionsUrl:
       "https://www.google.com/maps/dir//5Q7W%2B92R+Ulluru+Durgaparameshwari,+Post,+Kemundel,+Ulluru+Village,+Yellur,+Karnataka+574119/@13.1634892,74.7924429,17z/data=!4m16!1m7!3m6!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2sUlluru+Durgaparameshwari!8m2!3d13.1634892!4d74.7950178!16s%2Fg%2F11hzz5k8rp!4m7!1m0!1m5!1m1!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2m2!1d74.7950178!2d13.1634892?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
   },
+  sevaList,
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY_PLACEHOLDER",
   placeholders: {
     historyNote: "[PLACEHOLDER: Temple history text to be provided by the Trust]",
