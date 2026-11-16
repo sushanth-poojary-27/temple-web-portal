@@ -56,7 +56,8 @@ export default function ContactSection() {
                       {siteData.fullAddress}
                     </p>
                     <p className="text-xs font-bold text-amber-700">
-                      Pincode: {siteData.contact.pincode}
+                      Pincode: {siteData.contact.pincode} • Plus Code:{" "}
+                      {siteData.contact.plusCode}
                     </p>
                   </div>
                 </div>
