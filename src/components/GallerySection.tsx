@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Camera, X, ZoomIn } from "lucide-react";
 import { siteData, type GalleryItem } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function GallerySection() {
+  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
   // Close lightbox on Escape key press
@@ -30,14 +32,16 @@ export default function GallerySection() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <Camera className="w-3.5 h-3.5 text-amber-600" />
-            <span>Sacred Moments</span>
+            <span>{t("Sacred Moments", "ಪವಿತ್ರ ಕ್ಷಣಗಳು")}</span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Temple Photo Gallery
+            {t("Temple Photo Gallery", "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಛಾಯಾಚಿತ್ರ ಸಂಗ್ರಹ")}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            Glimpses of Goddess Alankara, Varshik Pooja, Sharannavaratri, and
-            community Annaprasada at {siteData.shortName}.
+            {t(
+              `Glimpses of Goddess Alankara, Varshik Pooja, Sharannavaratri, and community Annaprasada at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ಶ್ರೀ ದೇವಿಯ ಅಲಂಕಾರ, ವಾರ್ಷಿಕ ಪೂಜಾ ಮಹೋತ್ಸವ, ಶರನ್ನವರಾತ್ರಿ ಹಾಗೂ ಅನ್ನಪ್ರಸಾದದ ದೃಶ್ಯಗಳು.`
+            )}
           </p>
         </div>
 
@@ -48,12 +52,15 @@ export default function GallerySection() {
               key={item.id}
               type="button"
               onClick={() => setSelectedImage(item)}
-              aria-label={`View enlarged image: ${item.alt}`}
-              className="group relative h-64 w-full rounded-2xl overflow-hidden bg-amber-100 border border-amber-200 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-amber-600 transition-all duration-300 text-left focus:outline-none focus:ring-2 focus:ring-amber-600"
+              aria-label={t(
+                `View enlarged image: ${item.alt}`,
+                `ದೊಡ್ಡ ಚಿತ್ರವನ್ನು ವೀಕ್ಷಿಸಿ: ${item.altKn}`
+              )}
+              className="group relative h-64 w-full rounded-2xl overflow-hidden bg-amber-100 border border-amber-200 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-amber-600 transition-all duration-300 text-left focus:outline-none focus:ring-2 focus:ring-amber-600 cursor-pointer"
             >
               <Image
                 src={item.src}
-                alt={item.alt}
+                alt={t(item.alt, item.altKn)}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
@@ -63,14 +70,14 @@ export default function GallerySection() {
               <div className="absolute inset-0 bg-gradient-to-t from-amber-950/90 via-amber-950/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                 <div className="flex items-center justify-between gap-2">
                   <span className="inline-block rounded-full bg-amber-600/90 px-2.5 py-0.5 text-[11px] font-bold text-white">
-                    {item.category}
+                    {t(item.category, item.categoryKn)}
                   </span>
                   <span className="w-7 h-7 rounded-full bg-white/90 text-amber-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
                     <ZoomIn className="w-4 h-4" />
                   </span>
                 </div>
                 <p className="mt-1.5 text-xs sm:text-sm font-semibold text-amber-50 line-clamp-2">
-                  {item.alt}
+                  {t(item.alt, item.altKn)}
                 </p>
               </div>
             </button>
@@ -83,7 +90,7 @@ export default function GallerySection() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={selectedImage.alt}
+          aria-label={t(selectedImage.alt, selectedImage.altKn)}
           onClick={() => setSelectedImage(null)}
           className="fixed inset-0 z-50 flex items-center justify-center bg-amber-950/85 backdrop-blur-md p-4 sm:p-6"
         >
@@ -95,8 +102,8 @@ export default function GallerySection() {
             <button
               type="button"
               onClick={() => setSelectedImage(null)}
-              aria-label="Close enlarged image"
-              className="absolute top-4 right-4 z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-900/90 text-amber-50 hover:bg-amber-600 border border-amber-500 shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400"
+              aria-label={t("Close enlarged image", "ಚಿತ್ರವನ್ನು ಮುಚ್ಚಿ")}
+              className="absolute top-4 right-4 z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-900/90 text-amber-50 hover:bg-amber-600 border border-amber-500 shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -105,7 +112,7 @@ export default function GallerySection() {
             <div className="relative w-full h-[65vh] sm:h-[75vh] bg-black/40">
               <Image
                 src={selectedImage.src}
-                alt={selectedImage.alt}
+                alt={t(selectedImage.alt, selectedImage.altKn)}
                 fill
                 sizes="90vw"
                 className="object-contain p-2 sm:p-4"
@@ -117,18 +124,18 @@ export default function GallerySection() {
             <div className="p-4 sm:p-5 bg-amber-900 text-amber-50 flex flex-wrap items-center justify-between gap-2 border-t border-amber-700">
               <div>
                 <span className="inline-block rounded-full bg-amber-600 px-2.5 py-0.5 text-xs font-bold text-white mb-1">
-                  {selectedImage.category}
+                  {t(selectedImage.category, selectedImage.categoryKn)}
                 </span>
                 <p className="text-sm sm:text-base font-bold text-white">
-                  {selectedImage.alt}
+                  {t(selectedImage.alt, selectedImage.altKn)}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedImage(null)}
-                className="rounded-full bg-amber-800 hover:bg-amber-700 px-4 py-1.5 text-xs font-semibold text-amber-100 border border-amber-600 transition-colors"
+                className="rounded-full bg-amber-800 hover:bg-amber-700 px-4 py-1.5 text-xs font-semibold text-amber-100 border border-amber-600 transition-colors cursor-pointer"
               >
-                Close (Esc)
+                {t("Close (Esc)", "ಮುಚ್ಚಿ (Esc)")}
               </button>
             </div>
           </div>
