@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Clock,
   Mail,
@@ -7,8 +9,11 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="contact"
@@ -19,14 +24,19 @@ export default function ContactSection() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <MapPin className="w-3.5 h-3.5 text-amber-600" />
-            <span>Visit the Sannidhana</span>
+            <span>{t("Visit the Sannidhana", "ಶ್ರೀ ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಿ")}</span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Location & Contact Details
+            {t(
+              "Location & Contact Details",
+              "ಶ್ರೀ ಕ್ಷೇತ್ರದ ವಿಳಾಸ ಮತ್ತು ಸಂಪರ್ಕ ವಿವರ"
+            )}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            Plan your visit to {siteData.trustName} or reach out to the trust
-            office for seva and temple inquiries.
+            {t(
+              `Plan your visit to ${siteData.trustName} or reach out to the trust office for seva and temple inquiries.`,
+              `${siteData.trustNameKn} ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಲು ಹಾಗೂ ಸೇವಾ ವಿವರಗಳಿಗಾಗಿ ಟ್ರಸ್ಟ್ ಕಚೇರಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ.`
+            )}
           </p>
         </div>
 
@@ -37,10 +47,10 @@ export default function ContactSection() {
             <div className="space-y-6">
               <div>
                 <span className="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 border border-amber-200">
-                  {siteData.registrationNo}
+                  {t(siteData.registrationNo, siteData.registrationNoKn)}
                 </span>
-                <h3 className="mt-2 text-xl sm:text-2xl font-bold text-amber-900">
-                  {siteData.trustName}
+                <h3 className="mt-2 text-xl sm:text-2xl font-bold text-amber-900 leading-snug">
+                  {t(siteData.trustName, siteData.trustNameKn)}
                 </h3>
               </div>
 
@@ -50,13 +60,14 @@ export default function ContactSection() {
                   <MapPin className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                      Temple Postal Address
+                      {t("Temple Postal Address", "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಂಚೆ ವಿಳಾಸ")}
                     </p>
                     <p className="font-semibold text-amber-900">
-                      {siteData.fullAddress}
+                      {t(siteData.address, siteData.addressKn)}
                     </p>
                     <p className="text-xs font-bold text-amber-700">
-                      Pincode: {siteData.contact.pincode} • Plus Code:{" "}
+                      {t("Pincode", "ಪಿನ್ ಕೋಡ್")}: {siteData.contact.pincode} •{" "}
+                      {t("Plus Code", "ಪ್ಲಸ್ ಕೋಡ್")}:{" "}
                       {siteData.contact.plusCode}
                     </p>
                   </div>
@@ -67,13 +78,21 @@ export default function ContactSection() {
                   <Clock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                      Temple & Office Hours
+                      {t("Temple & Office Hours", "ದರ್ಶನ ಮತ್ತು ಕಚೇರಿ ಸಮಯ")}
                     </p>
                     <p className="font-semibold text-amber-900">
-                      Morning: {siteData.darshanTimings.morning}
+                      {t("Morning", "ಬೆಳಿಗ್ಗೆ")}:{" "}
+                      {t(
+                        siteData.darshanTimings.morning,
+                        siteData.darshanTimings.morningKn
+                      )}
                     </p>
                     <p className="font-semibold text-amber-900">
-                      Evening: {siteData.darshanTimings.evening}
+                      {t("Evening", "ಸಂಜೆ")}:{" "}
+                      {t(
+                        siteData.darshanTimings.evening,
+                        siteData.darshanTimings.eveningKn
+                      )}
                     </p>
                   </div>
                 </div>
@@ -83,14 +102,22 @@ export default function ContactSection() {
                   <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                   <div className="space-y-1.5">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                      Trust Office Contact
+                      {t("Trust Office Contact", "ಟ್ರಸ್ಟ್ ಕಚೇರಿ ಸಂಪರ್ಕ")}
                     </p>
                     <p className="font-bold text-amber-900">
-                      {siteData.supervisor.name} ({siteData.supervisor.designation})
+                      {t(
+                        `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
+                        `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
+                      )}
                     </p>
                     <p className="text-xs sm:text-sm flex items-center gap-2 text-amber-800">
                       <Phone className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>{siteData.contact.phoneDisplay}</span>
+                      <span>
+                        {t(
+                          siteData.contact.phoneDisplay,
+                          siteData.contact.phoneDisplayKn
+                        )}
+                      </span>
                     </p>
                     <p className="text-xs sm:text-sm flex items-center gap-2 text-amber-800">
                       <Mail className="w-4 h-4 text-amber-600 shrink-0" />
@@ -117,7 +144,7 @@ export default function ContactSection() {
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-900 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span>Email on Gmail</span>
+                <span>{t("Email on Gmail", "ಜಿಮೇಲ್ ಮೂಲಕ ಇಮೇಲ್ ಮಾಡಿ")}</span>
               </a>
 
               <a
@@ -127,7 +154,7 @@ export default function ContactSection() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-amber-600 bg-amber-50 px-5 py-3 text-sm font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors"
               >
                 <Navigation className="w-4 h-4" />
-                <span>Get Directions</span>
+                <span>{t("Get Directions", "ಗೂಗಲ್ ಮ್ಯಾಪ್ ಮಾರ್ಗಸೂಚಿ")}</span>
               </a>
             </div>
           </div>
@@ -138,7 +165,8 @@ export default function ContactSection() {
               <span className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>
-                  {siteData.shortName} • {siteData.contact.village} (
+                  {t(siteData.shortName, siteData.shortNameKn)} •{" "}
+                  {t(siteData.contact.village, siteData.contact.villageKn)} (
                   {siteData.contact.pincode})
                 </span>
               </span>
@@ -146,15 +174,18 @@ export default function ContactSection() {
                 href={siteData.contact.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-amber-300 hover:text-white underline underline-offset-2"
+                className="text-amber-300 hover:text-white underline underline-offset-2 shrink-0"
               >
-                Open in Maps ↗
+                {t("Open in Maps ↗", "ನಕ್ಷೆ ತೆರೆಯಿರಿ ↗")}
               </a>
             </div>
 
             <div className="relative flex-1 w-full min-h-[340px]">
               <iframe
-                title={`Google Maps location for ${siteData.trustName}`}
+                title={t(
+                  `Google Maps location for ${siteData.trustName}`,
+                  `${siteData.trustNameKn} ಗೂಗಲ್ ಮ್ಯಾಪ್ ಸ್ಥಳ`
+                )}
                 src={siteData.contact.googleMapsEmbedUrl}
                 width="100%"
                 height="100%"
