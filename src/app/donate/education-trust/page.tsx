@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
-  ArrowLeft,
   BookOpen,
   CreditCard,
   IndianRupee,
+  Languages,
   Loader2,
   Mail,
   MapPin,
@@ -18,6 +18,7 @@ import {
   User,
 } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 import type { ReceiptData } from "@/utils/generateReceipt";
 import { sendReceiptEmails } from "@/utils/sendReceiptEmails";
 
@@ -121,6 +122,7 @@ function loadRazorpayScript(): Promise<boolean> {
 
 export default function EducationTrustDonationPage() {
   const router = useRouter();
+  const { language, toggleLanguage, t } = useLanguage();
   const [formData, setFormData] =
     useState<TrustDonationFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<TrustDonationErrors>({});
@@ -140,32 +142,55 @@ export default function EducationTrustDonationPage() {
   ): string | undefined => {
     switch (field) {
       case "name":
-        if (!value.trim()) return "Full Name is required.";
+        if (!value.trim())
+          return t("Full Name is required.", "ದಾನಿಗಳ ಪೂರ್ಣ ಹೆಸರು ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (value.trim().length < 2)
-          return "Name must be at least 2 characters.";
+          return t(
+            "Name must be at least 2 characters.",
+            "ಹೆಸರು ಕನಿಷ್ಠ 2 ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."
+          );
         return undefined;
       case "phone":
-        if (!value.trim()) return "10-digit mobile number is required.";
+        if (!value.trim())
+          return t(
+            "10-digit mobile number is required.",
+            "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         if (!INDIAN_MOBILE_REGEX.test(value.trim())) {
-          return "Enter a valid 10-digit Indian mobile number (starting with 6-9).";
+          return t(
+            "Enter a valid 10-digit Indian mobile number (starting with 6-9).",
+            "6 ರಿಂದ 9 ರಲ್ಲಿ ಪ್ರಾರಂಭವಾಗುವ ಮಾನ್ಯ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ."
+          );
         }
         return undefined;
       case "email":
-        if (!value.trim()) return "Email ID is required.";
+        if (!value.trim())
+          return t("Email ID is required.", "ಇಮೇಲ್ ವಿಳಾಸ ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (!EMAIL_REGEX.test(value.trim())) {
-          return "Enter a valid Email ID.";
+          return t("Enter a valid Email ID.", "ಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.");
         }
         return undefined;
       case "address":
-        if (!value.trim()) return "Full Address is required.";
+        if (!value.trim())
+          return t("Full Address is required.", "ಪೂರ್ಣ ವಿಳಾಸ ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (value.trim().length < 8)
-          return "Please enter your complete postal address.";
+          return t(
+            "Please enter your complete postal address.",
+            "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ."
+          );
         return undefined;
       case "amount": {
-        if (!value.trim()) return "Contribution amount is required.";
+        if (!value.trim())
+          return t(
+            "Contribution amount is required.",
+            "ದೇಣಿಗೆ ಮೊತ್ತವನ್ನು ನಮೂದಿಸುವುದು ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         const num = Number(value);
         if (Number.isNaN(num) || num < 10) {
-          return "Minimum contribution amount is ₹10.";
+          return t(
+            "Minimum contribution amount is ₹10.",
+            "ಕನಿಷ್ಠ ದೇಣಿಗೆ ಮೊತ್ತ ₹10 ಆಗಿದೆ."
+          );
         }
         return undefined;
       }
@@ -242,7 +267,10 @@ export default function EducationTrustDonationPage() {
       const loaded = await loadRazorpayScript();
       if (!loaded || !window.Razorpay) {
         setGatewayError(
-          "Failed to load Razorpay Checkout SDK. Please check your internet connection."
+          t(
+            "Failed to load Razorpay Checkout SDK. Please check your internet connection.",
+            "ರೇಜರ್‌ಪೇ ಪಾವತಿ ಗೇಟ್‌ವೇ ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ."
+          )
         );
         setIsLoadingGateway(false);
         return;
@@ -255,7 +283,10 @@ export default function EducationTrustDonationPage() {
 
       if (!razorpayKey) {
         setGatewayError(
-          "Razorpay Test Key ID (NEXT_PUBLIC_RAZORPAY_KEY_ID) is not configured in .env.local."
+          t(
+            "Razorpay Test Key ID (NEXT_PUBLIC_RAZORPAY_KEY_ID) is not configured in .env.local.",
+            "ರೇಜರ್‌ಪೇ ಪರೀಕ್ಷಾ ಕೀ (NEXT_PUBLIC_RAZORPAY_KEY_ID) ಹೊಂದಿಸಲಾಗಿಲ್ಲ."
+          )
         );
         setIsLoadingGateway(false);
         return;
@@ -316,13 +347,19 @@ export default function EducationTrustDonationPage() {
       rzp.on("payment.failed", (failure: RazorpayFailureResponse) => {
         const desc =
           failure?.error?.description ||
-          "Your test payment could not be completed. No amount was deducted.";
+          t(
+            "Your test payment could not be completed. No amount was deducted.",
+            "ಪರೀಕ್ಷಾ ಪಾವತಿ ಪೂರ್ಣಗೊಂಡಿಲ್ಲ. ಯಾವುದೇ ಹಣ ಕಡಿತಗೊಂಡಿಲ್ಲ."
+          );
         setPaymentFailedMessage(desc);
       });
       rzp.open();
     } catch {
       setGatewayError(
-        "Unable to initialize Razorpay Checkout modal. Please try again."
+        t(
+          "Unable to initialize Razorpay Checkout modal. Please try again.",
+          "ಪಾವತಿ ವಿಂಡೋ ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+        )
       );
     } finally {
       setIsLoadingGateway(false);
@@ -337,33 +374,51 @@ export default function EducationTrustDonationPage() {
   return (
     <div className="min-h-screen bg-amber-50 text-amber-900 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto space-y-8">
-        {/* Top Back to Home Link & Test Mode Notice */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        {/* Top Back to Home Link, Language Switcher & Test Mode Notice */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/#donate"
             className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-colors"
           >
-            <span>← Back to Home</span>
+            <span>{t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}</span>
           </Link>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-            <span>DEMO / TEST, not a valid receipt</span>
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
+              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+              <span>
+                {t(siteData.demoDisclaimer, siteData.demoDisclaimerKn)}
+              </span>
+            </span>
+
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-amber-600 bg-white px-3.5 py-1 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors cursor-pointer"
+            >
+              <Languages className="w-3.5 h-3.5" />
+              <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
+            </button>
+          </div>
         </div>
 
         {/* Page Header */}
         <div className="rounded-3xl bg-amber-900 text-amber-50 p-6 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
           <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
             <BookOpen className="w-4 h-4 text-amber-400" />
-            <span>{siteData.trustName}</span>
+            <span>{t(siteData.trustName, siteData.trustNameKn)}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            Education & General Trust Fund
+            {t(
+              "Education & General Trust Fund",
+              "ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಾಮಾನ್ಯ ಟ್ರಸ್ಟ್ ನಿಧಿ"
+            )}
           </h1>
           <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed">
-            Support student scholarships, educational assistance, Annadana, and
-            temple preservation initiatives at {siteData.shortName}.
+            {t(
+              `Support student scholarships, educational assistance, Annadana, and temple preservation initiatives at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ವತಿಯಿಂದ ನೀಡಲಾಗುವ ವಿದ್ಯಾರ್ಥಿ ವೇತನ, ಶೈಕ್ಷಣಿಕ ನೆರವು, ನಿತ್ಯ ಅನ್ನದಾನ ಹಾಗೂ ದೇವಸ್ಥಾನದ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಗಳಿಗೆ ದೇಣಿಗೆ ನೀಡಿ.`
+            )}
           </p>
         </div>
 
@@ -379,17 +434,19 @@ export default function EducationTrustDonationPage() {
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                 <div className="text-sm space-y-1">
-                  <p className="font-bold text-base">Payment Failed</p>
+                  <p className="font-bold text-base">
+                    {t("Payment Failed", "ಪಾವತಿ ವಿಫಲವಾಗಿದೆ")}
+                  </p>
                   <p className="text-red-800">{paymentFailedMessage}</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={openRazorpayGateway}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0 cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Try Again</span>
+                <span>{t("Try Again", "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ")}</span>
               </button>
             </div>
           )}
@@ -403,7 +460,9 @@ export default function EducationTrustDonationPage() {
             >
               <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
               <div className="text-sm space-y-1">
-                <p className="font-bold">Payment Gateway Notice</p>
+                <p className="font-bold">
+                  {t("Payment Gateway Notice", "ಪಾವತಿ ಗೇಟ್‌ವೇ ಸೂಚನೆ")}
+                </p>
                 <p className="text-red-800">{gatewayError}</p>
               </div>
             </div>
@@ -416,9 +475,10 @@ export default function EducationTrustDonationPage() {
                 htmlFor="trust-amount"
                 className="block text-sm font-bold text-amber-900"
               >
-                Contribution Amount (₹) <span className="text-red-600">*</span>{" "}
+                {t("Contribution Amount (₹)", "ದೇಣಿಗೆ ಮೊತ್ತ (₹)")}{" "}
+                <span className="text-red-600">*</span>{" "}
                 <span className="text-xs font-medium text-amber-700">
-                  (Minimum ₹10)
+                  {t("(Minimum ₹10)", "(ಕನಿಷ್ಠ ₹10)")}
                 </span>
               </label>
 
@@ -431,7 +491,7 @@ export default function EducationTrustDonationPage() {
                       key={chip}
                       type="button"
                       onClick={() => handleQuickAmountSelect(chip)}
-                      className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold border transition-all ${
+                      className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold border transition-all cursor-pointer ${
                         isSelected
                           ? "bg-amber-600 text-white border-amber-600 shadow-sm"
                           : "bg-white text-amber-900 border-amber-300 hover:border-amber-600"
@@ -454,7 +514,10 @@ export default function EducationTrustDonationPage() {
                   required
                   value={formData.amount}
                   onChange={handleChange}
-                  placeholder="Enter amount in ₹ (min ₹10)"
+                  placeholder={t(
+                    "Enter amount in ₹ (min ₹10)",
+                    "ದೇಣಿಗೆ ಮೊತ್ತವನ್ನು ₹ ನಲ್ಲಿ ನಮೂದಿಸಿ (ಕನಿಷ್ಠ ₹10)"
+                  )}
                   className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-base font-bold text-amber-900 border focus:outline-none focus:ring-2 ${
                     errors.amount
                       ? "border-red-500 focus:ring-red-500"
@@ -477,7 +540,8 @@ export default function EducationTrustDonationPage() {
                   htmlFor="trust-name"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Full Name <span className="text-red-600">*</span>
+                  {t("Full Name", "ದಾನಿಗಳ ಪೂರ್ಣ ಹೆಸರು")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -488,7 +552,10 @@ export default function EducationTrustDonationPage() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter donor full name"
+                    placeholder={t(
+                      "Enter donor full name",
+                      "ದಾನಿಗಳ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
+                    )}
                     className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                       errors.name
                         ? "border-red-500 focus:ring-red-500"
@@ -510,7 +577,8 @@ export default function EducationTrustDonationPage() {
                   htmlFor="trust-phone"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  10-Digit Mobile Number <span className="text-red-600">*</span>
+                  {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -523,7 +591,7 @@ export default function EducationTrustDonationPage() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="e.g. 9876543210"
+                    placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
                     className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                       errors.phone
                         ? "border-red-500 focus:ring-red-500"
@@ -546,7 +614,8 @@ export default function EducationTrustDonationPage() {
                 htmlFor="trust-email"
                 className="block text-sm font-bold text-amber-900"
               >
-                Email ID <span className="text-red-600">*</span>
+                {t("Email ID", "ಇಮೇಲ್ ವಿಳಾಸ")}{" "}
+                <span className="text-red-600">*</span>
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -579,7 +648,8 @@ export default function EducationTrustDonationPage() {
                 htmlFor="trust-address"
                 className="block text-sm font-bold text-amber-900"
               >
-                Full Address <span className="text-red-600">*</span>
+                {t("Full Address", "ಪೂರ್ಣ ವಿಳಾಸ")}{" "}
+                <span className="text-red-600">*</span>
               </label>
               <div className="relative">
                 <MapPin className="w-4 h-4 text-amber-600 absolute left-3.5 top-3.5 pointer-events-none" />
@@ -590,7 +660,10 @@ export default function EducationTrustDonationPage() {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="Enter your complete postal address with Pincode"
+                  placeholder={t(
+                    "Enter your complete postal address with Pincode",
+                    "ಪಿನ್ ಕೋಡ್ ಸಹಿತ ನಿಮ್ಮ ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ"
+                  )}
                   className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                     errors.address
                       ? "border-red-500 focus:ring-red-500"
@@ -606,30 +679,43 @@ export default function EducationTrustDonationPage() {
               )}
             </div>
 
+            {/* Tax Exemption Notice */}
+            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900">
+              {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
+            </div>
+
             {/* Submit Button showing entered rupee amount */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-amber-100">
               <div className="text-xs text-amber-800">
-                Fund:{" "}
+                {t("Fund:", "ನಿಧಿ:")}{" "}
                 <strong className="text-amber-900">
-                  Education & General Trust Fund
+                  {t(
+                    "Education & General Trust Fund",
+                    "ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಾಮಾನ್ಯ ಟ್ರಸ್ಟ್ ನಿಧಿ"
+                  )}
                 </strong>
               </div>
 
               <button
                 type="submit"
                 disabled={isLoadingGateway}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors cursor-pointer"
               >
                 {isLoadingGateway ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Opening Razorpay...</span>
+                    <span>
+                      {t("Opening Razorpay...", "ಪಾವತಿ ವಿಂಡೋ ತೆರೆಯುತ್ತಿದೆ...")}
+                    </span>
                   </>
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4" />
                     <span>
-                      Donate ₹{displayAmount > 0 ? displayAmount : "0"}
+                      {t(
+                        `Donate ₹${displayAmount > 0 ? displayAmount : "0"}`,
+                        `ದೇಣಿಗೆ ನೀಡಿ ₹${displayAmount > 0 ? displayAmount : "0"}`
+                      )}
                     </span>
                   </>
                 )}
