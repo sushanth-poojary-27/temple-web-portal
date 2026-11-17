@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
-  ArrowLeft,
   Calendar,
   CreditCard,
   Flame,
+  Languages,
   Loader2,
   Mail,
   MapPin,
@@ -18,6 +18,7 @@ import {
   User,
 } from "lucide-react";
 import { sevaList, siteData, type SevaItem } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 import type { ReceiptData } from "@/utils/generateReceipt";
 import { sendReceiptEmails } from "@/utils/sendReceiptEmails";
 
@@ -123,6 +124,7 @@ function loadRazorpayScript(): Promise<boolean> {
 
 export default function SevaBookingPage() {
   const router = useRouter();
+  const { language, toggleLanguage, t } = useLanguage();
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formData, setFormData] =
     useState<SevaBookingFormData>(INITIAL_FORM_DATA);
@@ -142,33 +144,56 @@ export default function SevaBookingPage() {
   ): string | undefined => {
     switch (field) {
       case "name":
-        if (!value.trim()) return "Full Name is required.";
+        if (!value.trim())
+          return t("Full Name is required.", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (value.trim().length < 2)
-          return "Name must be at least 2 characters.";
+          return t(
+            "Name must be at least 2 characters.",
+            "ಹೆಸರು ಕನಿಷ್ಠ 2 ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."
+          );
         return undefined;
       case "phone":
-        if (!value.trim()) return "10-digit mobile number is required.";
+        if (!value.trim())
+          return t(
+            "10-digit mobile number is required.",
+            "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         if (!INDIAN_MOBILE_REGEX.test(value.trim())) {
-          return "Enter a valid 10-digit Indian mobile number (starting with 6-9).";
+          return t(
+            "Enter a valid 10-digit Indian mobile number (starting with 6-9).",
+            "6 ರಿಂದ 9 ರಲ್ಲಿ ಪ್ರಾರಂಭವಾಗುವ ಮಾನ್ಯ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ."
+          );
         }
         return undefined;
       case "email":
-        if (!value.trim()) return "Email ID is required.";
+        if (!value.trim())
+          return t("Email ID is required.", "ಇಮೇಲ್ ವಿಳಾಸ ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (!EMAIL_REGEX.test(value.trim())) {
-          return "Enter a valid Email ID.";
+          return t("Enter a valid Email ID.", "ಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.");
         }
         return undefined;
       case "address":
         if (!value.trim())
-          return "Full Postal Address with Pincode is required for Prasadam dispatch.";
+          return t(
+            "Full Postal Address with Pincode is required for Prasadam dispatch.",
+            "ಪ್ರಸಾದ ಕಳುಹಿಸಲು ಪಿನ್ ಕೋಡ್ ಸಹಿತ ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸ ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         if (value.trim().length < 10)
-          return "Please include complete postal address and 6-digit pincode.";
+          return t(
+            "Please include complete postal address and 6-digit pincode.",
+            "ದಯವಿಟ್ಟು ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸ ಮತ್ತು 6 ಅಂಕಿಯ ಪಿನ್ ಕೋಡ್ ನಮೂದಿಸಿ."
+          );
         return undefined;
       case "date":
-        if (!value.trim()) return "Preferred Seva Date is required.";
+        if (!value.trim())
+          return t(
+            "Preferred Seva Date is required.",
+            "ಸೇವೆಯ ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡುವುದು ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         return undefined;
       case "sevaId":
-        if (!value.trim()) return "Please select a Seva.";
+        if (!value.trim())
+          return t("Please select a Seva.", "ದಯವಿಟ್ಟು ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.");
         return undefined;
       default:
         return undefined;
@@ -229,7 +254,10 @@ export default function SevaBookingPage() {
       const loaded = await loadRazorpayScript();
       if (!loaded || !window.Razorpay) {
         setGatewayError(
-          "Failed to load Razorpay Checkout SDK. Please check your internet connection."
+          t(
+            "Failed to load Razorpay Checkout SDK. Please check your internet connection.",
+            "ರೇಜರ್‌ಪೇ ಪಾವತಿ ಗೇಟ್‌ವೇ ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ."
+          )
         );
         setIsLoadingGateway(false);
         return;
@@ -242,7 +270,10 @@ export default function SevaBookingPage() {
 
       if (!razorpayKey) {
         setGatewayError(
-          "Razorpay Test Key ID (NEXT_PUBLIC_RAZORPAY_KEY_ID) is not configured in .env.local."
+          t(
+            "Razorpay Test Key ID (NEXT_PUBLIC_RAZORPAY_KEY_ID) is not configured in .env.local.",
+            "ರೇಜರ್‌ಪೇ ಪರೀಕ್ಷಾ ಕೀ (NEXT_PUBLIC_RAZORPAY_KEY_ID) ಹೊಂದಿಸಲಾಗಿಲ್ಲ."
+          )
         );
         setIsLoadingGateway(false);
         return;
@@ -301,13 +332,19 @@ export default function SevaBookingPage() {
       rzp.on("payment.failed", (failure: RazorpayFailureResponse) => {
         const desc =
           failure?.error?.description ||
-          "Your test payment could not be completed. No amount was deducted.";
+          t(
+            "Your test payment could not be completed. No amount was deducted.",
+            "ಪರೀಕ್ಷಾ ಪಾವತಿ ಪೂರ್ಣಗೊಂಡಿಲ್ಲ. ಯಾವುದೇ ಹಣ ಕಡಿತಗೊಂಡಿಲ್ಲ."
+          );
         setPaymentFailedMessage(desc);
       });
       rzp.open();
     } catch {
       setGatewayError(
-        "Unable to initialize Razorpay Checkout modal. Please try again."
+        t(
+          "Unable to initialize Razorpay Checkout modal. Please try again.",
+          "ಪಾವತಿ ವಿಂಡೋ ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+        )
       );
     } finally {
       setIsLoadingGateway(false);
@@ -322,33 +359,48 @@ export default function SevaBookingPage() {
   return (
     <div className="min-h-screen bg-amber-50 text-amber-900 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto space-y-8">
-        {/* Top Back to Home Link & Test Mode Notice */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        {/* Top Back to Home Link, Language Switcher & Test Mode Notice */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/#donate"
             className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-colors"
           >
-            <span>← Back to Home</span>
+            <span>{t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}</span>
           </Link>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-            <span>DEMO / TEST, not a valid receipt</span>
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
+              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+              <span>
+                {t(siteData.demoDisclaimer, siteData.demoDisclaimerKn)}
+              </span>
+            </span>
+
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-amber-600 bg-white px-3.5 py-1 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors cursor-pointer"
+            >
+              <Languages className="w-3.5 h-3.5" />
+              <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
+            </button>
+          </div>
         </div>
 
         {/* Page Header */}
         <div className="rounded-3xl bg-amber-900 text-amber-50 p-6 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
           <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
             <Flame className="w-4 h-4 text-amber-400" />
-            <span>{siteData.trustName}</span>
+            <span>{t(siteData.trustName, siteData.trustNameKn)}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            Online Seva Booking
+            {t("Online Seva Booking", "ಆನ್‌ಲೈನ್ ಪೂಜಾ ಸೇವಾ ನೋಂದಣಿ")}
           </h1>
           <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed">
-            Select your Seva below and fill in your details for Sankalpa and
-            Prasadam postal dispatch.
+            {t(
+              "Select your Seva below and fill in your details for Sankalpa and Prasadam postal dispatch.",
+              "ಶ್ರೀ ದೇವಿಯ ಸಂಕಲ್ಪ ಪೂಜೆ ಹಾಗೂ ಅಂಚೆ ಮೂಲಕ ಪ್ರಸಾದ ಪಡೆಯಲು ಕೆಳಗೆ ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ."
+            )}
           </p>
         </div>
 
@@ -364,17 +416,19 @@ export default function SevaBookingPage() {
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                 <div className="text-sm space-y-1">
-                  <p className="font-bold text-base">Payment Failed</p>
+                  <p className="font-bold text-base">
+                    {t("Payment Failed", "ಪಾವತಿ ವಿಫಲವಾಗಿದೆ")}
+                  </p>
                   <p className="text-red-800">{paymentFailedMessage}</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={openRazorpayGateway}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0 cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Try Again</span>
+                <span>{t("Try Again", "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ")}</span>
               </button>
             </div>
           )}
@@ -388,7 +442,9 @@ export default function SevaBookingPage() {
             >
               <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
               <div className="text-sm space-y-1">
-                <p className="font-bold">Payment Gateway Notice</p>
+                <p className="font-bold">
+                  {t("Payment Gateway Notice", "ಪಾವತಿ ಗೇಟ್‌ವೇ ಸೂಚನೆ")}
+                </p>
                 <p className="text-red-800">{gatewayError}</p>
               </div>
             </div>
@@ -407,7 +463,8 @@ export default function SevaBookingPage() {
                   htmlFor="seva-name"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Full Name <span className="text-red-600">*</span>
+                  {t("Full Name", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -418,7 +475,10 @@ export default function SevaBookingPage() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter devotee full name"
+                    placeholder={t(
+                      "Enter devotee full name",
+                      "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
+                    )}
                     className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                       errors.name
                         ? "border-red-500 focus:ring-red-500"
@@ -440,7 +500,8 @@ export default function SevaBookingPage() {
                   htmlFor="seva-phone"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  10-Digit Mobile Number <span className="text-red-600">*</span>
+                  {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -453,7 +514,7 @@ export default function SevaBookingPage() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="e.g. 9876543210"
+                    placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
                     className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                       errors.phone
                         ? "border-red-500 focus:ring-red-500"
@@ -475,7 +536,8 @@ export default function SevaBookingPage() {
                   htmlFor="seva-email"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Email ID <span className="text-red-600">*</span>
+                  {t("Email ID", "ಇಮೇಲ್ ವಿಳಾಸ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -508,7 +570,8 @@ export default function SevaBookingPage() {
                   htmlFor="seva-date"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Preferred Seva Date <span className="text-red-600">*</span>
+                  {t("Preferred Seva Date", "ಸೇವೆಯ ದಿನಾಂಕ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Calendar className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -541,7 +604,8 @@ export default function SevaBookingPage() {
                 htmlFor="seva-select"
                 className="block text-sm font-bold text-amber-900"
               >
-                Select Seva <span className="text-red-600">*</span>
+                {t("Select Seva", "ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ")}{" "}
+                <span className="text-red-600">*</span>
               </label>
               <div className="relative">
                 <Flame className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -555,7 +619,7 @@ export default function SevaBookingPage() {
                 >
                   {sevaList.map((seva) => (
                     <option key={seva.id} value={seva.id}>
-                      {seva.name} - ₹{seva.price}
+                      {t(seva.name, seva.nameKn)} - ₹{seva.price}
                     </option>
                   ))}
                 </select>
@@ -568,7 +632,10 @@ export default function SevaBookingPage() {
                 htmlFor="seva-address"
                 className="block text-sm font-bold text-amber-900"
               >
-                Full Postal Address with Pincode (for Prasadam dispatch){" "}
+                {t(
+                  "Full Postal Address with Pincode (for Prasadam dispatch)",
+                  "ಪಿನ್ ಕೋಡ್ ಸಹಿತ ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸ (ಪ್ರಸಾದ ಕಳುಹಿಸಲು)"
+                )}{" "}
                 <span className="text-red-600">*</span>
               </label>
               <div className="relative">
@@ -580,7 +647,10 @@ export default function SevaBookingPage() {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="House/Flat No., Street, Village/Town, District, State & 6-digit Pincode"
+                  placeholder={t(
+                    "House/Flat No., Street, Village/Town, District, State & 6-digit Pincode",
+                    "ಮನೆ ಸಂಖ್ಯೆ, ರಸ್ತೆ, ಗ್ರಾಮ/ನಗರ, ಜಿಲ್ಲೆ, ರಾಜ್ಯ ಮತ್ತು 6 ಅಂಕಿಯ ಪಿನ್ ಕೋಡ್"
+                  )}
                   className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
                     errors.address
                       ? "border-red-500 focus:ring-red-500"
@@ -596,28 +666,42 @@ export default function SevaBookingPage() {
               )}
             </div>
 
+            {/* Tax Exemption Notice */}
+            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900">
+              {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
+            </div>
+
             {/* Submit Button showing selected Seva rupee amount */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-amber-100">
               <div className="text-xs text-amber-800">
-                Selected Seva:{" "}
-                <strong className="text-amber-900">{selectedSeva.name}</strong>{" "}
+                {t("Selected Seva:", "ಆಯ್ಕೆಮಾಡಿದ ಸೇವೆ:")}{" "}
+                <strong className="text-amber-900">
+                  {t(selectedSeva.name, selectedSeva.nameKn)}
+                </strong>{" "}
                 (₹{selectedSeva.price})
               </div>
 
               <button
                 type="submit"
                 disabled={isLoadingGateway}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors cursor-pointer"
               >
                 {isLoadingGateway ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Opening Razorpay...</span>
+                    <span>
+                      {t("Opening Razorpay...", "ಪಾವತಿ ವಿಂಡೋ ತೆರೆಯುತ್ತಿದೆ...")}
+                    </span>
                   </>
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4" />
-                    <span>Proceed to Pay ₹{selectedSeva.price}</span>
+                    <span>
+                      {t(
+                        `Proceed to Pay ₹${selectedSeva.price}`,
+                        `ಪಾವತಿಸಲು ಮುಂದುವರಿಯಿರಿ ₹${selectedSeva.price}`
+                      )}
+                    </span>
                   </>
                 )}
               </button>
