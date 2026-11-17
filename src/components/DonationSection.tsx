@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, BookOpen, Flame, HeartHandshake } from "lucide-react";
 import { sevaList, siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function DonationSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="donate"
@@ -13,14 +18,21 @@ export default function DonationSection() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <HeartHandshake className="w-3.5 h-3.5 text-amber-600" />
-            <span>Sacred Offerings & Support</span>
+            <span>
+              {t("Sacred Offerings & Support", "ಸೇವಾ ಕೈಂಕರ್ಯ ಮತ್ತು ದೇಣಿಗೆ")}
+            </span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Seva Booking & Temple Donations
+            {t(
+              "Seva Booking & Temple Donations",
+              "ಆನ್‌ಲೈನ್ ಸೇವಾ ನೋಂದಣಿ ಮತ್ತು ದೇಣಿಗೆ ಸಮರ್ಪಣೆ"
+            )}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            Select an offering option below to book a sacred Seva or contribute
-            towards the Education & General Trust Fund at {siteData.shortName}.
+            {t(
+              `Select an offering option below to book a sacred Seva or contribute towards the Education & General Trust Fund at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದಲ್ಲಿ ಪೂಜಾ ಸೇವೆಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲು ಅಥವಾ ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಾಮಾನ್ಯ ಟ್ರಸ್ಟ್ ನಿಧಿಗೆ ದೇಣಿಗೆ ನೀಡಲು ಕೆಳಗಿನ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ.`
+            )}
           </p>
         </div>
 
@@ -37,20 +49,27 @@ export default function DonationSection() {
               </div>
               <div className="space-y-2">
                 <span className="inline-block text-xs font-bold uppercase tracking-wider text-amber-600 group-hover:text-amber-300">
-                  Temple Rituals • {sevaList.length} Sevas
+                  {t(
+                    `Temple Rituals • ${sevaList.length} Sevas`,
+                    `ಶ್ರೀ ದೇವಿಯ ಪೂಜಾ ಸೇವೆಗಳು • ${sevaList.length} ಸೇವೆಗಳು`
+                  )}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-amber-900 group-hover:text-white">
-                  Book a Seva
+                  {t("Book a Seva", "ಪೂಜಾ ಸೇವೆ ಕಾಯ್ದಿರಿಸಿ")}
                 </h3>
                 <p className="text-sm text-amber-800 group-hover:text-amber-100/90 leading-relaxed">
-                  Book Alankara Pooja, Hunnime Pooja, Havina Pooja,
-                  Kunkumarchane, and other daily sevas with Prasadam dispatch.
+                  {t(
+                    "Book Alankara Pooja, Hunnime Pooja, Havina Pooja, Kunkumarchane, and other daily sevas with Prasadam dispatch.",
+                    "ಅಲಂಕಾರ ಪೂಜೆ, ಹುಣ್ಣಿಮೆ ಪೂಜೆ, ಹೂವಿನ ಪೂಜೆ, ಕುಂಕುಮಾರ್ಚನೆ ಹಾಗೂ ಇತರ ನಿತ್ಯ ಸೇವೆಗಳನ್ನು ಅಂಚೆ ಪ್ರಸಾದ ವ್ಯವಸ್ಥೆಯೊಂದಿಗೆ ಕಾಯ್ದಿರಿಸಿ."
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="pt-4 border-t border-amber-100 group-hover:border-amber-800 flex items-center justify-between text-sm font-bold text-amber-600 group-hover:text-amber-300">
-              <span>Proceed to Seva Booking</span>
+              <span>
+                {t("Proceed to Seva Booking", "ಸೇವೆ ಕಾಯ್ದಿರಿಸಲು ಮುಂದುವರಿಯಿರಿ")}
+              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -66,24 +85,36 @@ export default function DonationSection() {
               </div>
               <div className="space-y-2">
                 <span className="inline-block text-xs font-bold uppercase tracking-wider text-amber-600 group-hover:text-amber-300">
-                  Community Welfare
+                  {t("Community Welfare", "ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಮಾಜಮುಖಿ ಸೇವೆ")}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-amber-900 group-hover:text-white">
-                  Education & General Trust Fund
+                  {t(
+                    "Education & General Trust Fund",
+                    "ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಾಮಾನ್ಯ ಟ್ರಸ್ಟ್ ನಿಧಿ"
+                  )}
                 </h3>
                 <p className="text-sm text-amber-800 group-hover:text-amber-100/90 leading-relaxed">
-                  Support student scholarships, educational aid, Annadana, and
-                  ongoing temple development initiatives.
+                  {t(
+                    "Support student scholarships, educational aid, Annadana, and ongoing temple development initiatives.",
+                    "ವಿದ್ಯಾರ್ಥಿ ವೇತನ, ಶೈಕ್ಷಣಿಕ ನೆರವು, ನಿತ್ಯ ಅನ್ನದಾನ ಹಾಗೂ ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಗಳಿಗೆ ನಿಮ್ಮ ದೇಣಿಗೆಯನ್ನು ಸಮರ್ಪಿಸಿ."
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="pt-4 border-t border-amber-100 group-hover:border-amber-800 flex items-center justify-between text-sm font-bold text-amber-600 group-hover:text-amber-300">
-              <span>Contribute to Trust Fund</span>
+              <span>
+                {t("Contribute to Trust Fund", "ಟ್ರಸ್ಟ್ ನಿಧಿಗೆ ದೇಣಿಗೆ ನೀಡಿ")}
+              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
         </div>
+
+        {/* Tax Exemption Notice */}
+        <p className="text-center text-xs sm:text-sm font-medium text-amber-800">
+          {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
+        </p>
       </div>
     </section>
   );
