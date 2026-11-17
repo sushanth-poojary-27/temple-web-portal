@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { Clock, Flame, Sun, Moon, Sparkles } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 type ActiveTab = "aarti" | "darshan";
 
 export default function TimingsSection() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("aarti");
+  const { t } = useLanguage();
 
   return (
     <section
@@ -19,13 +21,19 @@ export default function TimingsSection() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <Clock className="w-3.5 h-3.5 text-amber-600" />
-            <span>Sacred Schedule</span>
+            <span>{t("Sacred Schedule", "ದೈನಂದಿನ ಪೂಜಾ ವೇಳಾಪಟ್ಟಿ")}</span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Daily Darshan, Aarti & Pooja Timings
+            {t(
+              "Daily Darshan, Aarti & Pooja Timings",
+              "ದೈನಂದಿನ ದರ್ಶನ, ಆರತಿ ಮತ್ತು ಪೂಜಾ ಸಮಯ"
+            )}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            View the daily worship and darshan hours at {siteData.shortName}.
+            {t(
+              `View the daily worship and darshan hours at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ದೈನಂದಿನ ಪೂಜೆ ಹಾಗೂ ದರ್ಶನದ ಸಮಯದ ವಿವರ.`
+            )}
           </p>
         </div>
 
@@ -33,7 +41,7 @@ export default function TimingsSection() {
         <div className="flex justify-center">
           <div
             role="tablist"
-            aria-label="Temple Schedule Tabs"
+            aria-label={t("Temple Schedule Tabs", "ದೇವಸ್ಥಾನದ ಸಮಯದ ಟ್ಯಾಬ್‌ಗಳು")}
             className="inline-flex rounded-full bg-amber-100 p-1.5 border border-amber-200 shadow-inner"
           >
             <button
@@ -41,14 +49,16 @@ export default function TimingsSection() {
               role="tab"
               aria-selected={activeTab === "aarti"}
               onClick={() => setActiveTab("aarti")}
-              className={`flex items-center gap-2 rounded-full px-5 sm:px-7 py-2.5 text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center gap-2 rounded-full px-5 sm:px-7 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                 activeTab === "aarti"
                   ? "bg-amber-600 text-white shadow-sm"
                   : "text-amber-900 hover:text-amber-600"
               }`}
             >
               <Flame className="w-4 h-4" />
-              <span>Aarti & Pooja Timings</span>
+              <span>
+                {t("Aarti & Pooja Timings", "ಆರತಿ ಮತ್ತು ಪೂಜಾ ಸಮಯ")}
+              </span>
             </button>
 
             <button
@@ -56,14 +66,14 @@ export default function TimingsSection() {
               role="tab"
               aria-selected={activeTab === "darshan"}
               onClick={() => setActiveTab("darshan")}
-              className={`flex items-center gap-2 rounded-full px-5 sm:px-7 py-2.5 text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center gap-2 rounded-full px-5 sm:px-7 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                 activeTab === "darshan"
                   ? "bg-amber-600 text-white shadow-sm"
                   : "text-amber-900 hover:text-amber-600"
               }`}
             >
               <Sun className="w-4 h-4" />
-              <span>Darshan Hours</span>
+              <span>{t("Darshan Hours", "ದರ್ಶನದ ಸಮಯ")}</span>
             </button>
           </div>
         </div>
@@ -85,24 +95,27 @@ export default function TimingsSection() {
                       <Sparkles className="w-5 h-5" />
                     </span>
                     <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
-                      Daily Ritual #{index + 1}
+                      {t(`Daily Ritual #${index + 1}`, `ನಿತ್ಯ ಪೂಜೆ #${index + 1}`)}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-amber-900">
-                    {aarti.name}
+                  <h3 className="text-xl font-bold text-amber-900 leading-snug">
+                    {t(aarti.name, aarti.nameKn)}
                   </h3>
 
                   {aarti.description && (
                     <p className="text-sm text-amber-800">
-                      {aarti.description}
+                      {t(
+                        aarti.description,
+                        aarti.descriptionKn ?? aarti.description
+                      )}
                     </p>
                   )}
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-amber-200 flex items-center gap-2 text-amber-900 font-bold">
                   <Clock className="w-4 h-4 text-amber-600 shrink-0" />
-                  <span>{aarti.time}</span>
+                  <span>{t(aarti.time, aarti.timeKn)}</span>
                 </div>
               </div>
             ))}
@@ -122,16 +135,22 @@ export default function TimingsSection() {
               </div>
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                  Morning Session
+                  {t("Morning Session", "ಬೆಳಗಿನ ಅವಧಿ")}
                 </span>
                 <h3 className="text-xl font-bold text-amber-900">
-                  Morning Darshan
+                  {t("Morning Darshan", "ಬೆಳಗಿನ ದರ್ಶನ")}
                 </h3>
                 <p className="text-lg font-bold text-amber-600">
-                  {siteData.darshanTimings.morning}
+                  {t(
+                    siteData.darshanTimings.morning,
+                    siteData.darshanTimings.morningKn
+                  )}
                 </p>
                 <p className="text-xs sm:text-sm text-amber-800">
-                  Includes Kakad Aarti and afternoon Maha Pooja & Naivedya.
+                  {t(
+                    "Includes Kakad Aarti and afternoon Maha Pooja & Naivedya.",
+                    "ಪ್ರಾತಃಕಾಲದ ಕಾಕಡ ಆರತಿ ಹಾಗೂ ಮಧ್ಯಾಹ್ನದ ಮಹಾಪೂಜೆ ಮತ್ತು ನೈವೇದ್ಯ ಒಳಗೊಂಡಿರುತ್ತದೆ."
+                  )}
                 </p>
               </div>
             </div>
@@ -143,16 +162,22 @@ export default function TimingsSection() {
               </div>
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                  Evening Session
+                  {t("Evening Session", "ಸಂಜೆಯ ಅವಧಿ")}
                 </span>
                 <h3 className="text-xl font-bold text-amber-900">
-                  Evening Darshan
+                  {t("Evening Darshan", "ಸಂಜೆಯ ದರ್ಶನ")}
                 </h3>
                 <p className="text-lg font-bold text-amber-600">
-                  {siteData.darshanTimings.evening}
+                  {t(
+                    siteData.darshanTimings.evening,
+                    siteData.darshanTimings.eveningKn
+                  )}
                 </p>
                 <p className="text-xs sm:text-sm text-amber-800">
-                  Includes evening deeparadhana, Night Aarti, and Shej Aarti.
+                  {t(
+                    "Includes evening deeparadhana, Night Aarti, and Shej Aarti.",
+                    "ಸಂಜೆಯ ದೀಪಾರಾಧನೆ, ರಾತ್ರಿ ಮಹಾಮಂಗಳಾರತಿ ಹಾಗೂ ಶೇಜ್ ಆರತಿ ಒಳಗೊಂಡಿರುತ್ತದೆ."
+                  )}
                 </p>
               </div>
             </div>
