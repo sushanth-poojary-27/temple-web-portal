@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { Landmark, MapPin, ShieldCheck, Users } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="about"
@@ -15,17 +20,18 @@ export default function AboutSection() {
           <div className="lg:col-span-5 relative h-72 sm:h-80 lg:h-96 w-full rounded-2xl overflow-hidden border-2 border-amber-600/30 shadow-md bg-amber-100">
             <Image
               src="/assets/gallery/devi-1.webp"
-              alt={siteData.trustName}
+              alt={t(siteData.trustName, siteData.trustNameKn)}
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover object-center"
             />
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-amber-950/90 via-amber-950/50 to-transparent p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-amber-300">
-                {siteData.registrationNo}
+                {t(siteData.registrationNo, siteData.registrationNoKn)}
               </p>
               <p className="text-sm font-bold text-amber-50">
-                {siteData.shortName}, {siteData.address}
+                {t(siteData.shortName, siteData.shortNameKn)},{" "}
+                {t("Ullur", "ಉಳ್ಳೂರು")}
               </p>
             </div>
           </div>
@@ -34,25 +40,33 @@ export default function AboutSection() {
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
               <Landmark className="w-3.5 h-3.5 text-amber-600" />
-              <span>About the Temple & Trust</span>
+              <span>
+                {t("About the Temple & Trust", "ಶ್ರೀ ಕ್ಷೇತ್ರ ಮತ್ತು ಟ್ರಸ್ಟ್ ಪರಿಚಯ")}
+              </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-tight">
-              {siteData.trustName}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-snug">
+              {t(siteData.trustName, siteData.trustNameKn)}
             </h2>
 
             <p className="flex items-start gap-2 text-sm sm:text-base text-amber-800 font-medium">
               <MapPin className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <span>{siteData.fullAddress}</span>
+              <span>{t(siteData.fullAddress, siteData.fullAddressKn)}</span>
             </p>
 
             {/* History Box (uses official text or placeholder from siteData) */}
             <div className="rounded-2xl bg-amber-50/80 p-5 border border-amber-200 space-y-2">
               <h3 className="text-sm font-bold uppercase tracking-wider text-amber-900">
-                Sacred Heritage & History
+                {t(
+                  "Sacred Heritage & History",
+                  "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಪರಂಪರೆ ಮತ್ತು ಸ್ಥಳ ಪುರಾಣ"
+                )}
               </h3>
               <p className="text-sm sm:text-base text-amber-800 leading-relaxed">
-                {siteData.placeholders.historyNote}
+                {t(
+                  siteData.placeholders.historyNote,
+                  siteData.placeholders.historyNoteKn
+                )}
               </p>
             </div>
 
@@ -62,10 +76,10 @@ export default function AboutSection() {
                 <ShieldCheck className="w-6 h-6 text-amber-600 shrink-0" />
                 <div>
                   <p className="text-xs font-semibold text-amber-700 uppercase">
-                    Registration
+                    {t("Registration", "ಟ್ರಸ್ಟ್ ನೋಂದಣಿ")}
                   </p>
                   <p className="text-sm font-bold text-amber-900">
-                    {siteData.registrationNo}
+                    {t(siteData.registrationNo, siteData.registrationNoKn)}
                   </p>
                 </div>
               </div>
@@ -74,10 +88,13 @@ export default function AboutSection() {
                 <Users className="w-6 h-6 text-amber-600 shrink-0" />
                 <div>
                   <p className="text-xs font-semibold text-amber-700 uppercase">
-                    Trust Administration
+                    {t("Trust Administration", "ಟ್ರಸ್ಟ್ ಆಡಳಿತ")}
                   </p>
                   <p className="text-sm font-bold text-amber-900">
-                    {siteData.supervisor.name} ({siteData.supervisor.designation})
+                    {t(
+                      `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
+                      `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
+                    )}
                   </p>
                 </div>
               </div>
@@ -90,14 +107,24 @@ export default function AboutSection() {
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
               <Users className="w-3.5 h-3.5 text-amber-600" />
-              <span>Trust Management & Clergy</span>
+              <span>
+                {t(
+                  "Trust Management & Clergy",
+                  "ಆಡಳಿತ ಮಂಡಳಿ ಮತ್ತು ಅರ್ಚಕ ವೃಂದ"
+                )}
+              </span>
             </span>
             <h3 className="text-2xl sm:text-3xl font-bold text-amber-900">
-              Managing Committee & Temple Priests
+              {t(
+                "Managing Committee & Temple Priests",
+                "ವ್ಯವಸ್ಥಾಪನಾ ಸಮಿತಿ ಮತ್ತು ಪ್ರಧಾನ ಅರ್ಚಕರು"
+              )}
             </h3>
             <p className="text-sm sm:text-base text-amber-800">
-              Dedicated office bearers and temple priests serving{" "}
-              {siteData.shortName}.
+              {t(
+                `Dedicated office bearers and temple priests serving ${siteData.shortName}.`,
+                `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ಸೇವೆಯಲ್ಲಿ ತೊಡಗಿಸಿಕೊಂಡಿರುವ ಪದಾಧಿಕಾರಿಗಳು ಮತ್ತು ಅರ್ಚಕ ವೃಂದ.`
+              )}
             </p>
           </div>
 
@@ -112,7 +139,7 @@ export default function AboutSection() {
                   {member.image ? (
                     <Image
                       src={member.image}
-                      alt={member.name}
+                      alt={t(member.name, member.nameKn)}
                       fill
                       sizes="80px"
                       className="object-cover object-top"
@@ -133,15 +160,15 @@ export default function AboutSection() {
                         : "bg-amber-100 text-amber-900 border border-amber-300"
                     }`}
                   >
-                    {member.role}
+                    {t(member.role, member.roleKn)}
                   </span>
-                  <h4 className="text-base sm:text-lg font-bold text-amber-900 truncate">
-                    {member.name}
+                  <h4 className="text-base sm:text-lg font-bold text-amber-900 leading-snug">
+                    {t(member.name, member.nameKn)}
                   </h4>
-                  <p className="text-xs text-amber-700 font-medium capitalize">
+                  <p className="text-xs text-amber-700 font-medium">
                     {member.category === "clergy"
-                      ? "Temple Clergy"
-                      : "Managing Committee"}
+                      ? t("Temple Clergy", "ಕ್ಷೇತ್ರದ ಅರ್ಚಕರು")
+                      : t("Managing Committee", "ವ್ಯವಸ್ಥಾಪನಾ ಸಮಿತಿ")}
                   </p>
                 </div>
               </div>
