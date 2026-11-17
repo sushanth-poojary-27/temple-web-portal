@@ -13,6 +13,7 @@ import {
   User,
 } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export type SevaInquiryType =
   | "Special Pooja"
@@ -38,11 +39,11 @@ interface InquiryFormErrors {
 
 const INDIAN_MOBILE_REGEX = /^[6-9]\d{9}$/;
 
-const SEVA_OPTIONS: SevaInquiryType[] = [
-  "Special Pooja",
-  "Annadana Seva",
-  "Alankara Pooja",
-  "General Inquiry",
+const SEVA_OPTIONS: { value: SevaInquiryType; labelEn: string; labelKn: string }[] = [
+  { value: "Special Pooja", labelEn: "Special Pooja", labelKn: "ವಿಶೇಷ ಪೂಜೆ" },
+  { value: "Annadana Seva", labelEn: "Annadana Seva", labelKn: "ಅನ್ನದಾನ ಸೇವೆ" },
+  { value: "Alankara Pooja", labelEn: "Alankara Pooja", labelKn: "ಅಲಂಕಾರ ಪೂಜೆ" },
+  { value: "General Inquiry", labelEn: "General Inquiry", labelKn: "ಸಾಮಾನ್ಯ ವಿಚಾರಣೆ" },
 ];
 
 const INITIAL_FORM_DATA: InquiryFormData = {
@@ -54,6 +55,7 @@ const INITIAL_FORM_DATA: InquiryFormData = {
 };
 
 export default function InquiryForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<InquiryFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<InquiryFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,21 +68,40 @@ export default function InquiryForm() {
   ): string | undefined => {
     switch (field) {
       case "name":
-        if (!value.trim()) return "Full name is required.";
+        if (!value.trim())
+          return t("Full name is required.", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು ಕಡ್ಡಾಯವಾಗಿದೆ.");
         if (value.trim().length < 2)
-          return "Name must be at least 2 characters.";
+          return t(
+            "Name must be at least 2 characters.",
+            "ಹೆಸರು ಕನಿಷ್ಠ 2 ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."
+          );
         return undefined;
       case "phone":
-        if (!value.trim()) return "10-digit mobile number is required.";
+        if (!value.trim())
+          return t(
+            "10-digit mobile number is required.",
+            "10 ಅಂಕಿಗಳ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಕಡ್ಡಾಯವಾಗಿದೆ."
+          );
         if (!INDIAN_MOBILE_REGEX.test(value.trim())) {
-          return "Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.";
+          return t(
+            "Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.",
+            "6, 7, 8 ಅಥವಾ 9 ರಿಂದ ಪ್ರಾರಂಭವಾಗುವ ಮಾನ್ಯ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ."
+          );
         }
         return undefined;
       case "date":
-        if (!value.trim()) return "Please select a preferred date.";
+        if (!value.trim())
+          return t(
+            "Please select a preferred date.",
+            "ದಯವಿಟ್ಟು ಸೇವೆಯ ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ."
+          );
         return undefined;
       case "sevaType":
-        if (!value.trim()) return "Please select a Seva or Inquiry type.";
+        if (!value.trim())
+          return t(
+            "Please select a Seva or Inquiry type.",
+            "ದಯವಿಟ್ಟು ಸೇವೆ ಅಥವಾ ವಿಚಾರಣೆಯ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ."
+          );
         return undefined;
       default:
         return undefined;
@@ -95,7 +116,6 @@ export default function InquiryForm() {
       sevaType: validateField("sevaType", formData.sevaType),
     };
 
-    // Remove undefined keys
     Object.keys(newErrors).forEach((key) => {
       const k = key as keyof InquiryFormErrors;
       if (!newErrors[k]) delete newErrors[k];
@@ -111,7 +131,6 @@ export default function InquiryForm() {
     const { name, value } = e.target;
     const fieldName = name as keyof InquiryFormData;
 
-    // Reset submission banners when editing
     if (isSuccess) setIsSuccess(false);
     if (error) setError(null);
 
@@ -120,7 +139,6 @@ export default function InquiryForm() {
       [fieldName]: value,
     }));
 
-    // Real-time field validation
     const fieldError = validateField(fieldName, value);
     setErrors((prev) => ({
       ...prev,
@@ -173,12 +191,18 @@ export default function InquiryForm() {
       } else {
         setError(
           result.message ||
-            "Unable to submit inquiry. Please verify the Web3Forms access key or contact the trust office via email."
+            t(
+              "Unable to submit inquiry. Please verify the Web3Forms access key or contact the trust office via email.",
+              "ವಿಚಾರಣೆಯನ್ನು ಸಲ್ಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಟ್ರಸ್ಟ್ ಕಚೇರಿಯನ್ನು ಇಮೇಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ."
+            )
         );
       }
     } catch {
       setError(
-        "Network error while submitting your request. Please check your connection or email us directly."
+        t(
+          "Network error while submitting your request. Please check your connection or email us directly.",
+          "ನೆಟ್‌ವರ್ಕ್ ದೋಷ ಉಂಟಾಗಿದೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ನೇರವಾಗಿ ಇಮೇಲ್ ಮಾಡಿ."
+        )
       );
     } finally {
       setIsSubmitting(false);
@@ -195,14 +219,24 @@ export default function InquiryForm() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>Online Seva & Temple Inquiry</span>
+            <span>
+              {t(
+                "Online Seva & Temple Inquiry",
+                "ಆನ್‌ಲೈನ್ ಸೇವಾ ವಿಚಾರಣೆ ಮತ್ತು ನೋಂದಣಿ"
+              )}
+            </span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Seva Booking & Inquiry Form
+            {t(
+              "Seva Booking & Inquiry Form",
+              "ಸೇವಾ ನೋಂದಣಿ ಮತ್ತು ವಿಚಾರಣಾ ಅರ್ಜಿ"
+            )}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            Submit your request for Special Pooja, Annadana Seva, Alankara
-            Pooja, or general temple inquiries at {siteData.shortName}.
+            {t(
+              `Submit your request for Special Pooja, Annadana Seva, Alankara Pooja, or general temple inquiries at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದಲ್ಲಿ ವಿಶೇಷ ಪೂಜೆ, ಅನ್ನದಾನ ಸೇವೆ, ಅಲಂಕಾರ ಪೂಜೆ ಅಥವಾ ಸಾಮಾನ್ಯ ವಿಚಾರಣೆಗಾಗಿ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ.`
+            )}
           </p>
         </div>
 
@@ -218,11 +252,16 @@ export default function InquiryForm() {
               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
               <div className="text-sm space-y-1">
                 <p className="font-bold">
-                  Seva Inquiry Submitted Successfully!
+                  {t(
+                    "Seva Inquiry Submitted Successfully!",
+                    "ನಿಮ್ಮ ಸೇವಾ ವಿಚಾರಣೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!"
+                  )}
                 </p>
                 <p className="text-green-800">
-                  Thank you. The trust office at {siteData.shortName} has
-                  received your details and will contact you shortly.
+                  {t(
+                    `Thank you. The trust office at ${siteData.shortName} has received your details and will contact you shortly.`,
+                    `ಧನ್ಯವಾದಗಳು. ${siteData.shortNameKn} ಟ್ರಸ್ಟ್ ಕಚೇರಿಗೆ ನಿಮ್ಮ ವಿವರಗಳು ತಲುಪಿದ್ದು, ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಲಾಗುವುದು.`
+                  )}
                 </p>
               </div>
             </div>
@@ -237,7 +276,9 @@ export default function InquiryForm() {
             >
               <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
               <div className="text-sm space-y-1">
-                <p className="font-bold">Submission Notice</p>
+                <p className="font-bold">
+                  {t("Submission Notice", "ಗಮನಿಸಿ")}
+                </p>
                 <p className="text-red-800">{error}</p>
               </div>
             </div>
@@ -251,7 +292,8 @@ export default function InquiryForm() {
                   htmlFor="inquiry-name"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Full Name <span className="text-red-600">*</span>
+                  {t("Full Name", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -262,7 +304,10 @@ export default function InquiryForm() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter devotee full name"
+                    placeholder={t(
+                      "Enter devotee full name",
+                      "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
+                    )}
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? "name-error" : undefined}
                     className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
@@ -289,7 +334,8 @@ export default function InquiryForm() {
                   htmlFor="inquiry-phone"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  10-Digit Mobile Number <span className="text-red-600">*</span>
+                  {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -302,7 +348,7 @@ export default function InquiryForm() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="e.g. 9876543210"
+                    placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
                     aria-invalid={Boolean(errors.phone)}
                     aria-describedby={errors.phone ? "phone-error" : undefined}
                     className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
@@ -329,7 +375,8 @@ export default function InquiryForm() {
                   htmlFor="inquiry-date"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Preferred Date <span className="text-red-600">*</span>
+                  {t("Preferred Date", "ಸೇವೆಯ ದಿನಾಂಕ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Calendar className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -366,7 +413,8 @@ export default function InquiryForm() {
                   htmlFor="inquiry-sevaType"
                   className="block text-sm font-bold text-amber-900"
                 >
-                  Seva / Inquiry Type <span className="text-red-600">*</span>
+                  {t("Seva / Inquiry Type", "ಸೇವೆ / ವಿಚಾರಣೆಯ ಪ್ರಕಾರ")}{" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <div className="relative">
                   <Sparkles className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -379,8 +427,8 @@ export default function InquiryForm() {
                     className="w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm font-medium text-amber-900 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
                   >
                     {SEVA_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key={option.value} value={option.value}>
+                        {t(option.labelEn, option.labelKn)}
                       </option>
                     ))}
                   </select>
@@ -394,7 +442,10 @@ export default function InquiryForm() {
                 htmlFor="inquiry-message"
                 className="block text-sm font-bold text-amber-900"
               >
-                Message / Special Notes (Nakshatra, Gotra, or Inquiry Details)
+                {t(
+                  "Message / Special Notes (Nakshatra, Gotra, or Inquiry Details)",
+                  "ಸಂದೇಶ / ವಿಶೇಷ ವಿವರಗಳು (ಜನ್ಮ ನಕ್ಷತ್ರ, ಗೋತ್ರ ಅಥವಾ ಇತರ ಮಾಹಿತಿ)"
+                )}
               </label>
               <div className="relative">
                 <MessageSquare className="w-4 h-4 text-amber-600 absolute left-3.5 top-3.5 pointer-events-none" />
@@ -404,7 +455,10 @@ export default function InquiryForm() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Optional: Mention Janma Nakshatra, Gotra, or specific timing questions..."
+                  placeholder={t(
+                    "Optional: Mention Janma Nakshatra, Gotra, or specific timing questions...",
+                    "ಐಚ್ಛಿಕ: ಜನ್ಮ ನಕ್ಷತ್ರ, ಗೋತ್ರ ಅಥವಾ ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ..."
+                  )}
                   className="w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
                 />
               </div>
@@ -413,24 +467,30 @@ export default function InquiryForm() {
             {/* Submit Button */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-xs text-amber-800">
-                Fields marked with <span className="text-red-600 font-bold">*</span>{" "}
-                are required.
+                {t(
+                  "Fields marked with * are required.",
+                  "* ಗುರುತು ಇರುವ ವಿವರಗಳನ್ನು ಕಡ್ಡಾಯವಾಗಿ ಭರ್ತಿ ಮಾಡಬೇಕು."
+                )}
               </p>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Submitting Request...</span>
+                    <span>
+                      {t("Submitting Request...", "ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...")}
+                    </span>
                   </>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Submit Seva / Inquiry</span>
+                    <span>
+                      {t("Submit Seva / Inquiry", "ಸೇವಾ ವಿಚಾರಣೆ ಸಲ್ಲಿಸಿ")}
+                    </span>
                   </>
                 )}
               </button>
