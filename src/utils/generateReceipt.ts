@@ -437,7 +437,12 @@ export async function createReceiptPdf(data: ReceiptData): Promise<jsPDF> {
   doc.setFontSize(8.5);
   doc.setTextColor(100, 40, 30);
   doc.text(
-    "Note: Test Mode simulation only. No legal or tax validity.",
+    "Note: Contributions to the trust are not eligible for Section 80G tax exemption.",
+    contentLeft,
+    sigY - 4.5
+  );
+  doc.text(
+    "DEMO / TEST, not a valid receipt (Test Mode simulation only).",
     contentLeft,
     sigY
   );
