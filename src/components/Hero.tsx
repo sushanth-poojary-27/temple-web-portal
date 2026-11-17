@@ -1,19 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, Sparkles } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="home"
       className="relative w-full overflow-hidden bg-amber-900 text-amber-50"
     >
       {/* Hero Banner Image Container */}
-      <div className="relative w-full h-[380px] sm:h-[460px] md:h-[540px] lg:h-[600px]">
+      <div className="relative w-full h-[400px] sm:h-[460px] md:h-[540px] lg:h-[600px]">
         <Image
           src={siteData.assets.heroBanner}
-          alt={`${siteData.trustName} Hero Banner`}
+          alt={t(
+            `${siteData.trustName} Hero Banner`,
+            `${siteData.trustNameKn} ಮುಖ್ಯ ಚಿತ್ರ`
+          )}
           fill
           priority
           sizes="100vw"
@@ -28,16 +36,21 @@ export default function Hero() {
             <div className="max-w-3xl space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-600/90 px-3.5 py-1 text-xs sm:text-sm font-semibold text-white shadow-sm backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>{siteData.registrationNo} • Official Temple Portal</span>
+                <span>
+                  {t(
+                    `${siteData.registrationNo} • Official Temple Portal`,
+                    `${siteData.registrationNoKn} • ಅಧಿಕೃತ ಶ್ರೀ ಕ್ಷೇತ್ರ ಜಾಲತಾಣ`
+                  )}
+                </span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-amber-50 drop-shadow-md">
-                {siteData.trustName}
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-amber-50 drop-shadow-md leading-snug">
+                {t(siteData.trustName, siteData.trustNameKn)}
               </h1>
 
               <p className="flex items-center gap-2 text-sm sm:text-base md:text-lg text-amber-100/95 font-medium">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0" />
-                <span>{siteData.fullAddress}</span>
+                <span>{t(siteData.fullAddress, siteData.fullAddressKn)}</span>
               </p>
 
               {/* CTA Buttons */}
@@ -46,13 +59,16 @@ export default function Hero() {
                   href="#timings"
                   className="inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md hover:bg-amber-500 transition-colors"
                 >
-                  Daily Pooja & Timings
+                  {t("Daily Pooja & Timings", "ದೈನಂದಿನ ಪೂಜೆ ಮತ್ತು ಸಮಯ")}
                 </Link>
                 <Link
                   href="#about"
                   className="inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-amber-950/60 backdrop-blur-sm px-6 py-3 text-sm sm:text-base font-semibold text-amber-50 hover:bg-amber-900/80 transition-colors"
                 >
-                  About the Trust & Committee
+                  {t(
+                    "About the Trust & Committee",
+                    "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಆಡಳಿತ ಸಮಿತಿ"
+                  )}
                 </Link>
               </div>
             </div>
@@ -67,9 +83,14 @@ export default function Hero() {
             <div className="flex items-center gap-3 bg-amber-950/50 rounded-xl p-3 border border-amber-800/60">
               <Clock className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-amber-300 font-semibold">Morning Darshan</p>
+                <p className="text-amber-300 font-semibold">
+                  {t("Morning Darshan", "ಬೆಳಗಿನ ದರ್ಶನ ಸಮಯ")}
+                </p>
                 <p className="text-amber-50 font-medium">
-                  {siteData.darshanTimings.morning}
+                  {t(
+                    siteData.darshanTimings.morning,
+                    siteData.darshanTimings.morningKn
+                  )}
                 </p>
               </div>
             </div>
@@ -77,9 +98,14 @@ export default function Hero() {
             <div className="flex items-center gap-3 bg-amber-950/50 rounded-xl p-3 border border-amber-800/60">
               <Clock className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-amber-300 font-semibold">Evening Darshan</p>
+                <p className="text-amber-300 font-semibold">
+                  {t("Evening Darshan", "ಸಂಜೆಯ ದರ್ಶನ ಸಮಯ")}
+                </p>
                 <p className="text-amber-50 font-medium">
-                  {siteData.darshanTimings.evening}
+                  {t(
+                    siteData.darshanTimings.evening,
+                    siteData.darshanTimings.eveningKn
+                  )}
                 </p>
               </div>
             </div>
@@ -87,9 +113,14 @@ export default function Hero() {
             <div className="flex items-center gap-3 bg-amber-950/50 rounded-xl p-3 border border-amber-800/60">
               <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <p className="text-amber-300 font-semibold">Maha Pooja</p>
+                <p className="text-amber-300 font-semibold">
+                  {t("Maha Pooja", "ಮಧ್ಯಾಹ್ನದ ಮಹಾಪೂಜೆ")}
+                </p>
                 <p className="text-amber-50 font-medium">
-                  {siteData.aartiTimings[1]?.time ?? "12:30 PM - 1:30 PM"}
+                  {t(
+                    siteData.aartiTimings[1]?.time ?? "12:30 PM - 1:30 PM",
+                    siteData.aartiTimings[1]?.timeKn ?? "ಮಧ್ಯಾಹ್ನ 12:30 - 1:30"
+                  )}
                 </p>
               </div>
             </div>
