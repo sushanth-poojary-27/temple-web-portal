@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Calendar, Clock, Sparkles } from "lucide-react";
 import { siteData, type FestivalItem } from "@/data/siteData";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface TimeLeft {
   days: number;
@@ -14,6 +15,7 @@ interface TimeLeft {
 }
 
 export default function EventsSection() {
+  const { t } = useLanguage();
   const [selectedFestival, setSelectedFestival] = useState<FestivalItem>(
     siteData.festivals[0]
   );
@@ -37,7 +39,13 @@ export default function EventsSection() {
     const updateTimer = () => {
       const diff = new Date(selectedFestival.isoDate).getTime() - Date.now();
       if (Number.isNaN(diff) || diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true });
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          isPast: true,
+        });
         return;
       }
       setTimeLeft({
@@ -64,14 +72,21 @@ export default function EventsSection() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
             <Calendar className="w-3.5 h-3.5 text-amber-600" />
-            <span>Annual Utsavas & Sevas</span>
+            <span>
+              {t("Annual Utsavas & Sevas", "ವಾರ್ಷಿಕ ಉತ್ಸವಗಳು ಮತ್ತು ಸೇವೆಗಳು")}
+            </span>
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
-            Upcoming Temple Festivals & Events
+            {t(
+              "Upcoming Temple Festivals & Events",
+              "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಮುಂಬರುವ ಉತ್ಸವಗಳು ಮತ್ತು ವಿಶೇಷ ಪೂಜೆಗಳು"
+            )}
           </h2>
           <p className="text-sm sm:text-base text-amber-800">
-            Sacred annual celebrations and monthly festivals observed at{" "}
-            {siteData.shortName}.
+            {t(
+              `Sacred annual celebrations and monthly festivals observed at ${siteData.shortName}.`,
+              `${siteData.shortNameKn} ಕ್ಷೇತ್ರದಲ್ಲಿ ಆಚರಿಸಲಾಗುವ ವಾರ್ಷಿಕ ಮಹೋತ್ಸವಗಳು ಹಾಗೂ ಮಾಸಿಕ ವಿಶೇಷ ಸೇವೆಗಳು.`
+            )}
           </p>
         </div>
 
@@ -81,17 +96,27 @@ export default function EventsSection() {
             <div className="lg:col-span-7 space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Upcoming Event Countdown • {selectedFestival.badge}</span>
+                <span>
+                  {t(
+                    `Upcoming Event Countdown • ${selectedFestival.badge}`,
+                    `ಉತ್ಸವದ ಕ್ಷಣಗಣನೆ • ${selectedFestival.badgeKn}`
+                  )}
+                </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                {selectedFestival.name}
+              <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+                {t(selectedFestival.name, selectedFestival.nameKn)}
               </h3>
               <p className="text-xs sm:text-sm text-amber-200 flex items-center gap-2 font-medium">
                 <Calendar className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>{selectedFestival.dateLabel}</span>
+                <span>
+                  {t(selectedFestival.dateLabel, selectedFestival.dateLabelKn)}
+                </span>
               </p>
               <p className="text-sm text-amber-100/90 leading-relaxed">
-                {selectedFestival.description}
+                {t(
+                  selectedFestival.description,
+                  selectedFestival.descriptionKn
+                )}
               </p>
             </div>
 
@@ -99,14 +124,20 @@ export default function EventsSection() {
             <div className="lg:col-span-5">
               <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
                 {[
-                  { label: "Days", value: timeLeft ? timeLeft.days : "--" },
-                  { label: "Hours", value: timeLeft ? timeLeft.hours : "--" },
                   {
-                    label: "Minutes",
+                    label: t("Days", "ದಿನಗಳು"),
+                    value: timeLeft ? timeLeft.days : "--",
+                  },
+                  {
+                    label: t("Hours", "ಗಂಟೆಗಳು"),
+                    value: timeLeft ? timeLeft.hours : "--",
+                  },
+                  {
+                    label: t("Minutes", "ನಿಮಿಷಗಳು"),
                     value: timeLeft ? timeLeft.minutes : "--",
                   },
                   {
-                    label: "Seconds",
+                    label: t("Seconds", "ಸೆಕೆಂಡುಗಳು"),
                     value: timeLeft ? timeLeft.seconds : "--",
                   },
                 ].map((unit) => (
@@ -128,7 +159,10 @@ export default function EventsSection() {
               <p className="mt-3 text-center text-xs text-amber-200/90 flex items-center justify-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>
-                  Click any festival card below to view its countdown timer
+                  {t(
+                    "Click any festival card below to view its countdown timer",
+                    "ಕ್ಷಣಗಣನೆ ನೋಡಲು ಕೆಳಗಿನ ಯಾವುದೇ ಉತ್ಸವದ ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ"
+                  )}
                 </span>
               </p>
             </div>
@@ -162,7 +196,7 @@ export default function EventsSection() {
                   <div className="relative h-52 w-full overflow-hidden bg-amber-100">
                     <Image
                       src={festival.image}
-                      alt={festival.name}
+                      alt={t(festival.name, festival.nameKn)}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
@@ -170,7 +204,7 @@ export default function EventsSection() {
                     <div className="absolute top-3 left-3">
                       <span className="inline-flex items-center gap-1 rounded-full bg-amber-900/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-amber-50 shadow-sm">
                         <Sparkles className="w-3 h-3 text-amber-400" />
-                        {festival.badge}
+                        {t(festival.badge, festival.badgeKn)}
                       </span>
                     </div>
                   </div>
@@ -179,15 +213,17 @@ export default function EventsSection() {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-amber-600">
                       <Calendar className="w-3.5 h-3.5 shrink-0" />
-                      <span>{festival.dateLabel}</span>
+                      <span>
+                        {t(festival.dateLabel, festival.dateLabelKn)}
+                      </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-amber-900 group-hover:text-amber-600 transition-colors">
-                      {festival.name}
+                    <h3 className="text-xl font-bold text-amber-900 group-hover:text-amber-600 transition-colors leading-snug">
+                      {t(festival.name, festival.nameKn)}
                     </h3>
 
                     <p className="text-sm text-amber-800 leading-relaxed">
-                      {festival.description}
+                      {t(festival.description, festival.descriptionKn)}
                     </p>
                   </div>
                 </div>
@@ -200,8 +236,11 @@ export default function EventsSection() {
                     }
                   >
                     {isSelected
-                      ? "Showing in Countdown Above"
-                      : "Select for Countdown"}
+                      ? t(
+                          "Showing in Countdown Above",
+                          "ಮೇಲಿನ ಕ್ಷಣಗಣನೆಯಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ"
+                        )
+                      : t("Select for Countdown", "ಕ್ಷಣಗಣನೆಗಾಗಿ ಆಯ್ಕೆಮಾಡಿ")}
                   </span>
                   <span className="text-amber-600 group-hover:translate-x-0.5 transition-transform">
                     →
