@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,8 +13,10 @@ import {
 import { sevaList, siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 import {
+  amountToKannadaWords,
   createReceiptPdf,
   formatAmountInWords,
+  generateKannadaReceiptPdf,
   type ReceiptData,
 } from "@/utils/generateReceipt";
 
@@ -32,6 +34,7 @@ function translatePurposeKn(purpose: string): string {
 
 export default function ReceiptPage() {
   const { language, toggleLanguage, t } = useLanguage();
+  const receiptRef = useRef<HTMLDivElement>(null);
   const [receipt, setReceipt] = useState<ReceiptData | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSharing, setIsSharing] = useState(false);
@@ -106,15 +109,38 @@ export default function ReceiptPage() {
   const receiptType = isSeva
     ? "Online Seva Receipt"
     : "Online Donation Receipt";
+  const receiptTypeKn = isSeva
+    ? "ಆನ್‌ಲೈನ್ ಸೇವಾ ರಸೀದಿ"
+    : "ಆನ್‌ಲೈನ್ ದೇಣಿಗೆ ರಸೀದಿ";
   const receiptNumber = data.receiptNo.split("-").pop() || data.receiptNo;
   const pdfFileName = isSeva
     ? `Seva-Receipt-${receiptNumber}.pdf`
     : `Donation-Receipt-${receiptNumber}.pdf`;
-  const shareText = `Shree Durgaparameshwari Sannidhana, Ullur\n${receiptType} for ${data.donorName}\nReceipt: ${data.receiptNo} (DEMO / TEST, not a valid receipt)`;
 
-  const amountInWords = formatAmountInWords(data.amount);
+  const purposeKn = translatePurposeKn(data.purpose);
+  const shareTitle =
+    language === "kn"
+      ? `${receiptTypeKn} - ${data.receiptNo}`
+      : `${receiptType} - ${data.receiptNo}`;
+  const shareText =
+    language === "kn"
+      ? `${siteData.trustNameKn}\n${receiptTypeKn} - ${data.donorName}\nವಿವರ: ${purposeKn} (₹${data.amount}/-)\nರಸೀದಿ ಸಂಖ್ಯೆ: ${data.receiptNo} (${siteData.demoDisclaimerKn})`
+      : `Shree Durgaparameshwari Sannidhana, Ullur\n${receiptType} for ${data.donorName}\nReceipt: ${data.receiptNo} (DEMO / TEST, not a valid receipt)`;
+
+  const amountInWords =
+    language === "kn"
+      ? amountToKannadaWords(data.amount)
+      : formatAmountInWords(data.amount);
 
   const handleDownloadReceipt = async () => {
+    if (language === "kn" && receiptRef.current) {
+      await generateKannadaReceiptPdf(
+        receiptRef.current,
+        pdfFileName,
+        "download"
+      );
+      return;
+    }
     const pdf = await createReceiptPdf(data);
     pdf.save(pdfFileName);
   };
@@ -124,8 +150,19 @@ export default function ReceiptPage() {
     setWhatsappFallbackNote(null);
 
     try {
-      const pdf = await createReceiptPdf(data);
-      const blob = pdf.output("blob");
+      let blob: Blob;
+      if (language === "kn" && receiptRef.current) {
+        const resultBlob = await generateKannadaReceiptPdf(
+          receiptRef.current,
+          pdfFileName,
+          "blob"
+        );
+        blob = resultBlob as Blob;
+      } else {
+        const pdf = await createReceiptPdf(data);
+        blob = pdf.output("blob");
+      }
+
       const file = new File([blob], pdfFileName, {
         type: "application/pdf",
       });
@@ -134,7 +171,7 @@ export default function ReceiptPage() {
         try {
           await navigator.share({
             files: [file],
-            title: `${receiptType} - ${data.receiptNo}`,
+            title: shareTitle,
             text: shareText,
           });
         } catch (err) {
@@ -143,8 +180,17 @@ export default function ReceiptPage() {
           }
         }
       } else {
-        pdf.save(pdfFileName);
-        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        if (language === "kn" && receiptRef.current) {
+          await generateKannadaReceiptPdf(
+            receiptRef.current,
+            pdfFileName,
+            "download"
+          );
+        } else {
+          const pdf = await createReceiptPdf(data);
+          pdf.save(pdfFileName);
+        }
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
           shareText
         )}`;
         window.open(whatsappUrl, "_blank", "noopener,noreferrer");
@@ -242,7 +288,10 @@ export default function ReceiptPage() {
         </div>
 
         {/* Printed Temple Paper Voucher Layout: Outer Thick Maroon (#7A1C1C) + Inner Thin Gold (#B8860B) */}
-        <div className="rounded-none bg-[#FFFDF7] border-[3px] border-[#7A1C1C] p-1.5">
+        <div
+          ref={receiptRef}
+          className="rounded-none bg-[#FFFDF7] border-[3px] border-[#7A1C1C] p-1.5"
+        >
           <div className="relative rounded-none border border-[#B8860B] bg-[#FFFDF7] overflow-hidden">
             {/* Top Red Warning Strip */}
             <div className="bg-red-700 text-white text-center py-2 px-4 text-xs sm:text-sm font-bold tracking-wider uppercase">
@@ -440,13 +489,8 @@ export default function ReceiptPage() {
                 </span>
               </div>
 
-              {/* Tax Exemption Note */}
-              <p className="text-xs font-semibold text-[#7A1C1C]">
-                {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
-              </p>
-
               {/* Footer & Signature Line (No official seals or stamps) */}
-              <div className="pt-6 flex flex-col sm:flex-row sm:items-end justify-between gap-6 text-xs">
+              <div className="pt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6 text-xs">
                 <p className="italic text-[#5C3317] max-w-sm">
                   {t(
                     "Note: Generated in Razorpay Test Mode for academic demonstration only. No real money was transferred.",
