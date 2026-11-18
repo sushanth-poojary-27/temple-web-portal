@@ -419,6 +419,14 @@ export const siteData: SiteData = {
       category: "Monthly Seva",
       categoryKn: "ಮಾಸಿಕ ಸೇವೆ",
     },
+    {
+      id: "gal-9",
+      src: "/assets/gallery/donation.webp",
+      alt: "Community Welfare & Educational Aid Initiative by the Trust",
+      altKn: "ಟ್ರಸ್ಟ್ ವತಿಯಿಂದ ಶೈಕ್ಷಣಿಕ ನೆರವು ಮತ್ತು ಸಮಾಜಮುಖಿ ಸೇವಾ ಕಾರ್ಯಕ್ರಮ",
+      category: "Varshik Pooja",
+      categoryKn: "ವಾರ್ಷಿಕ ಪೂಜೆ",
+    },
   ],
   contact: {
     village: "Ulluru Village, Yellur",
