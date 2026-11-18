@@ -103,6 +103,202 @@ export function formatAmountInWords(amount: number): string {
   return `Rupees ${parts.join(" ")} Only`;
 }
 
+const KANNADA_UNDER_100: string[] = [
+  "",
+  "ಒಂದು",
+  "ಎರಡು",
+  "ಮೂರು",
+  "ನಾಲ್ಕು",
+  "ಐದು",
+  "ಆರು",
+  "ಏಳು",
+  "ಎಂಟು",
+  "ಒಂಬತ್ತು",
+  "ಹತ್ತು",
+  "ಹನ್ನೊಂದು",
+  "ಹನ್ನೆರಡು",
+  "ಹದಿಮೂರು",
+  "ಹದಿನಾಲ್ಕು",
+  "ಹದಿನೈದು",
+  "ಹದಿನಾರು",
+  "ಹದಿನೇಳು",
+  "ಹದಿನೆಂಟು",
+  "ಹತ್ತೊಂಬತ್ತು",
+  "ಇಪ್ಪತ್ತು",
+  "ಇಪ್ಪತ್ತೊಂದು",
+  "ಇಪ್ಪತ್ತೆರಡು",
+  "ಇಪ್ಪತ್ತಮೂರು",
+  "ಇಪ್ಪತ್ತನಾಲ್ಕು",
+  "ಇಪ್ಪತ್ತೈದು",
+  "ಇಪ್ಪತ್ತಾರು",
+  "ಇಪ್ಪತ್ತೇಳು",
+  "ಇಪ್ಪತ್ತೆಂಟು",
+  "ಇಪ್ಪತ್ತೊಂಬತ್ತು",
+  "ಮೂವತ್ತು",
+  "ಮೂವತ್ತೊಂದು",
+  "ಮೂವತ್ತೆರಡು",
+  "ಮೂವತ್ತಮೂರು",
+  "ಮೂವತ್ತನಾಲ್ಕು",
+  "ಮೂವತ್ತೈದು",
+  "ಮೂವತ್ತಾರು",
+  "ಮೂವತ್ತೇಳು",
+  "ಮೂವತ್ತೆಂಟು",
+  "ಮೂವತ್ತೊಂಬತ್ತು",
+  "ನಲವತ್ತು",
+  "ನಲವತ್ತೊಂದು",
+  "ನಲವತ್ತೆರಡು",
+  "ನಲವತ್ತಮೂರು",
+  "ನಲವತ್ತನಾಲ್ಕು",
+  "ನಲವತ್ತೈದು",
+  "ನಲವತ್ತಾರು",
+  "ನಲವತ್ತೇಳು",
+  "ನಲವತ್ತೆಂಟು",
+  "ನಲವತ್ತೊಂಬತ್ತು",
+  "ಐವತ್ತು",
+  "ಐವತ್ತೊಂದು",
+  "ಐವತ್ತೆರಡು",
+  "ಐವತ್ತಮೂರು",
+  "ಐವತ್ತನಾಲ್ಕು",
+  "ಐವತ್ತೈದು",
+  "ಐವತ್ತಾರು",
+  "ಐವತ್ತೇಳು",
+  "ಐವತ್ತೆಂಟು",
+  "ಐವತ್ತೊಂಬತ್ತು",
+  "ಅರವತ್ತು",
+  "ಅರವತ್ತೊಂದು",
+  "ಅರವತ್ತೆರಡು",
+  "ಅರವತ್ತಮೂರು",
+  "ಅರವತ್ತನಾಲ್ಕು",
+  "ಅರವತ್ತೈದು",
+  "ಅರವತ್ತಾರು",
+  "ಅರವತ್ತೇಳು",
+  "ಅರವತ್ತೆಂಟು",
+  "ಅರವತ್ತೊಂಬತ್ತು",
+  "ಎಪ್ಪತ್ತು",
+  "ಎಪ್ಪತ್ತೊಂದು",
+  "ಎಪ್ಪತ್ತೆರಡು",
+  "ಎಪ್ಪತ್ತಮೂರು",
+  "ಎಪ್ಪತ್ತನಾಲ್ಕು",
+  "ಎಪ್ಪತ್ತೈದು",
+  "ಎಪ್ಪತ್ತಾರು",
+  "ಎಪ್ಪತ್ತೇಳು",
+  "ಎಪ್ಪತ್ತೆಂಟು",
+  "ಎಪ್ಪತ್ತೊಂಬತ್ತು",
+  "ಎಂಟತ್ತು",
+  "ಎಂಟತ್ತೊಂದು",
+  "ಎಂಟತ್ತೆರಡು",
+  "ಎಂಟತ್ತಮೂರು",
+  "ಎಂಟತ್ತನಾಲ್ಕು",
+  "ಎಂಟತ್ತೈದು",
+  "ಎಂಟತ್ತಾರು",
+  "ಎಂಟತ್ತೇಳು",
+  "ಎಂಟತ್ತೆಂಟು",
+  "ಎಂಟತ್ತೊಂಬತ್ತು",
+  "ತೊಂಬತ್ತು",
+  "ತೊಂಬತ್ತೊಂದು",
+  "ತೊಂಬತ್ತೆರಡು",
+  "ತೊಂಬತ್ತಮೂರು",
+  "ತೊಂಬತ್ತನಾಲ್ಕು",
+  "ತೊಂಬತ್ತೈದು",
+  "ತೊಂಬತ್ತಾರು",
+  "ತೊಂಬತ್ತೇಳು",
+  "ತೊಂಬತ್ತೆಂಟು",
+  "ತೊಂಬತ್ತೊಂಬತ್ತು",
+];
+
+export function amountToKannadaWords(amount: number): string {
+  const num = Math.floor(Math.abs(Number(amount) || 0));
+  if (num === 0) return "ಸೊನ್ನೆ ರೂಪಾಯಿಗಳು ಮಾತ್ರ";
+
+  const parts: string[] = [];
+  let remainder = num;
+
+  const crore = Math.floor(remainder / 10000000);
+  if (crore > 0) {
+    remainder %= 10000000;
+    const croreWord = KANNADA_UNDER_100[crore] || String(crore);
+    parts.push(`${croreWord} ಕೋಟಿ`);
+  }
+
+  const lakh = Math.floor(remainder / 100000);
+  if (lakh > 0) {
+    remainder %= 100000;
+    const lakhWord = KANNADA_UNDER_100[lakh] || String(lakh);
+    parts.push(`${lakhWord} ಲಕ್ಷ${remainder > 0 ? "ದ" : ""}`);
+  }
+
+  const thousand = Math.floor(remainder / 1000);
+  if (thousand > 0) {
+    remainder %= 1000;
+    const thousandWord = KANNADA_UNDER_100[thousand] || String(thousand);
+    parts.push(`${thousandWord} ಸಾವಿರ${remainder > 0 ? "ದ" : ""}`);
+  }
+
+  const hundred = Math.floor(remainder / 100);
+  if (hundred > 0) {
+    remainder %= 100;
+    const hundredWord = KANNADA_UNDER_100[hundred] || String(hundred);
+    parts.push(`${hundredWord} ${remainder > 0 ? "ನೂರ" : "ನೂರು"}`);
+  }
+
+  if (remainder > 0) {
+    parts.push(KANNADA_UNDER_100[remainder] || String(remainder));
+  }
+
+  return `${parts.join(" ")} ರೂಪಾಯಿಗಳು ಮಾತ್ರ`;
+}
+
+export async function generateKannadaReceiptPdf(
+  element: HTMLElement,
+  fileName: string,
+  mode: "download" | "blob"
+): Promise<Blob | void> {
+  const { toPng } = await import("html-to-image");
+  const dataUrl = await toPng(element, {
+    pixelRatio: 2,
+    cacheBust: true,
+    backgroundColor: "#FFFDF7",
+  });
+
+  const img = new window.Image();
+  await new Promise<void>((resolve, reject) => {
+    img.onload = () => resolve();
+    img.onerror = () =>
+      reject(new Error("Failed to load captured Kannada receipt image"));
+    img.src = dataUrl;
+  });
+
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4",
+    compress: true,
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth(); // 210mm
+  const pageHeight = doc.internal.pageSize.getHeight(); // 297mm
+  const margin = 12;
+  const maxW = pageWidth - margin * 2;
+  const maxH = pageHeight - margin * 2;
+
+  const imgW = img.naturalWidth || element.offsetWidth || 800;
+  const imgH = img.naturalHeight || element.offsetHeight || 1000;
+  const ratio = Math.min(maxW / imgW, maxH / imgH);
+
+  const renderW = imgW * ratio;
+  const renderH = imgH * ratio;
+  const x = (pageWidth - renderW) / 2;
+  const y = margin;
+
+  doc.addImage(dataUrl, "PNG", x, y, renderW, renderH, undefined, "FAST");
+
+  if (mode === "download") {
+    doc.save(fileName);
+    return;
+  }
+  return doc.output("blob");
+}
+
 async function loadImageAsJpegDataUrl(src: string): Promise<string | null> {
   if (typeof window === "undefined") return null;
   return new Promise((resolve) => {
@@ -437,12 +633,7 @@ export async function createReceiptPdf(data: ReceiptData): Promise<jsPDF> {
   doc.setFontSize(8.5);
   doc.setTextColor(100, 40, 30);
   doc.text(
-    "Note: Contributions to the trust are not eligible for Section 80G tax exemption.",
-    contentLeft,
-    sigY - 4.5
-  );
-  doc.text(
-    "DEMO / TEST, not a valid receipt (Test Mode simulation only).",
+    "Note: Test Mode simulation only. No legal or tax validity.",
     contentLeft,
     sigY
   );
