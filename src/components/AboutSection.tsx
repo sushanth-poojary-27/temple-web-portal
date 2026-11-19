@@ -16,23 +16,19 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
         {/* Part 1: Temple Overview & History */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white rounded-3xl p-5 sm:p-10 border border-amber-200 shadow-sm">
-          {/* Temple Sanctum Image */}
-          <div className="lg:col-span-5 min-w-0 relative h-72 sm:h-80 lg:h-96 w-full rounded-2xl overflow-hidden border-2 border-amber-600/30 shadow-md bg-amber-100">
-            <Image
-              src="/assets/gallery/devi-1.webp"
-              alt={t(siteData.trustName, siteData.trustNameKn)}
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover object-center"
-            />
-            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-amber-950/90 via-amber-950/50 to-transparent p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-300">
-                {t(siteData.registrationNo, siteData.registrationNoKn)}
-              </p>
-              <p className="text-sm font-bold text-amber-50">
-                {t(siteData.shortName, siteData.shortNameKn)},{" "}
-                {t("Ullur", "ಉಳ್ಳೂರು")}
-              </p>
+          {/* Temple Sanctum Portrait */}
+          <div className="lg:col-span-5 min-w-0">
+            <div className="relative aspect-square w-full max-w-sm mx-auto rounded-2xl border-2 border-amber-500/40 bg-amber-950/5 shadow-md overflow-hidden">
+              <Image
+                src="/assets/banner(2).png"
+                alt={t(
+                  "Shri Durga Parameshwari Sannidhana, Ullur",
+                  "ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಸನ್ನಿಧಾನ (ರಿ.), ಉಳ್ಳೂರು"
+                )}
+                fill
+                sizes="(max-width: 1024px) 100vw, 384px"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
 
