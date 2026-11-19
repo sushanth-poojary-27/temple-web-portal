@@ -212,7 +212,7 @@ export default function InquiryForm() {
   return (
     <section
       id="inquiry"
-      className="scroll-mt-24 py-16 sm:py-20 bg-white border-t border-amber-200 text-amber-900"
+      className="scroll-mt-24 py-12 md:py-20 bg-white border-t border-amber-200 text-amber-900"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Section Heading */}
@@ -226,13 +226,13 @@ export default function InquiryForm() {
               )}
             </span>
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-relaxed break-words">
             {t(
               "Seva Booking & Inquiry Form",
               "ಸೇವಾ ನೋಂದಣಿ ಮತ್ತು ವಿಚಾರಣಾ ಅರ್ಜಿ"
             )}
           </h2>
-          <p className="text-sm sm:text-base text-amber-800">
+          <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
             {t(
               `Submit your request for Special Pooja, Annadana Seva, Alankara Pooja, or general temple inquiries at ${siteData.shortName}.`,
               `${siteData.shortNameKn} ಕ್ಷೇತ್ರದಲ್ಲಿ ವಿಶೇಷ ಪೂಜೆ, ಅನ್ನದಾನ ಸೇವೆ, ಅಲಂಕಾರ ಪೂಜೆ ಅಥವಾ ಸಾಮಾನ್ಯ ವಿಚಾರಣೆಗಾಗಿ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ.`
@@ -241,7 +241,7 @@ export default function InquiryForm() {
         </div>
 
         {/* Form Card */}
-        <div className="rounded-3xl bg-amber-50/90 p-6 sm:p-10 border-2 border-amber-200 shadow-sm">
+        <div className="min-w-0 rounded-3xl bg-amber-50/90 p-5 sm:p-10 border-2 border-amber-200 shadow-sm">
           {/* Accessible Success Toast Alert */}
           {isSuccess && (
             <div
@@ -287,10 +287,10 @@ export default function InquiryForm() {
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Full Name */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="inquiry-name"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Full Name", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು")}{" "}
                   <span className="text-red-600">*</span>
@@ -310,7 +310,7 @@ export default function InquiryForm() {
                     )}
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? "name-error" : undefined}
-                    className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.name
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -329,10 +329,10 @@ export default function InquiryForm() {
               </div>
 
               {/* 10-Digit Indian Mobile Number */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="inquiry-phone"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
                   <span className="text-red-600">*</span>
@@ -351,7 +351,7 @@ export default function InquiryForm() {
                     placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
                     aria-invalid={Boolean(errors.phone)}
                     aria-describedby={errors.phone ? "phone-error" : undefined}
-                    className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.phone
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -370,10 +370,10 @@ export default function InquiryForm() {
               </div>
 
               {/* Preferred Date */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="inquiry-date"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Preferred Date", "ಸೇವೆಯ ದಿನಾಂಕ")}{" "}
                   <span className="text-red-600">*</span>
@@ -389,7 +389,7 @@ export default function InquiryForm() {
                     onChange={handleChange}
                     aria-invalid={Boolean(errors.date)}
                     aria-describedby={errors.date ? "date-error" : undefined}
-                    className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.date
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -408,10 +408,10 @@ export default function InquiryForm() {
               </div>
 
               {/* Seva / Inquiry Type Dropdown */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="inquiry-sevaType"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Seva / Inquiry Type", "ಸೇವೆ / ವಿಚಾರಣೆಯ ಪ್ರಕಾರ")}{" "}
                   <span className="text-red-600">*</span>
@@ -424,7 +424,7 @@ export default function InquiryForm() {
                     required
                     value={formData.sevaType}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm font-medium text-amber-900 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
+                    className="w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-sm font-medium text-amber-900 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
                   >
                     {SEVA_OPTIONS.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -437,10 +437,10 @@ export default function InquiryForm() {
             </div>
 
             {/* Message / Special Notes (Nakshatra, Gotra, etc.) */}
-            <div className="space-y-2">
+            <div className="min-w-0 space-y-2">
               <label
                 htmlFor="inquiry-message"
-                className="block text-sm font-bold text-amber-900"
+                className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
               >
                 {t(
                   "Message / Special Notes (Nakshatra, Gotra, or Inquiry Details)",
@@ -459,14 +459,14 @@ export default function InquiryForm() {
                     "Optional: Mention Janma Nakshatra, Gotra, or specific timing questions...",
                     "ಐಚ್ಛಿಕ: ಜನ್ಮ ನಕ್ಷತ್ರ, ಗೋತ್ರ ಅಥವಾ ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ..."
                   )}
-                  className="w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
+                  className="w-full max-w-full rounded-xl bg-white pl-10 pr-4 py-3 text-sm text-amber-900 placeholder:text-amber-900/40 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
                 />
               </div>
             </div>
 
             {/* Submit Button */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-xs text-amber-800">
+              <p className="text-xs text-amber-800 leading-relaxed">
                 {t(
                   "Fields marked with * are required.",
                   "* ಗುರುತು ಇರುವ ವಿವರಗಳನ್ನು ಕಡ್ಡಾಯವಾಗಿ ಭರ್ತಿ ಮಾಡಬೇಕು."
@@ -476,7 +476,7 @@ export default function InquiryForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed transition duration-200 cursor-pointer leading-snug"
               >
                 {isSubmitting ? (
                   <>
