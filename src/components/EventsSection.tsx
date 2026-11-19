@@ -65,7 +65,7 @@ export default function EventsSection() {
   return (
     <section
       id="events"
-      className="scroll-mt-24 py-16 sm:py-20 bg-amber-50 text-amber-900"
+      className="scroll-mt-24 py-12 md:py-20 bg-amber-50 text-amber-900"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Heading */}
@@ -76,13 +76,13 @@ export default function EventsSection() {
               {t("Annual Utsavas & Sevas", "ವಾರ್ಷಿಕ ಉತ್ಸವಗಳು ಮತ್ತು ಸೇವೆಗಳು")}
             </span>
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-relaxed break-words">
             {t(
               "Upcoming Temple Festivals & Events",
               "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಮುಂಬರುವ ಉತ್ಸವಗಳು ಮತ್ತು ವಿಶೇಷ ಪೂಜೆಗಳು"
             )}
           </h2>
-          <p className="text-sm sm:text-base text-amber-800">
+          <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
             {t(
               `Sacred annual celebrations and monthly festivals observed at ${siteData.shortName}.`,
               `${siteData.shortNameKn} ಕ್ಷೇತ್ರದಲ್ಲಿ ಆಚರಿಸಲಾಗುವ ವಾರ್ಷಿಕ ಮಹೋತ್ಸವಗಳು ಹಾಗೂ ಮಾಸಿಕ ವಿಶೇಷ ಸೇವೆಗಳು.`
@@ -91,28 +91,28 @@ export default function EventsSection() {
         </div>
 
         {/* Interactive Countdown Banner for Next / Selected Festival */}
-        <div className="rounded-3xl bg-amber-900 text-amber-50 p-6 sm:p-8 lg:p-10 shadow-md border-2 border-amber-600">
+        <div className="rounded-3xl bg-amber-900 text-amber-50 p-5 sm:p-8 lg:p-10 shadow-md border-2 border-amber-600">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>
+            <div className="lg:col-span-7 min-w-0 space-y-3">
+              <div className="inline-flex max-w-full items-center gap-2 rounded-full bg-amber-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                <span className="min-w-0 break-words">
                   {t(
                     `Upcoming Event Countdown • ${selectedFestival.badge}`,
                     `ಉತ್ಸವದ ಕ್ಷಣಗಣನೆ • ${selectedFestival.badgeKn}`
                   )}
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-relaxed sm:leading-snug break-words">
                 {t(selectedFestival.name, selectedFestival.nameKn)}
               </h3>
-              <p className="text-xs sm:text-sm text-amber-200 flex items-center gap-2 font-medium">
-                <Calendar className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>
+              <p className="text-xs sm:text-sm text-amber-200 flex items-start gap-2 font-medium leading-relaxed min-w-0">
+                <Calendar className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="min-w-0 break-words">
                   {t(selectedFestival.dateLabel, selectedFestival.dateLabelKn)}
                 </span>
               </p>
-              <p className="text-sm text-amber-100/90 leading-relaxed">
+              <p className="text-sm text-amber-100/90 leading-relaxed break-words">
                 {t(
                   selectedFestival.description,
                   selectedFestival.descriptionKn
@@ -121,8 +121,8 @@ export default function EventsSection() {
             </div>
 
             {/* Live Countdown Boxes */}
-            <div className="lg:col-span-5">
-              <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
+            <div className="lg:col-span-5 min-w-0">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-center">
                 {[
                   {
                     label: t("Days", "ದಿನಗಳು"),
@@ -150,13 +150,13 @@ export default function EventsSection() {
                         ? String(unit.value).padStart(2, "0")
                         : unit.value}
                     </div>
-                    <div className="mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-amber-100">
+                    <div className="mt-1 text-xs font-semibold uppercase tracking-normal sm:tracking-wider text-amber-100 leading-snug">
                       {unit.label}
                     </div>
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-center text-xs text-amber-200/90 flex items-center justify-center gap-1.5">
+              <p className="mt-3 text-center text-xs text-amber-200/90 flex items-center justify-center gap-1.5 leading-relaxed">
                 <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>
                   {t(
@@ -185,7 +185,7 @@ export default function EventsSection() {
                     setSelectedFestival(festival);
                   }
                 }}
-                className={`group cursor-pointer rounded-2xl bg-white overflow-hidden border transition-all flex flex-col justify-between ${
+                className={`group min-w-0 cursor-pointer rounded-2xl bg-white overflow-hidden border transition duration-200 hover:-translate-y-0.5 active:scale-[0.99] flex flex-col justify-between ${
                   isSelected
                     ? "border-amber-600 ring-2 ring-amber-600/30 shadow-md"
                     : "border-amber-200 shadow-sm hover:border-amber-600 hover:shadow-md"
@@ -211,25 +211,25 @@ export default function EventsSection() {
 
                   {/* Card Body */}
                   <div className="p-6 space-y-3">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-amber-600">
-                      <Calendar className="w-3.5 h-3.5 shrink-0" />
-                      <span>
+                    <div className="flex items-start gap-1.5 text-xs font-bold text-amber-600 leading-relaxed min-w-0">
+                      <Calendar className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                      <span className="min-w-0 break-words">
                         {t(festival.dateLabel, festival.dateLabelKn)}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-amber-900 group-hover:text-amber-600 transition-colors leading-snug">
+                    <h3 className="text-xl font-bold text-amber-900 group-hover:text-amber-600 transition-colors duration-200 leading-relaxed break-words">
                       {t(festival.name, festival.nameKn)}
                     </h3>
 
-                    <p className="text-sm text-amber-800 leading-relaxed">
+                    <p className="text-sm text-amber-800 leading-relaxed break-words">
                       {t(festival.description, festival.descriptionKn)}
                     </p>
                   </div>
                 </div>
 
                 {/* Card Footer */}
-                <div className="px-6 pb-5 pt-3 border-t border-amber-100 flex items-center justify-between text-xs font-bold">
+                <div className="px-6 pb-5 pt-3 border-t border-amber-100 flex items-center justify-between text-xs font-bold min-h-[44px]">
                   <span
                     className={
                       isSelected ? "text-amber-600" : "text-amber-800"
@@ -242,7 +242,7 @@ export default function EventsSection() {
                         )
                       : t("Select for Countdown", "ಕ್ಷಣಗಣನೆಗಾಗಿ ಆಯ್ಕೆಮಾಡಿ")}
                   </span>
-                  <span className="text-amber-600 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-amber-600 group-hover:translate-x-0.5 transition-transform duration-200">
                     →
                   </span>
                 </div>
