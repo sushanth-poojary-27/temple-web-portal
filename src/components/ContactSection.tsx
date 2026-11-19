@@ -17,7 +17,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-24 py-16 sm:py-20 bg-amber-50 text-amber-900"
+      className="scroll-mt-24 py-12 md:py-20 bg-amber-50 text-amber-900"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
@@ -26,13 +26,13 @@ export default function ContactSection() {
             <MapPin className="w-3.5 h-3.5 text-amber-600" />
             <span>{t("Visit the Sannidhana", "ಶ್ರೀ ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಿ")}</span>
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-relaxed break-words">
             {t(
               "Location & Contact Details",
               "ಶ್ರೀ ಕ್ಷೇತ್ರದ ವಿಳಾಸ ಮತ್ತು ಸಂಪರ್ಕ ವಿವರ"
             )}
           </h2>
-          <p className="text-sm sm:text-base text-amber-800">
+          <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
             {t(
               `Plan your visit to ${siteData.trustName} or reach out to the trust office for seva and temple inquiries.`,
               `${siteData.trustNameKn} ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಲು ಹಾಗೂ ಸೇವಾ ವಿವರಗಳಿಗಾಗಿ ಟ್ರಸ್ಟ್ ಕಚೇರಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ.`
@@ -43,13 +43,13 @@ export default function ContactSection() {
         {/* Two-Column Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Address, Office Hours, and Action Buttons */}
-          <div className="lg:col-span-5 flex flex-col justify-between rounded-3xl bg-white p-6 sm:p-8 border border-amber-200 shadow-sm space-y-6">
+          <div className="lg:col-span-5 min-w-0 flex flex-col justify-between rounded-3xl bg-white p-5 sm:p-8 border border-amber-200 shadow-sm space-y-6">
             <div className="space-y-6">
               <div>
                 <span className="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 border border-amber-200">
                   {t(siteData.registrationNo, siteData.registrationNoKn)}
                 </span>
-                <h3 className="mt-2 text-xl sm:text-2xl font-bold text-amber-900 leading-snug">
+                <h3 className="mt-2 text-xl sm:text-2xl font-bold text-amber-900 leading-relaxed sm:leading-snug break-words">
                   {t(siteData.trustName, siteData.trustNameKn)}
                 </h3>
               </div>
@@ -58,14 +58,14 @@ export default function ContactSection() {
                 {/* Full Postal Address & Pincode */}
                 <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
                   <MapPin className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="space-y-1">
+                  <div className="min-w-0 flex-1 space-y-1">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
                       {t("Temple Postal Address", "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಂಚೆ ವಿಳಾಸ")}
                     </p>
-                    <p className="font-semibold text-amber-900">
+                    <p className="font-semibold text-amber-900 break-words">
                       {t(siteData.address, siteData.addressKn)}
                     </p>
-                    <p className="text-xs font-bold text-amber-700">
+                    <p className="text-xs font-bold text-amber-700 break-words">
                       {t("Pincode", "ಪಿನ್ ಕೋಡ್")}: {siteData.contact.pincode} •{" "}
                       {t("Plus Code", "ಪ್ಲಸ್ ಕೋಡ್")}:{" "}
                       {siteData.contact.plusCode}
@@ -76,18 +76,18 @@ export default function ContactSection() {
                 {/* Office & Darshan Hours */}
                 <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
                   <Clock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="space-y-1">
+                  <div className="min-w-0 flex-1 space-y-1">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
                       {t("Temple & Office Hours", "ದರ್ಶನ ಮತ್ತು ಕಚೇರಿ ಸಮಯ")}
                     </p>
-                    <p className="font-semibold text-amber-900">
+                    <p className="font-semibold text-amber-900 break-words">
                       {t("Morning", "ಬೆಳಿಗ್ಗೆ")}:{" "}
                       {t(
                         siteData.darshanTimings.morning,
                         siteData.darshanTimings.morningKn
                       )}
                     </p>
-                    <p className="font-semibold text-amber-900">
+                    <p className="font-semibold text-amber-900 break-words">
                       {t("Evening", "ಸಂಜೆ")}:{" "}
                       {t(
                         siteData.darshanTimings.evening,
@@ -100,27 +100,27 @@ export default function ContactSection() {
                 {/* Trust Administrator & Contact Info */}
                 <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
                   <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="space-y-1.5">
+                  <div className="min-w-0 flex-1 space-y-1.5">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
                       {t("Trust Office Contact", "ಟ್ರಸ್ಟ್ ಕಚೇರಿ ಸಂಪರ್ಕ")}
                     </p>
-                    <p className="font-bold text-amber-900">
+                    <p className="font-bold text-amber-900 break-words">
                       {t(
                         `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
                         `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
                       )}
                     </p>
-                    <p className="text-xs sm:text-sm flex items-center gap-2 text-amber-800">
-                      <Phone className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>
+                    <p className="text-xs sm:text-sm flex items-start gap-2 text-amber-800">
+                      <Phone className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span className="min-w-0 break-words">
                         {t(
                           siteData.contact.phoneDisplay,
                           siteData.contact.phoneDisplayKn
                         )}
                       </span>
                     </p>
-                    <p className="text-xs sm:text-sm flex items-center gap-2 text-amber-800">
-                      <Mail className="w-4 h-4 text-amber-600 shrink-0" />
+                    <p className="text-xs sm:text-sm flex items-start gap-2 text-amber-800">
+                      <Mail className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                       <a
                         href={siteData.contact.emailHref}
                         target="_blank"
@@ -141,9 +141,9 @@ export default function ContactSection() {
                 href={siteData.contact.emailHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-900 transition-colors"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-amber-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 text-center leading-snug"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4 shrink-0" />
                 <span>{t("Email on Gmail", "ಜಿಮೇಲ್ ಮೂಲಕ ಇಮೇಲ್ ಮಾಡಿ")}</span>
               </a>
 
@@ -151,20 +151,20 @@ export default function ContactSection() {
                 href={siteData.contact.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-amber-600 bg-amber-50 px-5 py-3 text-sm font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full border-2 border-amber-600 bg-amber-50 px-5 py-3 text-sm font-bold text-amber-900 hover:bg-amber-600 hover:text-white hover:brightness-105 active:scale-[0.99] transition duration-200 text-center leading-snug"
               >
-                <Navigation className="w-4 h-4" />
+                <Navigation className="w-4 h-4 shrink-0" />
                 <span>{t("Get Directions", "ಗೂಗಲ್ ಮ್ಯಾಪ್ ಮಾರ್ಗಸೂಚಿ")}</span>
               </a>
             </div>
           </div>
 
           {/* Right Column: Responsive Google Maps Embed */}
-          <div className="lg:col-span-7 flex flex-col rounded-3xl overflow-hidden border-2 border-amber-600 bg-white shadow-md min-h-[380px] sm:min-h-[460px]">
-            <div className="bg-amber-900 text-amber-50 px-5 py-3 flex items-center justify-between text-xs sm:text-sm font-semibold">
-              <span className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>
+          <div className="lg:col-span-7 min-w-0 flex flex-col rounded-3xl overflow-hidden border-2 border-amber-600 bg-white shadow-md min-h-[380px] sm:min-h-[460px]">
+            <div className="bg-amber-900 text-amber-50 px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-semibold">
+              <span className="flex items-start sm:items-center gap-2 leading-relaxed min-w-0">
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
+                <span className="min-w-0 break-words">
                   {t(siteData.shortName, siteData.shortNameKn)} •{" "}
                   {t(siteData.contact.village, siteData.contact.villageKn)} (
                   {siteData.contact.pincode})
@@ -174,13 +174,13 @@ export default function ContactSection() {
                 href={siteData.contact.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-amber-300 hover:text-white underline underline-offset-2 shrink-0"
+                className="text-amber-300 hover:text-white underline underline-offset-2 shrink-0 py-1 leading-snug transition-colors duration-200"
               >
                 {t("Open in Maps ↗", "ನಕ್ಷೆ ತೆರೆಯಿರಿ ↗")}
               </a>
             </div>
 
-            <div className="relative flex-1 w-full min-h-[340px]">
+            <div className="relative flex-1 w-full max-w-full min-h-[340px]">
               <iframe
                 title={t(
                   `Google Maps location for ${siteData.trustName}`,
@@ -193,7 +193,7 @@ export default function ContactSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full"
+                className="absolute inset-0 w-full max-w-full h-full"
               />
             </div>
           </div>
