@@ -357,21 +357,21 @@ export default function SevaBookingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-900 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-8">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip bg-amber-50 text-amber-900 py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto min-w-0 space-y-8">
         {/* Top Back to Home Link, Language Switcher & Test Mode Notice */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/#donate"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-colors"
+            className="inline-flex items-center gap-2 min-h-[44px] rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
           >
             <span>{t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}</span>
           </Link>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
-              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-              <span>
+          <div className="flex flex-wrap items-center gap-2 max-w-full">
+            <span className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400 leading-snug break-words">
+              <Sparkles className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+              <span className="min-w-0 break-words">
                 {t(siteData.demoDisclaimer, siteData.demoDisclaimerKn)}
               </span>
             </span>
@@ -379,24 +379,26 @@ export default function SevaBookingPage() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="inline-flex items-center gap-1.5 rounded-full border-2 border-amber-600 bg-white px-3.5 py-1 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-full border-2 border-amber-600 bg-white px-4 py-2 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white hover:brightness-105 active:scale-[0.99] transition duration-200 cursor-pointer leading-snug"
             >
-              <Languages className="w-3.5 h-3.5" />
+              <Languages className="w-3.5 h-3.5 shrink-0" />
               <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
             </button>
           </div>
         </div>
 
         {/* Page Header */}
-        <div className="rounded-3xl bg-amber-900 text-amber-50 p-6 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
-            <Flame className="w-4 h-4 text-amber-400" />
-            <span>{t(siteData.trustName, siteData.trustNameKn)}</span>
+        <div className="rounded-3xl bg-amber-900 text-amber-50 p-5 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300 leading-relaxed max-w-full">
+            <Flame className="w-4 h-4 text-amber-400 shrink-0" />
+            <span className="min-w-0 break-words">
+              {t(siteData.trustName, siteData.trustNameKn)}
+            </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-relaxed break-words">
             {t("Online Seva Booking", "ಆನ್‌ಲೈನ್ ಪೂಜಾ ಸೇವಾ ನೋಂದಣಿ")}
           </h1>
-          <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed">
+          <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed break-words">
             {t(
               "Select your Seva below and fill in your details for Sankalpa and Prasadam postal dispatch.",
               "ಶ್ರೀ ದೇವಿಯ ಸಂಕಲ್ಪ ಪೂಜೆ ಹಾಗೂ ಅಂಚೆ ಮೂಲಕ ಪ್ರಸಾದ ಪಡೆಯಲು ಕೆಳಗೆ ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ."
@@ -405,7 +407,7 @@ export default function SevaBookingPage() {
         </div>
 
         {/* Booking Form Card */}
-        <div className="rounded-3xl bg-white p-6 sm:p-10 border-2 border-amber-200 shadow-sm space-y-6">
+        <div className="min-w-0 rounded-3xl bg-white p-5 sm:p-10 border-2 border-amber-200 shadow-sm space-y-6">
           {/* Payment Failed Alert Banner with Try Again Button */}
           {paymentFailedMessage && (
             <div
@@ -425,7 +427,7 @@ export default function SevaBookingPage() {
               <button
                 type="button"
                 onClick={openRazorpayGateway}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 hover:brightness-105 active:scale-[0.99] transition duration-200 shrink-0 cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>{t("Try Again", "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ")}</span>
@@ -458,10 +460,10 @@ export default function SevaBookingPage() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Full Name */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="seva-name"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Full Name", "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರು")}{" "}
                   <span className="text-red-600">*</span>
@@ -479,7 +481,7 @@ export default function SevaBookingPage() {
                       "Enter devotee full name",
                       "ಭಕ್ತರ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
                     )}
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.name
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -495,10 +497,10 @@ export default function SevaBookingPage() {
               </div>
 
               {/* 10-Digit Mobile Number */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="seva-phone"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
                   <span className="text-red-600">*</span>
@@ -515,7 +517,7 @@ export default function SevaBookingPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.phone
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -531,10 +533,10 @@ export default function SevaBookingPage() {
               </div>
 
               {/* Email ID */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="seva-email"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Email ID", "ಇಮೇಲ್ ವಿಳಾಸ")}{" "}
                   <span className="text-red-600">*</span>
@@ -549,7 +551,7 @@ export default function SevaBookingPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="devotee@example.com"
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.email
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -565,10 +567,10 @@ export default function SevaBookingPage() {
               </div>
 
               {/* Preferred Seva Date */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="seva-date"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Preferred Seva Date", "ಸೇವೆಯ ದಿನಾಂಕ")}{" "}
                   <span className="text-red-600">*</span>
@@ -582,7 +584,7 @@ export default function SevaBookingPage() {
                     required
                     value={formData.date}
                     onChange={handleChange}
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.date
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -599,10 +601,10 @@ export default function SevaBookingPage() {
             </div>
 
             {/* Select Seva Dropdown */}
-            <div className="space-y-2">
+            <div className="min-w-0 space-y-2">
               <label
                 htmlFor="seva-select"
-                className="block text-sm font-bold text-amber-900"
+                className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
               >
                 {t("Select Seva", "ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ")}{" "}
                 <span className="text-red-600">*</span>
@@ -615,7 +617,7 @@ export default function SevaBookingPage() {
                   required
                   value={formData.sevaId}
                   onChange={handleChange}
-                  className="w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3.5 text-sm font-bold text-amber-900 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  className="w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3.5 text-sm font-bold text-amber-900 border border-amber-300 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-colors"
                 >
                   {sevaList.map((seva) => (
                     <option key={seva.id} value={seva.id}>
@@ -627,10 +629,10 @@ export default function SevaBookingPage() {
             </div>
 
             {/* Full Postal Address with Pincode (for Prasadam dispatch) */}
-            <div className="space-y-2">
+            <div className="min-w-0 space-y-2">
               <label
                 htmlFor="seva-address"
-                className="block text-sm font-bold text-amber-900"
+                className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
               >
                 {t(
                   "Full Postal Address with Pincode (for Prasadam dispatch)",
@@ -651,7 +653,7 @@ export default function SevaBookingPage() {
                     "House/Flat No., Street, Village/Town, District, State & 6-digit Pincode",
                     "ಮನೆ ಸಂಖ್ಯೆ, ರಸ್ತೆ, ಗ್ರಾಮ/ನಗರ, ಜಿಲ್ಲೆ, ರಾಜ್ಯ ಮತ್ತು 6 ಅಂಕಿಯ ಪಿನ್ ಕೋಡ್"
                   )}
-                  className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                  className={`w-full max-w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                     errors.address
                       ? "border-red-500 focus:ring-red-500"
                       : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -667,13 +669,13 @@ export default function SevaBookingPage() {
             </div>
 
             {/* Tax Exemption Notice */}
-            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900">
+            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed">
               {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
             </div>
 
             {/* Submit Button showing selected Seva rupee amount */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-amber-100">
-              <div className="text-xs text-amber-800">
+              <div className="text-xs text-amber-800 leading-relaxed">
                 {t("Selected Seva:", "ಆಯ್ಕೆಮಾಡಿದ ಸೇವೆ:")}{" "}
                 <strong className="text-amber-900">
                   {t(selectedSeva.name, selectedSeva.nameKn)}
@@ -684,7 +686,7 @@ export default function SevaBookingPage() {
               <button
                 type="submit"
                 disabled={isLoadingGateway}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] disabled:opacity-60 transition duration-200 cursor-pointer leading-snug"
               >
                 {isLoadingGateway ? (
                   <>
