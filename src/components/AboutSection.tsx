@@ -11,13 +11,13 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-24 py-16 sm:py-20 bg-amber-50 text-amber-900"
+      className="scroll-mt-24 py-12 md:py-20 bg-amber-50 text-amber-900"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
         {/* Part 1: Temple Overview & History */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white rounded-3xl p-6 sm:p-10 border border-amber-200 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white rounded-3xl p-5 sm:p-10 border border-amber-200 shadow-sm">
           {/* Temple Sanctum Image */}
-          <div className="lg:col-span-5 relative h-72 sm:h-80 lg:h-96 w-full rounded-2xl overflow-hidden border-2 border-amber-600/30 shadow-md bg-amber-100">
+          <div className="lg:col-span-5 min-w-0 relative h-72 sm:h-80 lg:h-96 w-full rounded-2xl overflow-hidden border-2 border-amber-600/30 shadow-md bg-amber-100">
             <Image
               src="/assets/gallery/devi-1.webp"
               alt={t(siteData.trustName, siteData.trustNameKn)}
@@ -37,32 +37,34 @@ export default function AboutSection() {
           </div>
 
           {/* About & History Content */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
-              <Landmark className="w-3.5 h-3.5 text-amber-600" />
-              <span>
+          <div className="lg:col-span-7 min-w-0 space-y-5">
+            <div className="inline-flex max-w-full items-center gap-2 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
+              <Landmark className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+              <span className="min-w-0 break-words">
                 {t("About the Temple & Trust", "ಶ್ರೀ ಕ್ಷೇತ್ರ ಮತ್ತು ಟ್ರಸ್ಟ್ ಪರಿಚಯ")}
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-snug">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-relaxed sm:leading-snug break-words">
               {t(siteData.trustName, siteData.trustNameKn)}
             </h2>
 
-            <p className="flex items-start gap-2 text-sm sm:text-base text-amber-800 font-medium">
+            <p className="flex items-start gap-2 text-sm sm:text-base text-amber-800 font-medium min-w-0">
               <MapPin className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <span>{t(siteData.fullAddress, siteData.fullAddressKn)}</span>
+              <span className="min-w-0 break-words">
+                {t(siteData.fullAddress, siteData.fullAddressKn)}
+              </span>
             </p>
 
             {/* History Box (uses official text or placeholder from siteData) */}
             <div className="rounded-2xl bg-amber-50/80 p-5 border border-amber-200 space-y-2">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-amber-900">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-amber-900 break-words">
                 {t(
                   "Sacred Heritage & History",
                   "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಪರಂಪರೆ ಮತ್ತು ಸ್ಥಳ ಪುರಾಣ"
                 )}
               </h3>
-              <p className="text-sm sm:text-base text-amber-800 leading-relaxed">
+              <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
                 {t(
                   siteData.placeholders.historyNote,
                   siteData.placeholders.historyNoteKn
@@ -72,25 +74,25 @@ export default function AboutSection() {
 
             {/* Trust Administration Summary */}
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 rounded-xl bg-amber-50 p-3.5 border border-amber-200/80">
+              <div className="min-w-0 flex items-center gap-3 rounded-xl bg-amber-50 p-3.5 border border-amber-200/80">
                 <ShieldCheck className="w-6 h-6 text-amber-600 shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs font-semibold text-amber-700 uppercase">
                     {t("Registration", "ಟ್ರಸ್ಟ್ ನೋಂದಣಿ")}
                   </p>
-                  <p className="text-sm font-bold text-amber-900">
+                  <p className="text-sm font-bold text-amber-900 break-words">
                     {t(siteData.registrationNo, siteData.registrationNoKn)}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl bg-amber-50 p-3.5 border border-amber-200/80">
+              <div className="min-w-0 flex items-center gap-3 rounded-xl bg-amber-50 p-3.5 border border-amber-200/80">
                 <Users className="w-6 h-6 text-amber-600 shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs font-semibold text-amber-700 uppercase">
                     {t("Trust Administration", "ಟ್ರಸ್ಟ್ ಆಡಳಿತ")}
                   </p>
-                  <p className="text-sm font-bold text-amber-900">
+                  <p className="text-sm font-bold text-amber-900 break-words">
                     {t(
                       `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
                       `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
@@ -114,13 +116,13 @@ export default function AboutSection() {
                 )}
               </span>
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-amber-900">
+            <h3 className="text-2xl sm:text-3xl font-bold text-amber-900 leading-relaxed break-words">
               {t(
                 "Managing Committee & Temple Priests",
                 "ವ್ಯವಸ್ಥಾಪನಾ ಸಮಿತಿ ಮತ್ತು ಪ್ರಧಾನ ಅರ್ಚಕರು"
               )}
             </h3>
-            <p className="text-sm sm:text-base text-amber-800">
+            <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
               {t(
                 `Dedicated office bearers and temple priests serving ${siteData.shortName}.`,
                 `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ಸೇವೆಯಲ್ಲಿ ತೊಡಗಿಸಿಕೊಂಡಿರುವ ಪದಾಧಿಕಾರಿಗಳು ಮತ್ತು ಅರ್ಚಕ ವೃಂದ.`
@@ -132,7 +134,7 @@ export default function AboutSection() {
             {siteData.committee.map((member) => (
               <div
                 key={member.id}
-                className="group flex items-center gap-4 rounded-2xl bg-white p-5 border border-amber-200 shadow-sm hover:border-amber-600 hover:shadow-md transition-all"
+                className="group min-w-0 flex items-center gap-4 rounded-2xl bg-white p-5 border border-amber-200 shadow-sm hover:-translate-y-0.5 hover:border-amber-600 hover:shadow-md transition duration-200"
               >
                 {/* Member Photo or Initials Avatar */}
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-amber-600 bg-amber-100 shrink-0">
@@ -162,7 +164,7 @@ export default function AboutSection() {
                   >
                     {t(member.role, member.roleKn)}
                   </span>
-                  <h4 className="text-base sm:text-lg font-bold text-amber-900 leading-snug">
+                  <h4 className="text-base sm:text-lg font-bold text-amber-900 leading-relaxed break-words">
                     {t(member.name, member.nameKn)}
                   </h4>
                   <p className="text-xs text-amber-700 font-medium">
