@@ -24,6 +24,7 @@ export default function Hero() {
           )}
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="absolute inset-0 w-full h-full object-cover object-[78%_center] md:object-center"
         />
