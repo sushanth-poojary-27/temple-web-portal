@@ -7,7 +7,7 @@ import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <section
@@ -15,7 +15,7 @@ export default function Hero() {
       className="relative w-full overflow-hidden bg-amber-900 text-amber-50"
     >
       {/* Hero Banner Image Container */}
-      <div className="relative w-full min-h-[460px] sm:min-h-[500px] md:min-h-[560px] lg:min-h-[600px] flex flex-col justify-end">
+      <div className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex flex-col justify-end">
         <Image
           src={siteData.assets.heroBanner}
           alt={t(
@@ -25,53 +25,56 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-[78%_center] md:object-center"
         />
-        {/* Warm Temple Gradient Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-amber-950/90 via-amber-900/50 to-amber-950/30" />
+        {/* Directional Warm Dark-Maroon Gradient Overlay (mobile bottom-up, desktop left-to-right) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#240601]/95 via-[#240601]/70 via-45% to-transparent md:bg-gradient-to-r md:from-[#2B0902]/90 md:via-[#2B0902]/65 md:to-transparent" />
 
         {/* Overlay Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pb-12 md:pb-16">
-          <div className="max-w-3xl min-w-0 space-y-4">
-            <div className="inline-flex max-w-full items-center gap-2 rounded-full bg-amber-600/90 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white shadow-sm backdrop-blur-sm leading-snug">
-              <Sparkles className="w-3.5 h-3.5 shrink-0" />
-              <span className="min-w-0 break-words">
-                {t(
-                  `${siteData.registrationNo} • Official Temple Portal`,
-                  `${siteData.registrationNoKn} • ಅಧಿಕೃತ ಶ್ರೀ ಕ್ಷೇತ್ರ ಜಾಲತಾಣ`
-                )}
-              </span>
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-52 sm:pt-60 pb-8 md:py-24 flex flex-col justify-end md:justify-center items-start text-left">
+          <div className="w-full max-w-[68%] sm:max-w-[65%] md:max-w-xl min-w-0 space-y-3 sm:space-y-4">
+            <p className="text-[11px] sm:text-xs font-medium tracking-wider uppercase text-amber-300/90 mb-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)] md:drop-shadow-none break-words">
+              {t(
+                "Official Temple Portal • Ullur",
+                "ಅಧಿಕೃತ ಶ್ರೀ ಕ್ಷೇತ್ರ ಜಾಲತಾಣ • ಉಳ್ಳೂರು"
+              )}
+            </p>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-amber-50 drop-shadow-md leading-relaxed sm:leading-snug break-words">
+            <h1
+              className={`${
+                language === "kn"
+                  ? "text-lg sm:text-2xl md:text-4xl leading-relaxed"
+                  : "text-xl sm:text-3xl md:text-5xl leading-snug"
+              } font-bold tracking-tight text-amber-50 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)] md:drop-shadow-md break-words`}
+            >
               {t(siteData.trustName, siteData.trustNameKn)}
             </h1>
 
-            <p className="flex items-start gap-2 text-sm sm:text-base md:text-lg text-amber-100/95 font-medium leading-relaxed min-w-0">
-              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-1" />
+            <p className="flex items-start gap-2 text-xs sm:text-sm md:text-base text-amber-100/95 font-medium leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)] md:drop-shadow-none min-w-0">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-0.5" />
               <span className="min-w-0 break-words">
                 {t(siteData.fullAddress, siteData.fullAddressKn)}
               </span>
             </p>
+          </div>
 
-            {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
-              <Link
-                href="#timings"
-                className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full bg-amber-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md hover:bg-amber-500 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
-              >
-                {t("Daily Pooja & Timings", "ದೈನಂದಿನ ಪೂಜೆ ಮತ್ತು ಸಮಯ")}
-              </Link>
-              <Link
-                href="#about"
-                className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full border border-amber-200/80 bg-amber-950/60 backdrop-blur-sm px-6 py-3 text-sm sm:text-base font-semibold text-amber-50 hover:bg-amber-900/80 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
-              >
-                {t(
-                  "About the Trust & Committee",
-                  "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಆಡಳಿತ ಸಮಿತಿ"
-                )}
-              </Link>
-            </div>
+          {/* CTA Buttons */}
+          <div className="pt-4 w-full sm:w-auto flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+            <Link
+              href="#timings"
+              className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full bg-amber-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md hover:bg-amber-500 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
+            >
+              {t("Daily Pooja & Timings", "ದೈನಂದಿನ ಪೂಜೆ ಮತ್ತು ಸಮಯ")}
+            </Link>
+            <Link
+              href="#about"
+              className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full border border-amber-200/80 bg-amber-950/60 backdrop-blur-sm px-6 py-3 text-sm sm:text-base font-semibold text-amber-50 hover:bg-amber-900/80 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
+            >
+              {t(
+                "About the Trust & Committee",
+                "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಆಡಳಿತ ಸಮಿತಿ"
+              )}
+            </Link>
           </div>
         </div>
       </div>
