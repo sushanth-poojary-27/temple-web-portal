@@ -58,7 +58,7 @@ export default function ReceiptPage() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-amber-50 text-amber-900 flex items-center justify-center p-6">
+      <div className="min-h-screen w-full max-w-full overflow-x-clip bg-amber-50 text-amber-900 flex items-center justify-center p-6">
         <p className="text-sm font-bold text-amber-800 animate-pulse">
           {t(
             "Loading DEMO Receipt Preview...",
@@ -71,12 +71,12 @@ export default function ReceiptPage() {
 
   if (!receipt) {
     return (
-      <div className="min-h-screen bg-amber-50 text-amber-900 flex items-center justify-center px-4 py-12">
-        <div className="max-w-md w-full bg-[#FFFDF7] p-8 border-[3px] border-[#7A1C1C] text-center space-y-5">
+      <div className="min-h-screen w-full max-w-full overflow-x-clip bg-amber-50 text-amber-900 flex items-center justify-center px-4 py-12">
+        <div className="max-w-md w-full bg-[#FFFDF7] p-6 sm:p-8 border-[3px] border-[#7A1C1C] text-center space-y-5">
           <div className="w-12 h-12 bg-amber-100 text-[#7A1C1C] flex items-center justify-center mx-auto border border-[#B8860B]">
             <FileWarning className="w-6 h-6" />
           </div>
-          <h1 className="text-xl font-serif font-bold text-[#7A1C1C]">
+          <h1 className="text-xl font-serif font-bold text-[#7A1C1C] leading-relaxed break-words">
             {t("No Recent Receipt Found", "ಯಾವುದೇ ಇತ್ತೀಚಿನ ರಸೀದಿ ಕಂಡುಬಂದಿಲ್ಲ")}
           </h1>
           <p className="text-sm text-amber-900 leading-relaxed">
@@ -88,13 +88,13 @@ export default function ReceiptPage() {
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/donate/seva"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#7A1C1C] px-6 py-2.5 text-sm font-bold text-white hover:bg-amber-900 transition-colors"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center bg-[#7A1C1C] px-6 py-2.5 text-sm font-bold text-white hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
             >
               {t("Go to Seva Booking", "ಸೇವೆ ಕಾಯ್ದಿರಿಸಲು ತೆರಳಿ")}
             </Link>
             <Link
               href="/"
-              className="w-full sm:w-auto inline-flex items-center justify-center border border-[#7A1C1C] bg-white px-6 py-2.5 text-sm font-bold text-[#7A1C1C] hover:bg-amber-50 transition-colors"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center border border-[#7A1C1C] bg-white px-6 py-2.5 text-sm font-bold text-[#7A1C1C] hover:bg-amber-50 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
             >
               {t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}
             </Link>
@@ -207,20 +207,20 @@ export default function ReceiptPage() {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-900 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip bg-amber-50 text-amber-900 py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto min-w-0 space-y-6">
         {/* Top Green Status Banner + Language Toggle */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-green-50 px-5 py-3.5 border border-green-400 text-green-900">
-          <div className="flex items-center gap-3">
-            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0" />
-            <div>
-              <p className="text-sm sm:text-base font-bold">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-green-50 px-4 sm:px-5 py-3.5 border border-green-400 text-green-900">
+          <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5 sm:mt-0" />
+            <div className="min-w-0">
+              <p className="text-sm sm:text-base font-bold leading-snug break-words">
                 {t(
                   "Test Transaction Completed • Receipt Generated",
                   "ಪರೀಕ್ಷಾ ವಹಿವಾಟು ಪೂರ್ಣಗೊಂಡಿದೆ • ರಸೀದಿ ಸಿದ್ಧವಾಗಿದೆ"
                 )}
               </p>
-              <p className="text-xs text-green-800">
+              <p className="text-xs text-green-800 leading-relaxed break-words">
                 {t(
                   'DEMO / TEST, not a valid receipt — click "Download PDF Receipt" below to save a copy.',
                   "ಡೆಮೊ / ಪರೀಕ್ಷಾ ರಸೀದಿ — ಇದು ಮಾನ್ಯ ರಸೀದಿ ಅಲ್ಲ. ರಸೀದಿ ಉಳಿಸಲು ಕೆಳಗಿನ 'ಪಿಡಿಎಫ್ ರಸೀದಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ' ಬಟನ್ ಒತ್ತಿ."
@@ -232,28 +232,31 @@ export default function ReceiptPage() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#7A1C1C] bg-white px-3.5 py-1 text-xs font-bold text-[#7A1C1C] hover:bg-[#7A1C1C] hover:text-white transition-colors cursor-pointer shrink-0"
+            className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-full border-2 border-[#7A1C1C] bg-white px-4 py-2 text-xs font-bold text-[#7A1C1C] hover:bg-[#7A1C1C] hover:text-white hover:brightness-105 active:scale-[0.99] transition duration-200 cursor-pointer shrink-0 leading-snug"
           >
-            <Languages className="w-3.5 h-3.5" />
+            <Languages className="w-3.5 h-3.5 shrink-0" />
             <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
           </button>
         </div>
 
         {/* Email Delivery Status Badge below top green banner */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-[#FFFDF7] px-5 py-3 border border-[#B8860B] text-xs sm:text-sm text-[#4A2511]">
-          <div className="flex items-center gap-2 font-semibold">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-[#FFFDF7] px-4 sm:px-5 py-3 border border-[#B8860B] text-xs sm:text-sm text-[#4A2511]">
+          <div className="flex items-center gap-2 font-semibold min-w-0">
             <Mail className="w-4 h-4 text-[#7A1C1C] shrink-0" />
-            <span>
+            <span className="break-words">
               {t(
                 "Automated Email Notification Status:",
                 "ಸ್ವಯಂಚಾಲಿತ ಇಮೇಲ್ ರಸೀದಿ ಸ್ಥಿತಿ:"
               )}
             </span>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs">
-            <span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs min-w-0 max-w-full">
+            <span className="min-w-0 break-words">
               {t("Devotee", "ಭಕ್ತರು")} (
-              <strong className="text-[#7A1C1C]">{receipt.email}</strong>):{" "}
+              <strong className="text-[#7A1C1C] break-all">
+                {receipt.email}
+              </strong>
+              ):{" "}
               <strong
                 className={
                   receipt.emailStatus?.devoteeSent
@@ -266,9 +269,9 @@ export default function ReceiptPage() {
                   : t("Skipped / Pending Key", "ಕಳುಹಿಸಲಾಗಿಲ್ಲ")}
               </strong>
             </span>
-            <span>
+            <span className="min-w-0 break-words">
               {t("Trust", "ಟ್ರಸ್ಟ್")} (
-              <strong className="text-[#7A1C1C]">
+              <strong className="text-[#7A1C1C] break-all">
                 shridurgaparameshwariullur@gmail.com
               </strong>
               ):{" "}
@@ -287,11 +290,13 @@ export default function ReceiptPage() {
           </div>
         </div>
 
-        {/* Printed Temple Paper Voucher Layout: Outer Thick Maroon (#7A1C1C) + Inner Thin Gold (#B8860B) */}
-        <div
-          ref={receiptRef}
-          className="rounded-none bg-[#FFFDF7] border-[3px] border-[#7A1C1C] p-1.5"
-        >
+        {/* Responsive Scroll Container around Printed Temple Paper Voucher */}
+        <div className="w-full max-w-full overflow-x-auto">
+          {/* Printed Temple Paper Voucher Layout: Outer Thick Maroon (#7A1C1C) + Inner Thin Gold (#B8860B) */}
+          <div
+            ref={receiptRef}
+            className="rounded-none bg-[#FFFDF7] border-[3px] border-[#7A1C1C] p-1.5"
+          >
           <div className="relative rounded-none border border-[#B8860B] bg-[#FFFDF7] overflow-hidden">
             {/* Top Red Warning Strip */}
             <div className="bg-red-700 text-white text-center py-2 px-4 text-xs sm:text-sm font-bold tracking-wider uppercase">
@@ -315,7 +320,7 @@ export default function ReceiptPage() {
             </div>
 
             {/* Voucher Body */}
-            <div className="relative z-10 px-6 sm:px-10 py-8 space-y-6 font-serif text-[#2B1810]">
+            <div className="relative z-10 px-4 sm:px-10 py-6 sm:py-8 space-y-6 font-serif text-[#2B1810]">
               {/* Header: Centered trust-logo, Bold Serif Title, Verified Address, Underlined Heading */}
               <div className="text-center space-y-2 border-b-4 border-double border-[#7A1C1C] pb-5">
                 <div className="relative w-20 h-20 mx-auto">
@@ -332,7 +337,7 @@ export default function ReceiptPage() {
                   />
                 </div>
 
-                <h1 className="text-lg sm:text-2xl font-serif font-bold text-[#7A1C1C] tracking-wide uppercase pt-1">
+                <h1 className="text-lg sm:text-2xl font-serif font-bold text-[#7A1C1C] tracking-wide uppercase pt-1 leading-relaxed">
                   {t(
                     "SHREE DURGAPARAMESHWARI SANNIDHANA (REGD.), ULLUR",
                     "ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಸನ್ನಿಧಾನ (ರಿ.), ಉಳ್ಳೂರು"
@@ -385,7 +390,7 @@ export default function ReceiptPage() {
                       "ಶ್ರೀ / ಶ್ರೀಮತಿ ಇವರಿಂದ ಕೃತಜ್ಞತಾಪೂರ್ವಕವಾಗಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ:"
                     )}
                   </span>
-                  <span className="font-semibold text-[#2B1810] flex-1">
+                  <span className="font-semibold text-[#2B1810] flex-1 break-words">
                     {receipt.donorName}
                   </span>
                 </div>
@@ -407,7 +412,7 @@ export default function ReceiptPage() {
                   <span className="font-bold text-[#7A1C1C] shrink-0">
                     {t("Address:", "ವಿಳಾಸ:")}
                   </span>
-                  <span className="text-[#2B1810] flex-1">
+                  <span className="text-[#2B1810] flex-1 break-words">
                     {receipt.address}
                   </span>
                 </div>
@@ -419,7 +424,7 @@ export default function ReceiptPage() {
                       "ಪಾವತಿ ಉಲ್ಲೇಖ (ರೇಜರ್‌ಪೇ ಪರೀಕ್ಷಾ ಐಡಿ):"
                     )}
                   </span>
-                  <span className="font-mono text-[#2B1810]">
+                  <span className="font-mono text-[#2B1810] break-all">
                     {receipt.paymentId}
                   </span>
                   <span className="text-xs text-[#5C3317]">
@@ -430,48 +435,48 @@ export default function ReceiptPage() {
 
               {/* Sharp Particulars Grid (1px solid #7A1C1C, rounded-none) */}
               <div className="rounded-none overflow-x-auto">
-                <table className="w-full border-collapse border border-[#7A1C1C] rounded-none text-xs sm:text-sm">
+                <table className="w-full min-w-[460px] border-collapse border border-[#7A1C1C] rounded-none text-xs sm:text-sm">
                   <thead>
                     <tr className="bg-[#F6EEDC] text-[#7A1C1C]">
-                      <th className="border border-[#7A1C1C] py-2.5 px-3 text-center font-bold w-16">
+                      <th className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-center font-bold w-16">
                         {t("Sl. No.", "ಕ್ರ. ಸಂ.")}
                       </th>
-                      <th className="border border-[#7A1C1C] py-2.5 px-3 text-left font-bold">
+                      <th className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-left font-bold">
                         {t("Particulars (Seva / Fund)", "ವಿವರಗಳು (ಸೇವೆ / ನಿಧಿ)")}
                       </th>
-                      <th className="border border-[#7A1C1C] py-2.5 px-3 text-center font-bold w-32">
+                      <th className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-center font-bold w-32">
                         {t("Seva Date", "ಸೇವೆಯ ದಿನಾಂಕ")}
                       </th>
-                      <th className="border border-[#7A1C1C] py-2.5 px-3 text-right font-bold w-32">
+                      <th className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-right font-bold w-32">
                         {t("Amount (₹)", "ಮೊತ್ತ (₹)")}
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-[#7A1C1C] py-3 px-3 text-center">
+                      <td className="border border-[#7A1C1C] py-3 px-2.5 sm:px-3 text-center">
                         1
                       </td>
-                      <td className="border border-[#7A1C1C] py-3 px-3 font-bold text-[#2B1810]">
+                      <td className="border border-[#7A1C1C] py-3 px-2.5 sm:px-3 font-bold text-[#2B1810]">
                         {t(receipt.purpose, translatePurposeKn(receipt.purpose))}
                       </td>
-                      <td className="border border-[#7A1C1C] py-3 px-3 text-center">
+                      <td className="border border-[#7A1C1C] py-3 px-2.5 sm:px-3 text-center">
                         {receipt.sevaDate && receipt.sevaDate !== "N/A"
                           ? receipt.sevaDate
                           : t("N/A", "ಅನ್ವಯಿಸುವುದಿಲ್ಲ")}
                       </td>
-                      <td className="border border-[#7A1C1C] py-3 px-3 text-right font-bold">
+                      <td className="border border-[#7A1C1C] py-3 px-2.5 sm:px-3 text-right font-bold">
                         ₹{Number(receipt.amount).toLocaleString("en-IN")}/-
                       </td>
                     </tr>
                     <tr className="bg-[#F6EEDC] font-bold text-[#7A1C1C]">
                       <td
                         colSpan={3}
-                        className="border border-[#7A1C1C] py-2.5 px-3 text-right uppercase tracking-wide"
+                        className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-right uppercase tracking-wide"
                       >
                         {t("Total Paid", "ಒಟ್ಟು ಪಾವತಿಸಿದ ಮೊತ್ತ")}
                       </td>
-                      <td className="border border-[#7A1C1C] py-2.5 px-3 text-right text-sm sm:text-base">
+                      <td className="border border-[#7A1C1C] py-2.5 px-2.5 sm:px-3 text-right text-sm sm:text-base">
                         ₹{Number(receipt.amount).toLocaleString("en-IN")}/-
                       </td>
                     </tr>
@@ -514,15 +519,16 @@ export default function ReceiptPage() {
             </div>
           </div>
         </div>
+        </div>
 
         {/* Manual Action Buttons Below Receipt Voucher */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <button
             type="button"
             onClick={() => void handleDownloadReceipt()}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#7A1C1C] px-7 py-3 text-sm font-bold text-white hover:bg-amber-900 transition-colors cursor-pointer"
+            className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#7A1C1C] px-7 py-3 text-sm font-bold text-white hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 cursor-pointer leading-snug"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 shrink-0" />
             <span>
               {t("Download PDF Receipt", "ಪಿಡಿಎಫ್ ರಸೀದಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ")}
             </span>
@@ -532,7 +538,7 @@ export default function ReceiptPage() {
             type="button"
             disabled={isSharing}
             onClick={() => void handleShareReceipt()}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] disabled:opacity-60 px-7 py-3 text-sm text-white font-semibold shadow-sm transition-colors cursor-pointer"
+            className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] hover:brightness-105 active:scale-[0.99] disabled:opacity-60 px-7 py-3 text-sm text-white font-semibold shadow-sm transition duration-200 cursor-pointer leading-snug"
           >
             <svg
               viewBox="0 0 24 24"
@@ -551,7 +557,7 @@ export default function ReceiptPage() {
 
           <Link
             href="/"
-            className="w-full sm:w-auto inline-flex items-center justify-center bg-white px-7 py-3 text-sm font-bold text-[#7A1C1C] border-2 border-[#7A1C1C] hover:bg-amber-50 transition-colors"
+            className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center bg-white px-7 py-3 text-sm font-bold text-[#7A1C1C] border-2 border-[#7A1C1C] hover:bg-amber-50 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
           >
             <span>{t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}</span>
           </Link>
