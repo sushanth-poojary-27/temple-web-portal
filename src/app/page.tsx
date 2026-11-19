@@ -11,12 +11,12 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-amber-50 text-amber-900">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip flex flex-col bg-amber-50 text-amber-900">
       {/* Sticky Navigation Header */}
       <Header />
 
       {/* Main Content Area */}
-      <main className="flex-1">
+      <main className="flex-1 min-w-0 max-w-full">
         {/* Hero Banner Section */}
         <Hero />
 
