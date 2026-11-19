@@ -24,8 +24,9 @@ export default function Hero() {
           )}
           fill
           priority
+          fetchPriority="high"
           quality={90}
-          sizes="100vw"
+          sizes="(max-width: 767px) 1920px, 100vw"
           className="absolute inset-0 w-full h-full object-cover object-[78%_center] md:object-center"
         />
         {/* Directional Warm Dark-Maroon Gradient Overlay (mobile bottom-up, desktop left-to-right) */}
