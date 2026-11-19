@@ -372,21 +372,21 @@ export default function EducationTrustDonationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-900 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-8">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip bg-amber-50 text-amber-900 py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto min-w-0 space-y-8">
         {/* Top Back to Home Link, Language Switcher & Test Mode Notice */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/#donate"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-colors"
+            className="inline-flex items-center gap-2 min-h-[44px] rounded-full bg-white px-4 py-2 text-sm font-bold text-amber-900 border border-amber-300 shadow-sm hover:bg-amber-600 hover:text-white hover:border-amber-600 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
           >
             <span>{t("← Back to Home", "← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ")}</span>
           </Link>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400">
-              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-              <span>
+          <div className="flex flex-wrap items-center gap-2 max-w-full">
+            <span className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-amber-200/80 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-900 border border-amber-400 leading-snug break-words">
+              <Sparkles className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+              <span className="min-w-0 break-words">
                 {t(siteData.demoDisclaimer, siteData.demoDisclaimerKn)}
               </span>
             </span>
@@ -394,27 +394,29 @@ export default function EducationTrustDonationPage() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="inline-flex items-center gap-1.5 rounded-full border-2 border-amber-600 bg-white px-3.5 py-1 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-full border-2 border-amber-600 bg-white px-4 py-2 text-xs font-bold text-amber-900 hover:bg-amber-600 hover:text-white hover:brightness-105 active:scale-[0.99] transition duration-200 cursor-pointer leading-snug"
             >
-              <Languages className="w-3.5 h-3.5" />
+              <Languages className="w-3.5 h-3.5 shrink-0" />
               <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
             </button>
           </div>
         </div>
 
         {/* Page Header */}
-        <div className="rounded-3xl bg-amber-900 text-amber-50 p-6 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
-            <BookOpen className="w-4 h-4 text-amber-400" />
-            <span>{t(siteData.trustName, siteData.trustNameKn)}</span>
+        <div className="rounded-3xl bg-amber-900 text-amber-50 p-5 sm:p-8 border-2 border-amber-600 shadow-md space-y-2">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300 leading-relaxed max-w-full">
+            <BookOpen className="w-4 h-4 text-amber-400 shrink-0" />
+            <span className="min-w-0 break-words">
+              {t(siteData.trustName, siteData.trustNameKn)}
+            </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-relaxed break-words">
             {t(
               "Education & General Trust Fund",
               "ಶೈಕ್ಷಣಿಕ ಮತ್ತು ಸಾಮಾನ್ಯ ಟ್ರಸ್ಟ್ ನಿಧಿ"
             )}
           </h1>
-          <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed">
+          <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed break-words">
             {t(
               `Support student scholarships, educational assistance, Annadana, and temple preservation initiatives at ${siteData.shortName}.`,
               `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ವತಿಯಿಂದ ನೀಡಲಾಗುವ ವಿದ್ಯಾರ್ಥಿ ವೇತನ, ಶೈಕ್ಷಣಿಕ ನೆರವು, ನಿತ್ಯ ಅನ್ನದಾನ ಹಾಗೂ ದೇವಸ್ಥಾನದ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಗಳಿಗೆ ದೇಣಿಗೆ ನೀಡಿ.`
@@ -423,7 +425,7 @@ export default function EducationTrustDonationPage() {
         </div>
 
         {/* Donation Form Card */}
-        <div className="rounded-3xl bg-white p-6 sm:p-10 border-2 border-amber-200 shadow-sm space-y-6">
+        <div className="min-w-0 rounded-3xl bg-white p-5 sm:p-10 border-2 border-amber-200 shadow-sm space-y-6">
           {/* Payment Failed Alert Banner with Try Again Button */}
           {paymentFailedMessage && (
             <div
@@ -443,7 +445,7 @@ export default function EducationTrustDonationPage() {
               <button
                 type="button"
                 onClick={openRazorpayGateway}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 transition-colors shrink-0 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 hover:brightness-105 active:scale-[0.99] transition duration-200 shrink-0 cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>{t("Try Again", "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ")}</span>
@@ -491,7 +493,7 @@ export default function EducationTrustDonationPage() {
                       key={chip}
                       type="button"
                       onClick={() => handleQuickAmountSelect(chip)}
-                      className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold border transition-all cursor-pointer ${
+                      className={`inline-flex items-center justify-center min-h-[44px] rounded-full px-4 py-2 text-xs sm:text-sm font-bold border transition duration-200 hover:brightness-105 active:scale-[0.99] cursor-pointer ${
                         isSelected
                           ? "bg-amber-600 text-white border-amber-600 shadow-sm"
                           : "bg-white text-amber-900 border-amber-300 hover:border-amber-600"
@@ -518,7 +520,7 @@ export default function EducationTrustDonationPage() {
                     "Enter amount in ₹ (min ₹10)",
                     "ದೇಣಿಗೆ ಮೊತ್ತವನ್ನು ₹ ನಲ್ಲಿ ನಮೂದಿಸಿ (ಕನಿಷ್ಠ ₹10)"
                   )}
-                  className={`w-full rounded-xl bg-white pl-10 pr-4 py-3 text-base font-bold text-amber-900 border focus:outline-none focus:ring-2 ${
+                  className={`w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-base font-bold text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                     errors.amount
                       ? "border-red-500 focus:ring-red-500"
                       : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -535,10 +537,10 @@ export default function EducationTrustDonationPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Full Name */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="trust-name"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("Full Name", "ದಾನಿಗಳ ಪೂರ್ಣ ಹೆಸರು")}{" "}
                   <span className="text-red-600">*</span>
@@ -556,7 +558,7 @@ export default function EducationTrustDonationPage() {
                       "Enter donor full name",
                       "ದಾನಿಗಳ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ"
                     )}
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.name
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -572,10 +574,10 @@ export default function EducationTrustDonationPage() {
               </div>
 
               {/* 10-Digit Indian Mobile Number */}
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2">
                 <label
                   htmlFor="trust-phone"
-                  className="block text-sm font-bold text-amber-900"
+                  className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
                 >
                   {t("10-Digit Mobile Number", "10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ")}{" "}
                   <span className="text-red-600">*</span>
@@ -592,7 +594,7 @@ export default function EducationTrustDonationPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder={t("e.g. 9876543210", "ಉದಾ: 9876543210")}
-                    className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                    className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                       errors.phone
                         ? "border-red-500 focus:ring-red-500"
                         : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -609,10 +611,10 @@ export default function EducationTrustDonationPage() {
             </div>
 
             {/* Email ID */}
-            <div className="space-y-2">
+            <div className="min-w-0 space-y-2">
               <label
                 htmlFor="trust-email"
-                className="block text-sm font-bold text-amber-900"
+                className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
               >
                 {t("Email ID", "ಇಮೇಲ್ ವಿಳಾಸ")}{" "}
                 <span className="text-red-600">*</span>
@@ -627,7 +629,7 @@ export default function EducationTrustDonationPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="donor@example.com"
-                  className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                  className={`w-full max-w-full min-h-[44px] rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                     errors.email
                       ? "border-red-500 focus:ring-red-500"
                       : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -643,10 +645,10 @@ export default function EducationTrustDonationPage() {
             </div>
 
             {/* Full Address */}
-            <div className="space-y-2">
+            <div className="min-w-0 space-y-2">
               <label
                 htmlFor="trust-address"
-                className="block text-sm font-bold text-amber-900"
+                className="block text-sm font-bold text-amber-900 leading-relaxed break-words"
               >
                 {t("Full Address", "ಪೂರ್ಣ ವಿಳಾಸ")}{" "}
                 <span className="text-red-600">*</span>
@@ -664,7 +666,7 @@ export default function EducationTrustDonationPage() {
                     "Enter your complete postal address with Pincode",
                     "ಪಿನ್ ಕೋಡ್ ಸಹಿತ ನಿಮ್ಮ ಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ"
                   )}
-                  className={`w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 ${
+                  className={`w-full max-w-full rounded-xl bg-amber-50/50 pl-10 pr-4 py-3 text-sm text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                     errors.address
                       ? "border-red-500 focus:ring-red-500"
                       : "border-amber-300 focus:border-amber-600 focus:ring-amber-600"
@@ -680,13 +682,13 @@ export default function EducationTrustDonationPage() {
             </div>
 
             {/* Tax Exemption Notice */}
-            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900">
+            <div className="rounded-xl bg-amber-50 p-3.5 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed">
               {t(siteData.taxExemptionNote, siteData.taxExemptionNoteKn)}
             </div>
 
             {/* Submit Button showing entered rupee amount */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-amber-100">
-              <div className="text-xs text-amber-800">
+              <div className="text-xs text-amber-800 leading-relaxed">
                 {t("Fund:", "ನಿಧಿ:")}{" "}
                 <strong className="text-amber-900">
                   {t(
@@ -699,7 +701,7 @@ export default function EducationTrustDonationPage() {
               <button
                 type="submit"
                 disabled={isLoadingGateway}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 disabled:opacity-60 transition-colors cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-md hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] disabled:opacity-60 transition duration-200 cursor-pointer leading-snug"
               >
                 {isLoadingGateway ? (
                   <>
