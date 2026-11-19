@@ -24,6 +24,16 @@ const notoSansKannada = Noto_Sans_Kannada({
 export const metadata: Metadata = {
   title: siteData.trustName,
   description: `Official web portal of ${siteData.trustName}, ${siteData.fullAddress}`,
+  openGraph: {
+    title: siteData.trustName,
+    description: `Official web portal of ${siteData.trustName}, ${siteData.fullAddress}`,
+    images: [
+      {
+        url: "/assets/banner(2).png",
+        alt: "Shri Durga Parameshwari Sannidhana, Ullur",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
