@@ -30,9 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansKannada.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansKannada.variable} h-full antialiased motion-safe:scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-amber-50 text-amber-900">
+      <body className="min-h-full flex flex-col bg-amber-50 text-amber-900 overflow-x-clip">
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
