@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import {
+  Check,
   Clock,
+  Copy,
   Mail,
   MapPin,
   Navigation,
@@ -13,6 +16,17 @@ import { useLanguage } from "@/context/LanguageContext";
 
 export default function ContactSection() {
   const { t } = useLanguage();
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(siteData.contact.emailDisplay);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      // Fallback no-op if clipboard permission is unavailable
+    }
+  };
 
   return (
     <section
@@ -112,35 +126,52 @@ export default function ContactSection() {
                     </p>
                     <p className="text-xs sm:text-sm flex items-start gap-2 text-amber-800">
                       <Phone className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <span className="min-w-0 break-words">
+                      <a
+                        href={siteData.contact.phoneHref}
+                        className="font-semibold text-amber-900 hover:text-amber-600 underline underline-offset-2 min-w-0 break-words transition-colors"
+                      >
                         {t(
                           siteData.contact.phoneDisplay,
                           siteData.contact.phoneDisplayKn
                         )}
-                      </span>
+                      </a>
                     </p>
-                    <p className="text-xs sm:text-sm flex items-start gap-2 text-amber-800">
-                      <Mail className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                    <div className="text-xs sm:text-sm flex flex-wrap items-center gap-2 text-amber-800">
+                      <Mail className="w-4 h-4 text-amber-600 shrink-0" />
                       <a
                         href={siteData.contact.emailHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="font-semibold text-amber-900 hover:text-amber-600 underline underline-offset-2 break-all transition-colors"
                       >
                         {siteData.contact.emailDisplay}
                       </a>
-                    </p>
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 hover:bg-amber-100 active:scale-[0.98] transition cursor-pointer"
+                        aria-label={t("Copy email address", "ಇಮೇಲ್ ವಿಳಾಸ ನಕಲಿಸಿ")}
+                      >
+                        {emailCopied ? (
+                          <>
+                            <Check className="w-3 h-3 text-emerald-600 shrink-0" />
+                            <span>{t("Copied", "ನಕಲಿಸಲಾಗಿದೆ")}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3 text-amber-600 shrink-0" />
+                            <span>{t("Copy Email", "ಇಮೇಲ್ ನಕಲಿಸಿ")}</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons: Email via Gmail & Google Maps Directions */}
+            {/* Action Buttons: Email via Mailto & Google Maps Directions */}
             <div className="pt-4 border-t border-amber-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={siteData.contact.emailHref}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-amber-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 text-center leading-snug"
               >
                 <Mail className="w-4 h-4 shrink-0" />

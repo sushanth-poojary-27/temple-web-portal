@@ -26,6 +26,12 @@ export interface AartiTiming {
 }
 
 export interface DarshanTimings {
+  title: string;
+  titleKn: string;
+  morningLabel: string;
+  morningLabelKn: string;
+  eveningLabel: string;
+  eveningLabelKn: string;
   morning: string;
   morningKn: string;
   evening: string;
@@ -37,6 +43,14 @@ export interface NavItem {
   label: string;
   labelKn: string;
   href: string;
+}
+
+export interface HeroCtaItem {
+  id: string;
+  label: string;
+  labelKn: string;
+  href: string;
+  variant: "primary" | "secondary" | "accent";
 }
 
 export interface FestivalItem {
@@ -146,6 +160,8 @@ export interface SiteData {
   fullAddressKn: string;
   registrationNo: string;
   registrationNoKn: string;
+  announcementBar: string;
+  announcementBarKn: string;
   taxExemptionNote: string;
   taxExemptionNoteKn: string;
   demoDisclaimer: string;
@@ -156,6 +172,7 @@ export interface SiteData {
   };
   supervisor: SupervisorInfo;
   navigation: NavItem[];
+  heroCtas: HeroCtaItem[];
   committee: CommitteeMember[];
   aartiTimings: AartiTiming[];
   darshanTimings: DarshanTimings;
@@ -163,7 +180,6 @@ export interface SiteData {
   gallery: GalleryItem[];
   contact: ContactInfo;
   sevaList: SevaItem[];
-  web3formsKey: string;
   placeholders: {
     historyNote: string;
     historyNoteKn: string;
@@ -191,6 +207,10 @@ export const siteData: SiteData = {
     "ಪೋಸ್ಟ್ ಕೆಮುಂಡೇಲ್, ಉಳ್ಳೂರು ಗ್ರಾಮ, ಎಲ್ಲೂರು, ಉಡುಪಿ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ - 574119 (ಪ್ಲಸ್ ಕೋಡ್: 5Q7W+92R)",
   registrationNo: "Regd. Trust 2007",
   registrationNoKn: "ನೋಂದಾಯಿತ ಟ್ರಸ್ಟ್ 2007",
+  announcementBar:
+    "🙏 Om Shri Durgayai Namaha • Check Upcoming Festivals, Seva Details, Pre-Seva Bookings & Temple Updates — Thank You 🙏",
+  announcementBarKn:
+    "🙏 ಓಂ ಶ್ರೀ ದುರ್ಗಾಯೈ ನಮಃ • ಮುಂಬರುವ ಉತ್ಸವಗಳು, ಸೇವೆಗಳ ವಿವರ, ಮುಂಗಡ ಸೇವೆ ಬುಕ್ಕಿಂಗ್ ಮತ್ತು ದೇವಾಲಯದ ಮಾಹಿತಿಯನ್ನು ವೀಕ್ಷಿಸಿ — ಧನ್ಯವಾದಗಳು 🙏",
   taxExemptionNote:
     "Note: Contributions to the trust are not eligible for Section 80G tax exemption.",
   taxExemptionNoteKn:
@@ -210,11 +230,33 @@ export const siteData: SiteData = {
   navigation: [
     { label: "Home", labelKn: "ಮುಖಪುಟ", href: "#home" },
     { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "#about" },
-    { label: "Timings & Sevas", labelKn: "ದರ್ಶನ ಮತ್ತು ಸೇವಾ ಸಮಯ", href: "#timings" },
     { label: "Festivals", labelKn: "ಉತ್ಸವಗಳು", href: "#events" },
     { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "#gallery" },
     { label: "Donate", labelKn: "ಸೇವೆ / ದೇಣಿಗೆ", href: "#donate" },
     { label: "Contact", labelKn: "ಸಂಪರ್ಕಿಸಿ", href: "#contact" },
+  ],
+  heroCtas: [
+    {
+      id: "upcoming-events",
+      label: "Upcoming Events",
+      labelKn: "ಮುಂಬರುವ ಉತ್ಸವಗಳು",
+      href: "#events",
+      variant: "primary",
+    },
+    {
+      id: "book-seva",
+      label: "Book a Seva",
+      labelKn: "ಸೇವೆ ಬುಕ್ ಮಾಡಿ",
+      href: "/donate/seva",
+      variant: "secondary",
+    },
+    {
+      id: "support-edu-trust",
+      label: "Support Edu Trust",
+      labelKn: "ವಿದ್ಯಾ ಟ್ರಸ್ಟ್ ದೇಣಿಗೆ",
+      href: "/donate/education-trust",
+      variant: "accent",
+    },
   ],
   committee: [
     {
@@ -296,6 +338,12 @@ export const siteData: SiteData = {
     },
   ],
   darshanTimings: {
+    title: "Daily Darshan Timings",
+    titleKn: "ದೈನಂದಿನ ದರ್ಶನ ಸಮಯ",
+    morningLabel: "Morning Darshan",
+    morningLabelKn: "ಬೆಳಗಿನ ದರ್ಶನ",
+    eveningLabel: "Evening Darshan",
+    eveningLabelKn: "ಸಂಜೆಯ ದರ್ಶನ",
     morning: "6:00 AM - 2:00 PM",
     morningKn: "ಬೆಳಿಗ್ಗೆ 6:00 - ಮಧ್ಯಾಹ್ನ 2:00",
     evening: "4:00 PM - 8:30 PM",
@@ -439,25 +487,24 @@ export const siteData: SiteData = {
     plusCode: "5Q7W+92R",
     officeHours: "Morning 6:00 AM - 2:00 PM | Evening 4:00 PM - 8:30 PM",
     officeHoursKn: "ಬೆಳಿಗ್ಗೆ 6:00 - ಮಧ್ಯಾಹ್ನ 2:00 | ಸಂಜೆ 4:00 - ರಾತ್ರಿ 8:30",
-    phoneDisplay: "[PLACEHOLDER: Official Trust Phone Number]",
-    phoneDisplayKn: "[PLACEHOLDER: ಟ್ರಸ್ಟ್ ಅಧಿಕೃತ ದೂರವಾಣಿ ಸಂಖ್ಯೆ ನಿರೀಕ್ಷಿಸಲಾಗಿದೆ]",
-    phoneHref: "tel:+910000000000",
+    phoneDisplay: "+91 9820790032",
+    phoneDisplayKn: "+91 9820790032",
+    phoneHref: "tel:+919820790032",
     emailDisplay: "shridurgaparameshwariullur@gmail.com",
     emailHref:
-      "https://mail.google.com/mail/?view=cm&fs=1&to=shridurgaparameshwariullur@gmail.com",
+      "mailto:shridurgaparameshwariullur@gmail.com?subject=Temple%20Trust%20Inquiry",
     googleMapsEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.228546!2d74.7924429!3d13.1634892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcaddb334977bf%3A0xf294e0dc4628342f!2sUlluru%20Durgaparameshwari!5e0!3m2!1sen!2sin!4v1731314000000!5m2!1sen!2sin",
     googleMapsDirectionsUrl:
       "https://www.google.com/maps/dir//5Q7W%2B92R+Ulluru+Durgaparameshwari,+Post,+Kemundel,+Ulluru+Village,+Yellur,+Karnataka+574119/@13.1634892,74.7924429,17z/data=!4m16!1m7!3m6!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2sUlluru+Durgaparameshwari!8m2!3d13.1634892!4d74.7950178!16s%2Fg%2F11hzz5k8rp!4m7!1m0!1m5!1m1!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2m2!1d74.7950178!2d13.1634892?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
   },
   sevaList,
-  web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY_PLACEHOLDER",
   placeholders: {
     historyNote: "[PLACEHOLDER: Temple history text to be provided by the Trust]",
     historyNoteKn:
       "[PLACEHOLDER: ಶ್ರೀ ಕ್ಷೇತ್ರದ ಇತಿಹಾಸ ಮತ್ತು ಸ್ಥಳ ಪುರಾಣದ ಮಾಹಿತಿಯನ್ನು ಟ್ರಸ್ಟ್ ವತಿಯಿಂದ ಒದಗಿಸಲಾಗುವುದು]",
-    contactPhone: "[PLACEHOLDER: Official trust phone number]",
-    contactPhoneKn: "[PLACEHOLDER: ಟ್ರಸ್ಟ್ ಅಧಿಕೃತ ದೂರವಾಣಿ ಸಂಖ್ಯೆ ನಿರೀಕ್ಷಿಸಲಾಗಿದೆ]",
+    contactPhone: "+91 9820790032",
+    contactPhoneKn: "+91 9820790032",
     contactEmail: "shridurgaparameshwariullur@gmail.com",
     googleMapsEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.228546!2d74.7924429!3d13.1634892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcaddb334977bf%3A0xf294e0dc4628342f!2sUlluru%20Durgaparameshwari!5e0!3m2!1sen!2sin!4v1731314000000!5m2!1sen!2sin",
