@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, Sparkles } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -61,74 +61,25 @@ export default function Hero() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="pt-4 w-full sm:w-auto flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
-            <Link
-              href="#timings"
-              className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full bg-amber-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md hover:bg-amber-500 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
-            >
-              {t("Daily Pooja & Timings", "ದೈನಂದಿನ ಪೂಜೆ ಮತ್ತು ಸಮಯ")}
-            </Link>
-            <Link
-              href="#about"
-              className="inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full border border-amber-200/80 bg-amber-950/60 backdrop-blur-sm px-6 py-3 text-sm sm:text-base font-semibold text-amber-50 hover:bg-amber-900/80 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center"
-            >
-              {t(
-                "About the Trust & Committee",
-                "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಆಡಳಿತ ಸಮಿತಿ"
-              )}
-            </Link>
-          </div>
-        </div>
-      </div>
+          <div className="pt-3.5 sm:pt-4 w-full sm:w-auto flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
+            {siteData.heroCtas.map((cta) => {
+              const variantClasses =
+                cta.variant === "primary"
+                  ? "bg-amber-600 text-white shadow-md hover:bg-amber-500"
+                  : cta.variant === "secondary"
+                    ? "border border-amber-200/80 bg-amber-950/60 backdrop-blur-sm text-amber-50 hover:bg-amber-900/80"
+                    : "border border-amber-400/75 bg-amber-900/55 backdrop-blur-sm text-amber-200 shadow-sm hover:bg-amber-800/70 hover:text-amber-50";
 
-      {/* Quick Darshan & Aarti Strip below Banner */}
-      <div className="bg-amber-900 border-t border-amber-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-            <div className="min-w-0 flex items-center gap-3 bg-amber-950/50 hover:bg-amber-950/75 transition-colors duration-200 rounded-xl p-3.5 border border-amber-800/60">
-              <Clock className="w-5 h-5 text-amber-400 shrink-0" />
-              <div className="min-w-0 flex-1 break-words">
-                <p className="text-amber-300 font-semibold leading-snug">
-                  {t("Morning Darshan", "ಬೆಳಗಿನ ದರ್ಶನ ಸಮಯ")}
-                </p>
-                <p className="text-amber-50 font-medium leading-relaxed">
-                  {t(
-                    siteData.darshanTimings.morning,
-                    siteData.darshanTimings.morningKn
-                  )}
-                </p>
-              </div>
-            </div>
-
-            <div className="min-w-0 flex items-center gap-3 bg-amber-950/50 hover:bg-amber-950/75 transition-colors duration-200 rounded-xl p-3.5 border border-amber-800/60">
-              <Clock className="w-5 h-5 text-amber-400 shrink-0" />
-              <div className="min-w-0 flex-1 break-words">
-                <p className="text-amber-300 font-semibold leading-snug">
-                  {t("Evening Darshan", "ಸಂಜೆಯ ದರ್ಶನ ಸಮಯ")}
-                </p>
-                <p className="text-amber-50 font-medium leading-relaxed">
-                  {t(
-                    siteData.darshanTimings.evening,
-                    siteData.darshanTimings.eveningKn
-                  )}
-                </p>
-              </div>
-            </div>
-
-            <div className="min-w-0 flex items-center gap-3 bg-amber-950/50 hover:bg-amber-950/75 transition-colors duration-200 rounded-xl p-3.5 border border-amber-800/60">
-              <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-              <div className="min-w-0 flex-1 break-words">
-                <p className="text-amber-300 font-semibold leading-snug">
-                  {t("Maha Pooja", "ಮಧ್ಯಾಹ್ನದ ಮಹಾಪೂಜೆ")}
-                </p>
-                <p className="text-amber-50 font-medium leading-relaxed">
-                  {t(
-                    siteData.aartiTimings[1]?.time ?? "12:30 PM - 1:30 PM",
-                    siteData.aartiTimings[1]?.timeKn ?? "ಮಧ್ಯಾಹ್ನ 12:30 - 1:30"
-                  )}
-                </p>
-              </div>
-            </div>
+              return (
+                <Link
+                  key={cta.id}
+                  href={cta.href}
+                  className={`inline-flex items-center justify-center w-full sm:w-auto min-h-[44px] rounded-full px-5 sm:px-6 py-2.5 text-sm sm:text-base font-semibold hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug text-center ${variantClasses}`}
+                >
+                  {t(cta.label, cta.labelKn)}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

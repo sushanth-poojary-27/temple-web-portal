@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Clock, Languages } from "lucide-react";
+import { Menu, X, Languages } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -13,25 +13,18 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-amber-50/95 backdrop-blur-md border-b border-amber-200 shadow-sm">
-      {/* Top announcement bar with darshan timings */}
-      <div className="bg-amber-900 text-amber-50 text-xs py-1.5 px-4 leading-relaxed">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-          <span className="font-medium tracking-wide min-w-0 break-words">
-            {t(siteData.registrationNo, siteData.registrationNoKn)}
-            <span className="hidden sm:inline">
-              {" "}
-              • {t(siteData.address, siteData.addressKn)}
-            </span>
+      {/* Top announcement bar with seamless bilingual marquee */}
+      <div className="w-full max-w-full overflow-hidden bg-amber-900 text-amber-50 text-xs py-1.5 leading-relaxed">
+        <div className="animate-temple-marquee hover:[animation-play-state:paused]">
+          <span className="inline-block whitespace-nowrap px-8 font-medium tracking-wide">
+            {t(siteData.announcementBar, siteData.announcementBarKn)}
           </span>
-          <div className="flex items-center gap-1.5 text-amber-100 min-w-0">
-            <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span className="min-w-0 break-words">
-              {t(
-                `Darshan: Morning ${siteData.darshanTimings.morning} | Evening ${siteData.darshanTimings.evening}`,
-                `ದರ್ಶನ ಸಮಯ: ಬೆಳಿಗ್ಗೆ ${siteData.darshanTimings.morningKn} | ಸಂಜೆ ${siteData.darshanTimings.eveningKn}`
-              )}
-            </span>
-          </div>
+          <span
+            aria-hidden="true"
+            className="inline-block whitespace-nowrap px-8 font-medium tracking-wide"
+          >
+            {t(siteData.announcementBar, siteData.announcementBarKn)}
+          </span>
         </div>
       </div>
 
@@ -97,13 +90,6 @@ export default function Header() {
               <Languages className="w-3.5 h-3.5" />
               <span>{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
             </button>
-
-            <Link
-              href="#timings"
-              className="inline-flex items-center justify-center min-h-[44px] rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 whitespace-nowrap shrink-0 leading-snug"
-            >
-              {t("Aarti & Timings", "ಆರತಿ ಮತ್ತು ಸಮಯ")}
-            </Link>
           </nav>
 
           {/* Mobile Controls: Language Toggle + Hamburger Button */}
@@ -170,16 +156,6 @@ export default function Header() {
                   : "Switch to English"}
               </span>
             </button>
-            <Link
-              href="#timings"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center w-full min-h-[44px] text-center rounded-full bg-amber-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 leading-snug"
-            >
-              {t(
-                "View Aarti & Darshan Timings",
-                "ಆರತಿ ಮತ್ತು ದರ್ಶನದ ಸಮಯ ನೋಡಿ"
-              )}
-            </Link>
           </div>
         </nav>
       )}

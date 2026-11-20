@@ -12,7 +12,8 @@
   --temple-border: #fde68a; /* amber-200: subtle dividers */
 }
 
-@theme inline {
+
+ inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-temple-primary: var(--temple-primary);
@@ -50,4 +51,19 @@ html[lang="kn"] body {
 
 html[lang="kn"] .font-serif {
   font-family: var(--font-kannada), Georgia, Cambria, "Times New Roman", serif;
+}
+
+@keyframes temple-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-temple-marquee {
+  display: flex;
+  width: max-content;
+  animation: temple-marquee 28s linear infinite;
 }
