@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Landmark, MapPin, ShieldCheck, Users } from "lucide-react";
+import { Clock, Landmark, MapPin, ShieldCheck, Users } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -92,6 +92,49 @@ export default function AboutSection() {
                     {t(
                       `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
                       `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Compact Daily Darshan Timings Card */}
+            <div className="rounded-2xl bg-amber-50/90 p-4 border border-amber-200 space-y-3">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-900 break-words">
+                  {t(
+                    siteData.darshanTimings.title,
+                    siteData.darshanTimings.titleKn
+                  )}
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="min-w-0 rounded-xl bg-white px-3.5 py-2.5 border border-amber-200/80">
+                  <p className="text-xs font-semibold text-amber-700 uppercase leading-snug">
+                    {t(
+                      siteData.darshanTimings.morningLabel,
+                      siteData.darshanTimings.morningLabelKn
+                    )}
+                  </p>
+                  <p className="text-sm font-bold text-amber-900 leading-relaxed break-words">
+                    {t(
+                      siteData.darshanTimings.morning,
+                      siteData.darshanTimings.morningKn
+                    )}
+                  </p>
+                </div>
+                <div className="min-w-0 rounded-xl bg-white px-3.5 py-2.5 border border-amber-200/80">
+                  <p className="text-xs font-semibold text-amber-700 uppercase leading-snug">
+                    {t(
+                      siteData.darshanTimings.eveningLabel,
+                      siteData.darshanTimings.eveningLabelKn
+                    )}
+                  </p>
+                  <p className="text-sm font-bold text-amber-900 leading-relaxed break-words">
+                    {t(
+                      siteData.darshanTimings.evening,
+                      siteData.darshanTimings.eveningKn
                     )}
                   </p>
                 </div>

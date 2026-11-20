@@ -1,11 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
-import TimingsSection from "@/components/TimingsSection";
 import EventsSection from "@/components/EventsSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
-import InquiryForm from "@/components/InquiryForm";
 import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
 
@@ -23,9 +21,6 @@ export default function Home() {
         {/* Task 5: About, Temple History & Managing Committee Section */}
         <AboutSection />
 
-        {/* Task 6: Timings & Services Section with Tabs */}
-        <TimingsSection />
-
         {/* Task 7: Upcoming Temple Festivals & Events with Countdown */}
         <EventsSection />
 
@@ -34,9 +29,6 @@ export default function Home() {
 
         {/* Task 9: Location & Contact Section with Google Maps Embed */}
         <ContactSection />
-
-        {/* Task 10: Seva Booking & Inquiry Form with Validation & Web3Forms */}
-        <InquiryForm />
 
         {/* Task 11 / 12: Seva Booking & Temple Donations Section */}
         <DonationSection />

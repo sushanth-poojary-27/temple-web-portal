@@ -136,19 +136,20 @@ export default function Footer() {
               </p>
               <p className="flex items-start gap-2.5 text-xs text-amber-200 min-w-0">
                 <Phone className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <span className="min-w-0 break-words">
+                <a
+                  href={siteData.contact.phoneHref}
+                  className="text-amber-100 hover:text-amber-300 underline underline-offset-2 min-w-0 break-words transition-colors"
+                >
                   {t(
-                    siteData.placeholders.contactPhone,
-                    siteData.placeholders.contactPhoneKn
+                    siteData.contact.phoneDisplay,
+                    siteData.contact.phoneDisplayKn
                   )}
-                </span>
+                </a>
               </p>
               <p className="flex items-start gap-2.5 text-xs text-amber-200 min-w-0">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <a
                   href={siteData.contact.emailHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="text-amber-100 hover:text-amber-300 underline underline-offset-2 break-all transition-colors"
                 >
                   {siteData.contact.emailDisplay}
