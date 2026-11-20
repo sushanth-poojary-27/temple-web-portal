@@ -118,8 +118,8 @@ export const sevaList: SevaItem[] = [
     price: 750,
   },
   {
-    id: "havina-pooja",
-    name: "Havina Pooja",
+    id: "huvina-pooja",
+    name: "Huvina Pooja",
     nameKn: "ಹೂವಿನ ಪೂಜೆ",
     price: 151,
   },
