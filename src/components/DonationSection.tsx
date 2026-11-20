@@ -59,7 +59,7 @@ export default function DonationSection() {
                 </h3>
                 <p className="text-sm text-amber-800 group-hover:text-amber-100/90 leading-relaxed break-words">
                   {t(
-                    "Book Alankara Pooja, Hunnime Pooja, Havina Pooja, Kunkumarchane, and other daily sevas with Prasadam dispatch.",
+                    "Book Alankara Pooja, Hunnime Pooja, Huvina Pooja, Kunkumarchane, and other daily sevas with Prasadam dispatch.",
                     "ಅಲಂಕಾರ ಪೂಜೆ, ಹುಣ್ಣಿಮೆ ಪೂಜೆ, ಹೂವಿನ ಪೂಜೆ, ಕುಂಕುಮಾರ್ಚನೆ ಹಾಗೂ ಇತರ ನಿತ್ಯ ಸೇವೆಗಳನ್ನು ಅಂಚೆ ಪ್ರಸಾದ ವ್ಯವಸ್ಥೆಯೊಂದಿಗೆ ಕಾಯ್ದಿರಿಸಿ."
                   )}
                 </p>
