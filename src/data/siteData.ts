@@ -104,6 +104,22 @@ export interface SevaItem {
   price: number;
 }
 
+export type SocialPlatform = "youtube" | "instagram" | "facebook" | "whatsapp";
+
+export interface SocialLinkItem {
+  id: SocialPlatform;
+  label: string;
+  labelKn: string;
+  url: string;
+}
+
+export interface SocialConnectLabels {
+  floatingLabel: string;
+  floatingLabelKn: string;
+  sectionHeading: string;
+  sectionHeadingKn: string;
+}
+
 export const sevaList: SevaItem[] = [
   {
     id: "alankara-pooja",
@@ -179,6 +195,8 @@ export interface SiteData {
   festivals: FestivalItem[];
   gallery: GalleryItem[];
   contact: ContactInfo;
+  socialLinks: SocialLinkItem[];
+  socialConnectLabels: SocialConnectLabels;
   sevaList: SevaItem[];
   placeholders: {
     historyNote: string;
@@ -497,6 +515,38 @@ export const siteData: SiteData = {
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.228546!2d74.7924429!3d13.1634892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcaddb334977bf%3A0xf294e0dc4628342f!2sUlluru%20Durgaparameshwari!5e0!3m2!1sen!2sin!4v1731314000000!5m2!1sen!2sin",
     googleMapsDirectionsUrl:
       "https://www.google.com/maps/dir//5Q7W%2B92R+Ulluru+Durgaparameshwari,+Post,+Kemundel,+Ulluru+Village,+Yellur,+Karnataka+574119/@13.1634892,74.7924429,17z/data=!4m16!1m7!3m6!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2sUlluru+Durgaparameshwari!8m2!3d13.1634892!4d74.7950178!16s%2Fg%2F11hzz5k8rp!4m7!1m0!1m5!1m1!1s0x3bbcaddb334977bf:0xf294e0dc4628342f!2m2!1d74.7950178!2d13.1634892?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
+  },
+  socialLinks: [
+    {
+      id: "youtube",
+      label: "YouTube",
+      labelKn: "ಯೂಟ್ಯೂಬ್",
+      url: "https://www.youtube.com/@ShriDurgaParameshwariUllur/shorts",
+    },
+    {
+      id: "instagram",
+      label: "Instagram",
+      labelKn: "ಇನ್ಸ್ಟಾಗ್ರಾಮ್",
+      url: "https://www.instagram.com/shri_durgaparameshwari_ullur/",
+    },
+    {
+      id: "facebook",
+      label: "Facebook",
+      labelKn: "ಫೇಸ್ಬುಕ್",
+      url: "https://www.facebook.com/61595604200198/",
+    },
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      labelKn: "ವಾಟ್ಸಾಪ್",
+      url: "https://wa.me/919820790032",
+    },
+  ],
+  socialConnectLabels: {
+    floatingLabel: "Connect",
+    floatingLabelKn: "ಸಂಪರ್ಕಿಸಿ",
+    sectionHeading: "Connect With Us",
+    sectionHeadingKn: "ನಮ್ಮೊಂದಿಗೆ ಸಂಪರ್ಕದಲ್ಲಿರಿ",
   },
   sevaList,
   placeholders: {
