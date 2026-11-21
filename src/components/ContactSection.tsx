@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
+import SocialIcon from "@/components/SocialIcon";
 
 export default function ContactSection() {
   const { t } = useLanguage();
@@ -227,6 +228,38 @@ export default function ContactSection() {
                 className="absolute inset-0 w-full max-w-full h-full"
               />
             </div>
+          </div>
+        </div>
+
+        {/* Connect With Us Social Block */}
+        <div className="rounded-3xl bg-white p-5 sm:p-8 border border-amber-200 shadow-sm space-y-5">
+          <div className="text-center space-y-1">
+            <h3 className="text-lg sm:text-xl font-bold text-amber-900 leading-relaxed break-words">
+              {t(
+                siteData.socialConnectLabels.sectionHeading,
+                siteData.socialConnectLabels.sectionHeadingKn
+              )}
+            </h3>
+            <p className="text-xs sm:text-sm text-amber-800 leading-relaxed break-words">
+              {t(
+                "Follow official temple updates, festival announcements, and live darshan highlights.",
+                "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಧಿಕೃತ ಪ್ರಕಟಣೆಗಳು, ಉತ್ಸವಗಳ ಮಾಹಿತಿ ಮತ್ತು ವಿಶೇಷ ದರ್ಶನಕ್ಕಾಗಿ ಸಂಪರ್ಕದಲ್ಲಿರಿ."
+              )}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {siteData.socialLinks.map((item) => (
+              <a
+                key={item.id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-w-0 inline-flex items-center justify-center gap-2.5 min-h-[44px] rounded-full border border-amber-300 bg-amber-50/70 px-4 py-2.5 text-sm font-semibold text-amber-900 hover:border-amber-600 hover:bg-amber-100 hover:-translate-y-0.5 active:scale-[0.99] transition duration-200 leading-snug text-center"
+              >
+                <SocialIcon platform={item.id} className="w-4 h-4 shrink-0" />
+                <span className="truncate">{t(item.label, item.labelKn)}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
