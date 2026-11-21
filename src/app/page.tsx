@@ -6,6 +6,7 @@ import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
+import FloatingSocialPill from "@/components/FloatingSocialPill";
 
 export default function Home() {
   return (
@@ -36,6 +37,9 @@ export default function Home() {
 
       {/* Temple Trust Footer */}
       <Footer />
+
+      {/* Floating Social Connect Pill */}
+      <FloatingSocialPill />
     </div>
   );
 }
