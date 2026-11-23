@@ -53,19 +53,271 @@ export interface HeroCtaItem {
   variant: "primary" | "secondary" | "accent";
 }
 
-export interface FestivalItem {
-  id: string;
-  name: string;
-  nameKn: string;
+export interface EventScheduleItem {
+  time: string;
+  timeKn: string;
+  title: string;
+  titleKn: string;
+  note: string;
+  noteKn: string;
+}
+
+export interface EventItem {
+  slug: string;
+  badge: string;
+  badgeKn: string;
+  title: string;
+  titleKn: string;
   dateLabel: string;
   dateLabelKn: string;
   isoDate: string;
-  badge: string;
-  badgeKn: string;
+  pastLabel: string;
+  pastLabelKn: string;
+  image: string;
+  shortInviteNote: string;
+  shortInviteNoteKn: string;
+  fullDescription: string;
+  fullDescriptionKn: string;
+  schedule: EventScheduleItem[];
+  scheduleDisclaimer?: string;
+  scheduleDisclaimerKn?: string;
+  sevaType: string;
+  sevaTypeKn: string;
+  ctaLabel: string;
+  ctaLabelKn: string;
+}
+
+export const eventsData: EventItem[] = [
+  {
+    slug: "varshika-utsava",
+    badge: "Flagship Annual Utsava",
+    badgeKn: "ಪ್ರಮುಖ ವಾರ್ಷಿಕ ಉತ್ಸವ",
+    title: "Varshika Utsava (Varshik Pooja)",
+    titleKn: "ವಾರ್ಷಿಕ ಉತ್ಸವ (ವಾರ್ಷಿಕ ಪೂಜಾ ಮಹೋತ್ಸವ)",
+    dateLabel: "Friday, 22 January 2027",
+    dateLabelKn: "ಶುಕ್ರವಾರ, 22 ಜನವರಿ 2027",
+    isoDate: "2027-01-22T06:00:00+05:30",
+    pastLabel: "Celebration Completed",
+    pastLabelKn: "ಉತ್ಸವ ಸಂಪನ್ನಗೊಂಡಿದೆ",
+    image: "/images/varshika-utsava.png",
+    shortInviteNote:
+      "Join us with family and friends for the annual Pratishthapana & Varshika Utsava celebrations at Ullur.",
+    shortInviteNoteKn:
+      "ಕುಟುಂಬ ಮತ್ತು ಬಂಧುಮಿತ್ರರೊಂದಿಗೆ ಉಳ್ಳೂರಿನ ವಾರ್ಷಿಕ ಪ್ರತಿಷ್ಠಾಪನಾ ಉತ್ಸವದಲ್ಲಿ ಪಾಲ್ಗೊಳ್ಳಿ.",
+    fullDescription:
+      "The annual Pratishthapana & Varshika Utsava of Shree Durgaparameshwari Sannidana Trust, Ullur brings devotees together in sacred devotion for morning Vedic rituals, Chandika Homa, Dharmika Sabha, community Anna Santarpana, and evening Ranga Pooja.",
+    fullDescriptionKn:
+      "ಉಳ್ಳೂರು ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಸನ್ನಿಧಾನ ಟ್ರಸ್ಟ್‌ನ ವಾರ್ಷಿಕ ಪ್ರತಿಷ್ಠಾಪನಾ ಮಹೋತ್ಸವವು ಭಕ್ತಾದಿಗಳ ಸಮ್ಮುಖದಲ್ಲಿ ಬೆಳಗಿನ ವೈದಿಕ ವಿಧಿವಿಧಾನಗಳು, ಪವಿತ್ರ ಚಂಡಿಕಾ ಹೋಮ, ಧಾರ್ಮಿಕ ಸಭೆ, ಸಾರ್ವಜನಿಕ ಅನ್ನಸಂತರ್ಪಣೆ ಹಾಗೂ ಸಂಜೆಯ ರಂಗಪೂಜೆಯೊಂದಿಗೆ ವಿಜೃಂಭಣೆಯಿಂದ ನೆರವೇರಲಿದೆ.",
+    schedule: [
+      {
+        time: "06:00 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 06:00",
+        title: "Punyaha Vachana, Ganahoma & Navaka Pradhana Kalashabhisheka",
+        titleKn: "ಪುಣ್ಯಾಹ ವಾಚನ, ಗಣಹೋಮ ಮತ್ತು ನವಕ ಪ್ರಧಾನ ಕಲಶಾಭಿಷೇಕ",
+        note: "Auspicious dawn sanctification, Ganapathi Homa, and sacred Kalasha abhisheka to Goddess Durgaparameshwari.",
+        noteKn:
+          "ಶುಭ ಪ್ರಾತಃಕಾಲದ ಪುಣ್ಯಾಹ ವಾಚನ, ಗಣಪತಿ ಹೋಮ ಹಾಗೂ ಶ್ರೀ ದೇವಿಗೆ ನವಕ ಪ್ರಧಾನ ಕಲಶಾಭಿಷೇಕ.",
+      },
+      {
+        time: "07:30 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 07:30",
+        title: "Sacred Chandika Homa",
+        titleKn: "ಪವಿತ್ರ ಚಂಡಿಕಾ ಹೋಮ",
+        note: "Vedic Durga Saptashati parayana and Chandika Homa invoking Devi's grace for universal well-being.",
+        noteKn:
+          "ಲೋಕಕಲ್ಯಾಣಾರ್ಥವಾಗಿ ದುರ್ಗಾ ಸಪ್ತಶತಿ ಪಾರಾಯಣದೊಂದಿಗೆ ಪವಿತ್ರ ಚಂಡಿಕಾ ಹೋಮ.",
+      },
+      {
+        time: "11:30 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 11:30",
+        title:
+          "Poornahuti, Maha Naivedya, Mahapooja, Dharmika Sabha & Anna Prasada (Anna Santarpana)",
+        titleKn:
+          "ಪೂರ್ಣಾಹುತಿ, ಮಹಾ ನೈವೇದ್ಯ, ಮಹಾಪೂಜೆ, ಧಾರ್ಮಿಕ ಸಭೆ ಹಾಗೂ ಅನ್ನಪ್ರಸಾದ (ಅನ್ನಸಂತರ್ಪಣೆ)",
+        note: "Completion of homa rituals followed by Mahapooja, Dharmika Sabha address, and community Anna Santarpana.",
+        noteKn:
+          "ಹೋಮದ ಪೂರ್ಣಾಹುತಿ, ಮಹಾಪೂಜೆ, ಧಾರ್ಮಿಕ ಸಭಾ ಕಾರ್ಯಕ್ರಮ ಮತ್ತು ಭಕ್ತಾದಿಗಳಿಗೆ ಸಾರ್ವಜನಿಕ ಅನ್ನಸಂತರ್ಪಣೆ.",
+      },
+      {
+        time: "06:30 PM",
+        timeKn: "ಸಂಜೆ 06:30",
+        title: "Evening Ranga Pooja, Bhajans & Maha Mangalarati",
+        titleKn: "ಸಂಜೆ ರಂಗಪೂಜೆ, ಭಜನಾ ಸೇವೆ ಮತ್ತು ಮಹಾಮಂಗಳಾರತಿ",
+        note: "Grand evening floral decoration, devotional bhajans, Ranga Pooja, and Maha Mangalarati.",
+        noteKn:
+          "ಸಂಜೆಯ ವಿಶೇಷ ಪುಷ್ಪಾಲಂಕಾರ, ಭಜನಾ ಕಾರ್ಯಕ್ರಮ, ರಂಗಪೂಜೆ ಹಾಗೂ ಮಹಾಮಂಗಳಾರತಿ.",
+      },
+    ],
+    sevaType: "Alankara Pooja",
+    sevaTypeKn: "ಅಲಂಕಾರ ಪೂಜೆ",
+    ctaLabel: "Offer Seva for Varshika Utsava",
+    ctaLabelKn: "ವಾರ್ಷಿಕ ಉತ್ಸವಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸಿ",
+  },
+  {
+    slug: "sharannavaratri-mahotsava",
+    badge: "9-Day Festival",
+    badgeKn: "೯ ದಿನಗಳ ಮಹೋತ್ಸವ",
+    title: "Sharannavaratri Mahotsava",
+    titleKn: "ಶರನ್ನವರಾತ್ರಿ ಮಹೋತ್ಸವ",
+    dateLabel: "October 2027 (Navaratri & Vijayadashami)",
+    dateLabelKn: "ಅಕ್ಟೋಬರ್ 2027 (ನವರಾತ್ರಿ ಮತ್ತು ವಿಜಯದಶಮಿ)",
+    isoDate: "2027-10-01T06:00:00+05:30",
+    pastLabel: "Celebration Completed",
+    pastLabelKn: "ಉತ್ಸವ ಸಂಪನ್ನಗೊಂಡಿದೆ",
+    image: "/images/sharannavaratri.png",
+    shortInviteNote:
+      "Nine sacred days of Devi Alankara, Kumkumarchane, Deepotsava, and Vijayadashami celebrations.",
+    shortInviteNoteKn:
+      "ಒಂಬತ್ತು ದಿನಗಳ ದೇವಿ ಅಲಂಕಾರ, ಕುಂಕುಮಾರ್ಚನೆ, ದೀಪೋತ್ಸವ ಮತ್ತು ವಿಜಯದಶಮಿ ಆಚರಣೆಗಳು.",
+    fullDescription:
+      "Celebrated over nine auspicious days of Sharannavaratri culminating in Vijayadashami, devotees gather at Ullur Sannidhana for daily Devi Alankara, Kumkumarchane, Lalita Sahasranamarchane, Anna Prasada, and illuminated evening Deepotsava and Bhajans.",
+    fullDescriptionKn:
+      "ವಿಜಯದಶಮಿಯವರೆಗೆ ಒಂಬತ್ತು ಶುಭ ದಿನಗಳ ಕಾಲ ನಡೆಯುವ ಶರನ್ನವರಾತ್ರಿ ಮಹೋತ್ಸವದಲ್ಲಿ ಭಕ್ತಾದಿಗಳು ದೈನಂದಿನ ದೇವಿ ಅಲಂಕಾರ, ಕುಂಕುಮಾರ್ಚನೆ, ಲಲಿತಾ ಸಹಸ್ರನಾಮಾರ್ಚನೆ, ಅನ್ನಪ್ರಸಾದ ಹಾಗೂ ಸಂಜೆಯ ದೀಪೋತ್ಸವ ಮತ್ತು ಭಜನಾ ಸೇವೆಯಲ್ಲಿ ಪಾಲ್ಗೊಳ್ಳುತ್ತಾರೆ.",
+    scheduleDisclaimer:
+      "Tentative Panchanga timings — final schedule updated closer to festival",
+    scheduleDisclaimerKn:
+      "ಸಂಭಾವ್ಯ ಪಂಚಾಂಗ ವೇಳಾಪಟ್ಟಿ — ಉತ್ಸವದ ಸಮೀಪದಲ್ಲಿ ಅಂತಿಮ ವೇಳಾಪಟ್ಟಿಯನ್ನು ಪ್ರಕಟಿಸಲಾಗುವುದು",
+    schedule: [
+      {
+        time: "07:00 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 07:00",
+        title: "Morning Kalasha Pooja & Devi Alankara",
+        titleKn: "ಬೆಳಗಿನ ಕಲಶ ಪೂಜೆ ಮತ್ತು ದೇವಿ ಅಲಂಕಾರ",
+        note: "Daily sacred Kalasha worship and special Navaratri floral decoration of Goddess Durgaparameshwari.",
+        noteKn:
+          "ನವರಾತ್ರಿಯ ನಿತ್ಯ ಕಲಶ ಪೂಜೆ ಹಾಗೂ ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಅಮ್ಮನವರಿಗೆ ವಿಶೇಷ ಅಲಂಕಾರ.",
+      },
+      {
+        time: "10:30 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 10:30",
+        title: "Kumkumarchane & Lalita Sahasranamarchane",
+        titleKn: "ಕುಂಕುಮಾರ್ಚನೆ ಮತ್ತು ಲಲಿತಾ ಸಹಸ್ರನಾಮಾರ್ಚನೆ",
+        note: "Collective chanting of Sri Lalita Sahasranama with sacred Kumkumarchane offerings.",
+        noteKn:
+          "ಶ್ರೀ ಲಲಿತಾ ಸಹಸ್ರನಾಮ ಪಾರಾಯಣದೊಂದಿಗೆ ಭಕ್ತಾದಿಗಳಿಂದ ಸಾಮೂಹಿಕ ಕುಂಕುಮಾರ್ಚನೆ.",
+      },
+      {
+        time: "12:30 PM",
+        timeKn: "ಮಧ್ಯಾಹ್ನ 12:30",
+        title: "Mahapooja & Anna Prasada",
+        titleKn: "ಮಹಾಪೂಜೆ ಮತ್ತು ಅನ್ನಪ್ರಸಾದ",
+        note: "Noon Maha Naivedya, Mahapooja, and prasada distribution for visiting devotees.",
+        noteKn:
+          "ಮಧ್ಯಾಹ್ನದ ಮಹಾ ನೈವೇದ್ಯ, ಮಹಾಪೂಜೆ ಹಾಗೂ ಆಗಮಿಸಿದ ಭಕ್ತಾದಿಗಳಿಗೆ ಅನ್ನಪ್ರಸಾದ ವಿತರಣೆ.",
+      },
+      {
+        time: "06:30 PM",
+        timeKn: "ಸಂಜೆ 06:30",
+        title: "Evening Deepotsava, Ranga Pooja & Bhajans",
+        titleKn: "ಸಂಜೆ ದೀಪೋತ್ಸವ, ರಂಗಪೂಜೆ ಮತ್ತು ಭಜನೆಗಳು",
+        note: "Festive lamp lighting across the sanctum, evening Ranga Pooja, and devotional bhajans.",
+        noteKn:
+          "ಸನ್ನಿಧಾನದಲ್ಲಿ ದೀಪೋತ್ಸವ, ಸಂಜೆಯ ವಿಶೇಷ ರಂಗಪೂಜೆ ಹಾಗೂ ಭಕ್ತಿಗೀತೆ-ಭಜನಾ ಸೇವೆ.",
+      },
+    ],
+    sevaType: "Kunkumarchane",
+    sevaTypeKn: "ಕುಂಕುಮಾರ್ಚನೆ",
+    ctaLabel: "Offer Seva for Navaratri",
+    ctaLabelKn: "ನವರಾತ್ರಿ ಉತ್ಸವಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸಿ",
+  },
+  {
+    slug: "monthly-sankranti-hunnime",
+    badge: "Monthly Seva",
+    badgeKn: "ಮಾಸಿಕ ವಿಶೇಷ ಸೇವೆ",
+    title: "Monthly Sankranti & Hunnime Pooja",
+    titleKn: "ಮಾಸಿಕ ಸಂಕ್ರಮಣ ಮತ್ತು ಹುಣ್ಣಿಮೆ ಪೂಜೆ",
+    dateLabel: "Monthly Sankranti & Hunnime (Full Moon)",
+    dateLabelKn: "ಮಾಸಿಕ ಸಂಕ್ರಮಣ ಮತ್ತು ಹುಣ್ಣಿಮೆ (ಪೌರ್ಣಮಿ)",
+    isoDate: "2026-12-16T06:00:00+05:30",
+    pastLabel: "Monthly Observance",
+    pastLabelKn: "ಮಾಸಿಕ ವಿಶೇಷ ಆಚರಣೆ",
+    image: "/images/monthly-pooja.png",
+    shortInviteNote:
+      "Monthly auspicious Alankara Pooja, Hunnime Pooja, Trimadhura Naivedya, and evening Karpoora Arati.",
+    shortInviteNoteKn:
+      "ಮಾಸಿಕ ವಿಶೇಷ ಅಲಂಕಾರ ಪೂಜೆ, ಹುಣ್ಣಿಮೆ ಪೂಜೆ, ತ್ರಿಮಧುರ ನೈವೇದ್ಯ ಮತ್ತು ಸಂಜೆ ಕರ್ಪೂರ ಆರತಿ.",
+    fullDescription:
+      "Observed every month on auspicious Sankranti and Hunnime (Full Moon) days strictly in accordance with the temple's monthly pooja schedule, devotees offer Alankara Pooja, Huvina Pooja, Trimadhura Naivedya, Kumkumarchane, Lalita Sahasranamarchane, and evening Karpoora Arati.",
+    fullDescriptionKn:
+      "ಪ್ರತಿ ತಿಂಗಳ ಶುಭ ಸಂಕ್ರಮಣ ಮತ್ತು ಹುಣ್ಣಿಮೆ ದಿನಗಳಂದು ಶ್ರೀ ಕ್ಷೇತ್ರದ ಮಾಸಿಕ ಪೂಜಾ ಪದ್ಧತಿಯಂತೆ ಅಲಂಕಾರ ಪೂಜೆ, ಹೂವಿನ ಪೂಜೆ, ತ್ರಿಮಧುರ ನೈವೇದ್ಯ, ಕುಂಕುಮಾರ್ಚನೆ, ಲಲಿತಾ ಸಹಸ್ರನಾಮಾರ್ಚನೆ ಹಾಗೂ ಸಂಜೆ ಕರ್ಪೂರ ಆರತಿ ನೆರವೇರಿಸಲಾಗುತ್ತದೆ.",
+    scheduleDisclaimer:
+      "Tentative monthly timings — exact Sankranti & Hunnime dates follow the Udupi Panchanga",
+    scheduleDisclaimerKn:
+      "ಸಂಭಾವ್ಯ ಮಾಸಿಕ ವೇಳಾಪಟ್ಟಿ — ಸಂಕ್ರಮಣ ಮತ್ತು ಹುಣ್ಣಿಮೆಯ ನಿಖರ ದಿನಾಂಕಗಳು ಉಡುಪಿ ಪಂಚಾಂಗದ ಪ್ರಕಾರ ಇರುತ್ತವೆ",
+    schedule: [
+      {
+        time: "07:30 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 07:30",
+        title: "Morning Alankara Pooja & Huvina Pooja",
+        titleKn: "ಬೆಳಗಿನ ಅಲಂಕಾರ ಪೂಜೆ ಮತ್ತು ಹೂವಿನ ಪೂಜೆ",
+        note: "Special morning floral alankara and Huvina Pooja offered at the sanctum.",
+        noteKn:
+          "ಗರ್ಭಗುಡಿಯಲ್ಲಿ ಶ್ರೀ ದೇವಿಗೆ ಬೆಳಗಿನ ವಿಶೇಷ ಅಲಂಕಾರ ಪೂಜೆ ಮತ್ತು ಹೂವಿನ ಪೂಜೆ.",
+      },
+      {
+        time: "11:30 AM",
+        timeKn: "ಬೆಳಿಗ್ಗೆ 11:30",
+        title: "Trimadhura Naivedya, Kumkumarchane & Lalita Sahasranamarchane",
+        titleKn: "ತ್ರಿಮಧುರ ನೈವೇದ್ಯ, ಕುಂಕುಮಾರ್ಚನೆ ಮತ್ತು ಲಲಿತಾ ಸಹಸ್ರನಾಮಾರ್ಚನೆ",
+        note: "Sacred Trimadhura Naivedya offering accompanied by Kumkumarchane and Lalita Sahasranamarchane.",
+        noteKn:
+          "ಶ್ರೀ ದೇವಿಗೆ ಪವಿತ್ರ ತ್ರಿಮಧುರ ನೈವೇದ್ಯ ಸಮರ್ಪಣೆ, ಕುಂಕುಮಾರ್ಚನೆ ಹಾಗೂ ಲಲಿತಾ ಸಹಸ್ರನಾಮಾರ್ಚನೆ.",
+      },
+      {
+        time: "07:00 PM",
+        timeKn: "ರಾತ್ರಿ 07:00",
+        title: "Evening Hunnime / Sankranti Mahapooja & Karpoora Arati",
+        titleKn: "ಸಂಜೆ ಹುಣ್ಣಿಮೆ / ಸಂಕ್ರಮಣ ಮಹಾಪೂಜೆ ಮತ್ತು ಕರ್ಪೂರ ಆರತಿ",
+        note: "Evening special Hunnime / Sankranti Mahapooja concluding with Karpoora Arati and prasada.",
+        noteKn:
+          "ಸಂಜೆಯ ವಿಶೇಷ ಹುಣ್ಣಿಮೆ / ಸಂಕ್ರಮಣ ಮಹಾಪೂಜೆ, ಕರ್ಪೂರ ಆರತಿ ಹಾಗೂ ತೀರ್ಥ ಪ್ರಸಾದ ವಿತರಣೆ.",
+      },
+    ],
+    sevaType: "Hunnime Pooja",
+    sevaTypeKn: "ಹುಣ್ಣಿಮೆ ಪೂಜೆ",
+    ctaLabel: "Book a Monthly Seva",
+    ctaLabelKn: "ಮಾಸಿಕ ಸೇವೆ ಕಾಯ್ದಿರಿಸಿ",
+  },
+];
+
+export interface TrustObjectiveItem {
+  id: string;
+  title: string;
+  titleKn: string;
   description: string;
   descriptionKn: string;
-  image: string;
-  isPlaceholderDate?: boolean;
+}
+
+export interface TrustProfile {
+  legalName: string;
+  legalNameKn: string;
+  educationalWing: string;
+  educationalWingKn: string;
+  registrationDetails: string;
+  registrationDetailsKn: string;
+  officialAddress: string;
+  officialAddressKn: string;
+  founderLabel: string;
+  founderLabelKn: string;
+  founderName: string;
+  founderNameKn: string;
+  motto: string;
+  mottoKn: string;
+  mottoSubline: string;
+  mottoSublineKn: string;
+  heritageSummary: string;
+  heritageSummaryKn: string;
+  inclusionNote: string;
+  inclusionNoteKn: string;
+  coreObjectives: TrustObjectiveItem[];
+}
+
+export interface EducationTierItem {
+  id: string;
+  label: string;
+  labelKn: string;
+  amountLabel: string;
+  amountLabelKn: string;
 }
 
 export interface GalleryItem {
@@ -187,12 +439,14 @@ export interface SiteData {
     heroBanner: string;
   };
   supervisor: SupervisorInfo;
+  trustProfile: TrustProfile;
+  educationTiers: EducationTierItem[];
   navigation: NavItem[];
   heroCtas: HeroCtaItem[];
   committee: CommitteeMember[];
   aartiTimings: AartiTiming[];
   darshanTimings: DarshanTimings;
-  festivals: FestivalItem[];
+  events: EventItem[];
   gallery: GalleryItem[];
   contact: ContactInfo;
   socialLinks: SocialLinkItem[];
@@ -245,6 +499,85 @@ export const siteData: SiteData = {
     designation: "Convener",
     designationKn: "ಸಂಚಾಲಕರು",
   },
+  trustProfile: {
+    legalName: "Shree Durgaparameshwari Sannidana Trust, Udupi",
+    legalNameKn: "ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಸನ್ನಿಧಾನ ಟ್ರಸ್ಟ್, ಉಡುಪಿ",
+    educationalWing:
+      "Conductors of Shree Durgaparameshwari Education Trust (Vidyanidhi)",
+    educationalWingKn:
+      "ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಎಜುಕೇಶನ್ ಟ್ರಸ್ಟ್ (ವಿದ್ಯಾನಿಧಿ) ಸಂಚಾಲಕರು",
+    registrationDetails:
+      "Established in 2007 and formally registered on 4th November 2008 at the Sub-Registrar Office, Udupi (Reg. No. IV-85/2008-09).",
+    registrationDetailsKn:
+      "2007ರಲ್ಲಿ ಸ್ಥಾಪನೆಯಾಗಿ, 4 ನವೆಂಬರ್ 2008ರಂದು ಉಡುಪಿ ಉಪನೋಂದಣಾಧಿಕಾರಿ ಕಚೇರಿಯಲ್ಲಿ ಅಧಿಕೃತವಾಗಿ ನೋಂದಾಯಿಸಲ್ಪಟ್ಟಿದೆ (ನೋಂದಣಿ ಸಂಖ್ಯೆ: IV-85/2008-09).",
+    officialAddress:
+      "Shree Devi Kripa, Ullur Village, Kemundel Post, Via Yermal, Udupi Taluk & District – 574 119, Karnataka",
+    officialAddressKn:
+      "ಶ್ರೀ ದೇವಿ ಕೃಪಾ, ಉಳ್ಳೂರು ಗ್ರಾಮ, ಕೆಮುಂಡೇಲ್ ಪೋಸ್ಟ್, ಯರ್ಮಾಳ್ ಮೂಲಕ, ಉಡುಪಿ ತಾಲೂಕು ಮತ್ತು ಜಿಲ್ಲೆ – 574 119, ಕರ್ನಾಟಕ",
+    founderLabel: "Founder & Chief Archaka",
+    founderLabelKn: "ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ಪ್ರಧಾನ ಅರ್ಚಕರು",
+    founderName: "Sri Dinesh Shanthi",
+    founderNameKn: "ಶ್ರೀ ದಿನೇಶ್ ಶಾಂತಿ",
+    motto:
+      "Be Strong by Unity, Be Independent by Education — Brahmashree Narayana Guru",
+    mottoKn:
+      "ಸಂಘಟನೆಯಿಂದ ಬಲಯುತರಾಗಿ, ವಿದ್ಯೆಯಿಂದ ಸ್ವತಂತ್ರರಾಗಿ — ಬ್ರಹ್ಮಶ್ರೀ ನಾರಾಯಣ ಗುರು",
+    mottoSubline:
+      "Guiding principle behind our community unity and Vidyanidhi educational support for deserving students.",
+    mottoSublineKn:
+      "ನಮ್ಮ ಸಮುದಾಯದ ಒಗ್ಗಟ್ಟು ಮತ್ತು ಅರ್ಹ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ನೀಡುವ ವಿದ್ಯಾನಿಧಿ ಶೈಕ್ಷಣಿಕ ನೆರವಿನ ಮಾರ್ಗದರ್ಶಿ ತತ್ವ.",
+    heritageSummary:
+      "Rooted in devotion and community service at Ullur, the Trust is dedicated to preserving active temple sevas — Daily Poojas, Navaratri & Dussehra celebrations, Varshika Utsava, Chandika Homa, and Anna Santarpana — and supporting deserving students through Vidyanidhi Education Aid.",
+    heritageSummaryKn:
+      "ಉಳ್ಳೂರಿನಲ್ಲಿ ಭಕ್ತಿ ಮತ್ತು ಸಮಾಜ ಸೇವೆಯಲ್ಲಿ ಬೇರೂರಿರುವ ಈ ಟ್ರಸ್ಟ್, ನಿತ್ಯ ಪೂಜೆಗಳು, ನವರಾತ್ರಿ ಮತ್ತು ದಸರಾ ಉತ್ಸವಗಳು, ವಾರ್ಷಿಕ ಉತ್ಸವ, ಚಂಡಿಕಾ ಹೋಮ ಹಾಗೂ ಅನ್ನಸಂತರ್ಪಣೆಯಂತಹ ದೇವಾಲಯ ಸೇವೆಗಳನ್ನು ಉಳಿಸಿಕೊಂಡು ಬರುವುದರ ಜೊತೆಗೆ ವಿದ್ಯಾನಿಧಿ ಶೈಕ್ಷಣಿಕ ನೆರವಿನ ಮೂಲಕ ಅರ್ಹ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಬೆಂಬಲ ನೀಡಲು ಸಮರ್ಪಿತವಾಗಿದೆ.",
+    inclusionNote:
+      "All Trust benefits and charitable initiatives are open to everyone irrespective of caste, creed, or religion.",
+    inclusionNoteKn:
+      "ಟ್ರಸ್ಟ್‌ನ ಎಲ್ಲಾ ಸೇವಾ ಯೋಜನೆಗಳು ಮತ್ತು ಧರ್ಮಕಾರ್ಯಗಳು ಜಾತಿ, ಮತ ಅಥವಾ ಧರ್ಮದ ಭೇದಭಾವವಿಲ್ಲದೆ ಎಲ್ಲರಿಗೂ ಮುಕ್ತವಾಗಿವೆ.",
+    coreObjectives: [
+      {
+        id: "worship-utsava",
+        title: "Daily Poojas & Sacred Utsavas",
+        titleKn: "ನಿತ್ಯ ಪೂಜೆ ಮತ್ತು ವಾರ್ಷಿಕ ಉತ್ಸವಗಳು",
+        description:
+          "Preserving Daily Poojas, Varshika Utsava, Chandika Homa, and community Anna Santarpana.",
+        descriptionKn:
+          "ನಿತ್ಯ ಪೂಜೆಗಳು, ವಾರ್ಷಿಕ ಉತ್ಸವ, ಚಂಡಿಕಾ ಹೋಮ ಹಾಗೂ ಸಾರ್ವಜನಿಕ ಅನ್ನಸಂತರ್ಪಣೆ.",
+      },
+      {
+        id: "vidyanidhi",
+        title: "Vidyanidhi Education Aid",
+        titleKn: "ವಿದ್ಯಾನಿಧಿ ಶೈಕ್ಷಣಿಕ ನೆರವು",
+        description:
+          "Supporting deserving students with scholarships, free notebooks, uniforms, and merit cash awards.",
+        descriptionKn:
+          "ಅರ್ಹ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ, ಉಚಿತ ನೋಟ್‌ಬುಕ್‌ಗಳು, ಸಮವಸ್ತ್ರ ಮತ್ತು ಪ್ರತಿಭಾ ಪುರಸ್ಕಾರ ನಗದು ಬಹುಮಾನಗಳು.",
+      },
+    ],
+  },
+  educationTiers: [
+    {
+      id: "primary",
+      label: "Primary School Student Support",
+      labelKn: "ಪ್ರಾಥಮಿಕ ಶಾಲಾ ವಿದ್ಯಾರ್ಥಿ ಬೆಂಬಲ",
+      amountLabel: "₹3,000",
+      amountLabelKn: "₹3,000",
+    },
+    {
+      id: "puc",
+      label: "Higher Secondary (PUC) Student Support",
+      labelKn: "ಪದವಿಪೂರ್ವ (PUC) ವಿದ್ಯಾರ್ಥಿ ಬೆಂಬಲ",
+      amountLabel: "₹7,000",
+      amountLabelKn: "₹7,000",
+    },
+    {
+      id: "college",
+      label: "College Level Student Support",
+      labelKn: "ಕಾಲೇಜು ಹಂತದ ವಿದ್ಯಾರ್ಥಿ ಬೆಂಬಲ",
+      amountLabel: "₹10,000 & above",
+      amountLabelKn: "₹10,000 ಮತ್ತು ಮೇಲ್ಪಟ್ಟು",
+    },
+  ],
   navigation: [
     { label: "Home", labelKn: "ಮುಖಪುಟ", href: "#home" },
     { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "#about" },
@@ -367,59 +700,7 @@ export const siteData: SiteData = {
     evening: "4:00 PM - 8:30 PM",
     eveningKn: "ಸಂಜೆ 4:00 - ರಾತ್ರಿ 8:30",
   },
-  festivals: [
-    {
-      id: "varshik-pooja",
-      name: "Varshik Pooja (Annual Temple Festival)",
-      nameKn: "ವಾರ್ಷಿಕ ಪೂಜಾ ಮಹೋತ್ಸವ (ಪ್ರತಿಷ್ಠಾ ವಾರ್ಷಿಕೋತ್ಸವ)",
-      dateLabel: "February 2027 [PLACEHOLDER: Exact Panchanga Date Pending]",
-      dateLabelKn:
-        "ಫೆಬ್ರವರಿ 2027 [PLACEHOLDER: ಪಂಚಾಂಗದ ನಿಖರ ದಿನಾಂಕವನ್ನು ಟ್ರಸ್ಟ್ ಪ್ರಕಟಿಸಲಿದೆ]",
-      isoDate: "2027-02-03T06:00:00+05:30",
-      badge: "Next Major Utsava",
-      badgeKn: "ಮುಂದಿನ ಪ್ರಮುಖ ಉತ್ಸವ",
-      description:
-        "Annual Pratishtha & Varshik Mahotsava featuring Kalasha Pooja, Maha Ranga Pooja, Daiva Darshana, and community Annaprasada.",
-      descriptionKn:
-        "ಶ್ರೀ ಕ್ಷೇತ್ರದ ವಾರ್ಷಿಕ ಪ್ರತಿಷ್ಠಾ ಮಹೋತ್ಸವದ ಪ್ರಯುಕ್ತ ವಿಶೇಷ ಕಲಶ ಪೂಜೆ, ಮಹಾ ರಂಗಪೂಜೆ, ದೈವ ದರ್ಶನ ಹಾಗೂ ಸಾರ್ವಜನಿಕ ಅನ್ನಸಂತರ್ಪಣೆ ನಡೆಯುತ್ತದೆ.",
-      image: "/assets/varshik-pooja/2026/2026-devi.jpg",
-      isPlaceholderDate: true,
-    },
-    {
-      id: "navaratri-utsava",
-      name: "Sharannavaratri Mahotsava",
-      nameKn: "ಶರನ್ನವರಾತ್ರಿ ಮಹೋತ್ಸವ",
-      dateLabel: "October 2027 [PLACEHOLDER: Exact Panchanga Date Pending]",
-      dateLabelKn:
-        "ಅಕ್ಟೋಬರ್ 2027 [PLACEHOLDER: ಪಂಚಾಂಗದ ನಿಖರ ದಿನಾಂಕವನ್ನು ಟ್ರಸ್ಟ್ ಪ್ರಕಟಿಸಲಿದೆ]",
-      isoDate: "2027-10-01T06:00:00+05:30",
-      badge: "9-Day Festival",
-      badgeKn: "೯ ದಿನಗಳ ನವರಾತ್ರಿ ಉತ್ಸವ",
-      description:
-        "Nine auspicious days of special Devi Alankara, Chandika Homa, Kumkumarchana, Bhajans, and Maha Mangalarathi.",
-      descriptionKn:
-        "ಒಂಬತ್ತು ದಿನಗಳ ಕಾಲ ಶ್ರೀ ದೇವಿಗೆ ವಿಶೇಷ ಅಲಂಕಾರ ಪೂಜೆ, ಚಂಡಿಕಾ ಹೋಮ, ಕುಂಕುಮಾರ್ಚನೆ, ಭಜನಾ ಕಾರ್ಯಕ್ರಮ ಹಾಗೂ ಮಹಾಮಂಗಳಾರತಿ ನೆರವೇರುತ್ತದೆ.",
-      image: "/assets/navaratri/2026/IMG-20261011-WA0006.jpg",
-      isPlaceholderDate: true,
-    },
-    {
-      id: "monthly-sankramana",
-      name: "Masa Sankramana & Special Ranga Pooja",
-      nameKn: "ಮಾಸ ಸಂಕ್ರಮಣ ಮತ್ತು ವಿಶೇಷ ರಂಗಪೂಜೆ",
-      dateLabel: "Monthly (Solar Transition Day) [PLACEHOLDER: Next Date Pending]",
-      dateLabelKn:
-        "ಪ್ರತಿ ತಿಂಗಳ ಸಂಕ್ರಮಣ ದಿನ [PLACEHOLDER: ಮುಂದಿನ ಸಂಕ್ರಮಣ ದಿನಾಂಕ ನಿರೀಕ್ಷಿಸಲಾಗಿದೆ]",
-      isoDate: "2026-12-16T06:00:00+05:30",
-      badge: "Monthly Seva",
-      badgeKn: "ಮಾಸಿಕ ವಿಶೇಷ ಸೇವೆ",
-      description:
-        "Monthly Sankramana special abhisheka, Pushpalankara, and evening Ranga Pooja offered to Goddess Durgaparameshwari.",
-      descriptionKn:
-        "ಪ್ರತಿ ಮಾಸ ಸಂಕ್ರಮಣದಂದು ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ಅಮ್ಮನವರಿಗೆ ವಿಶೇಷ ಅಭಿಷೇಕ, ಪುಷ್ಪಾಲಂಕಾರ ಹಾಗೂ ಸಂಜೆ ವಿಶೇಷ ರಂಗಪೂಜೆ ಸಮರ್ಪಿಸಲಾಗುತ್ತದೆ.",
-      image: "/assets/gallery/monthly-pooja.webp",
-      isPlaceholderDate: true,
-    },
-  ],
+  events: eventsData,
   gallery: [
     {
       id: "gal-1",
