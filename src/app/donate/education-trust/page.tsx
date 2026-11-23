@@ -87,14 +87,19 @@ interface TrustDonationErrors {
 
 const INDIAN_MOBILE_REGEX = /^[6-9]\d{9}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const QUICK_AMOUNTS = [101, 501, 1001, 2501, 5001];
+const QUICK_AMOUNTS = [501, 1001, 5001];
+const VIDYANIDHI_PRESETS = [
+  { amount: 3000, label: "₹3,000 (Primary)", labelKn: "₹3,000 (ಪ್ರಾಥಮಿಕ)" },
+  { amount: 7000, label: "₹7,000 (PUC)", labelKn: "₹7,000 (PUC)" },
+  { amount: 10000, label: "₹10,000 (College)", labelKn: "₹10,000 (ಕಾಲೇಜು)" },
+];
 
 const INITIAL_FORM_DATA: TrustDonationFormData = {
   name: "",
   phone: "",
   email: "",
   address: "",
-  amount: "501",
+  amount: "",
 };
 
 function loadRazorpayScript(): Promise<boolean> {
@@ -471,6 +476,14 @@ export default function EducationTrustDonationPage() {
           )}
 
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            {/* Vidyanidhi Education Aid Guidance Note */}
+            <div className="rounded-2xl bg-amber-100/80 border border-amber-300 px-4 py-3 text-xs sm:text-sm font-medium text-amber-900 leading-relaxed break-words">
+              {t(
+                "Vidyanidhi Education Aid Guide: Primary School Student — ₹3,000 | Higher Secondary (PUC) — ₹7,000 | College Student — ₹10,000 & above (or enter any custom contribution below).",
+                "ವಿದ್ಯಾನಿಧಿ ಶೈಕ್ಷಣಿಕ ನೆರವಿನ ಮಾರ್ಗದರ್ಶಿ: ಪ್ರಾಥಮಿಕ ಶಾಲಾ ವಿದ್ಯಾರ್ಥಿ — ₹3,000 | ಪದವಿಪೂರ್ವ (PUC) — ₹7,000 | ಕಾಲೇಜು ವಿದ್ಯಾರ್ಥಿ — ₹10,000 ಮತ್ತು ಮೇಲ್ಪಟ್ಟು (ಅಥವಾ ಕೆಳಗೆ ನಿಮ್ಮ ಇಚ್ಛೆಯ ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ)."
+              )}
+            </div>
+
             {/* Contribution Amount (₹) with Quick-Select Chips */}
             <div className="space-y-3 rounded-2xl bg-amber-50/80 p-5 border border-amber-200">
               <label
@@ -484,8 +497,25 @@ export default function EducationTrustDonationPage() {
                 </span>
               </label>
 
-              {/* Quick-Select Amount Chips */}
+              {/* Quick-Select Amount Chips & Vidyanidhi Presets */}
               <div className="flex flex-wrap gap-2">
+                {VIDYANIDHI_PRESETS.map((preset) => {
+                  const isSelected = Number(formData.amount) === preset.amount;
+                  return (
+                    <button
+                      key={preset.amount}
+                      type="button"
+                      onClick={() => handleQuickAmountSelect(preset.amount)}
+                      className={`inline-flex items-center justify-center min-h-[44px] rounded-full px-3.5 py-2 text-xs sm:text-sm font-bold border transition duration-200 hover:brightness-105 active:scale-[0.99] cursor-pointer ${
+                        isSelected
+                          ? "bg-amber-600 text-white border-amber-600 shadow-sm"
+                          : "bg-white text-amber-900 border-amber-300 hover:border-amber-600"
+                      }`}
+                    >
+                      {t(preset.label, preset.labelKn)}
+                    </button>
+                  );
+                })}
                 {QUICK_AMOUNTS.map((chip) => {
                   const isSelected = Number(formData.amount) === chip;
                   return (
@@ -517,8 +547,8 @@ export default function EducationTrustDonationPage() {
                   value={formData.amount}
                   onChange={handleChange}
                   placeholder={t(
-                    "Enter amount in ₹ (min ₹10)",
-                    "ದೇಣಿಗೆ ಮೊತ್ತವನ್ನು ₹ ನಲ್ಲಿ ನಮೂದಿಸಿ (ಕನಿಷ್ಠ ₹10)"
+                    "Enter amount (e.g. ₹3,000 Primary, ₹7,000 PUC, ₹10,000 College)",
+                    "ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ (ಉದಾ: ₹3,000 ಪ್ರಾಥಮಿಕ, ₹7,000 PUC, ₹10,000 ಕಾಲೇಜು)"
                   )}
                   className={`w-full max-w-full min-h-[44px] rounded-xl bg-white pl-10 pr-4 py-3 text-base font-bold text-amber-900 border focus:outline-none focus:ring-2 transition-colors ${
                     errors.amount
