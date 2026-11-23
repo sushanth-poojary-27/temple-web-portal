@@ -248,18 +248,33 @@ export default function ContactSection() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {siteData.socialLinks.map((item) => (
-              <a
-                key={item.id}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-0 inline-flex items-center justify-center gap-2.5 min-h-[44px] rounded-full border border-amber-300 bg-amber-50/70 px-4 py-2.5 text-sm font-semibold text-amber-900 hover:border-amber-600 hover:bg-amber-100 hover:-translate-y-0.5 active:scale-[0.99] transition duration-200 leading-snug text-center"
-              >
-                <SocialIcon platform={item.id} className="w-4 h-4 shrink-0" />
-                <span className="truncate">{t(item.label, item.labelKn)}</span>
-              </a>
-            ))}
+            {siteData.socialLinks.map((item) => {
+              const brandClasses =
+                item.id === "youtube"
+                  ? "bg-[#FF0000] hover:bg-[#D90000]"
+                  : item.id === "instagram"
+                    ? "bg-gradient-to-r from-[#E1306C] via-[#F56040] to-[#F77737] hover:brightness-105"
+                    : item.id === "facebook"
+                      ? "bg-[#1877F2] hover:bg-[#1464D0]"
+                      : "bg-[#25D366] hover:bg-[#1EBE5D]";
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group min-w-0 inline-flex items-center justify-center gap-2.5 min-h-[44px] rounded-full border border-transparent px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-200 leading-snug text-center ${brandClasses}`}
+                >
+                  <SocialIcon
+                    platform={item.id}
+                    className="w-4 h-4 shrink-0"
+                    white
+                  />
+                  <span className="truncate">{t(item.label, item.labelKn)}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
