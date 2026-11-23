@@ -40,8 +40,9 @@ export default function DonationSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1: Book a Seva -> /donate/seva */}
           <Link
+            id="seva-form"
             href="/donate/seva"
-            className="group min-w-0 rounded-3xl bg-white p-5 sm:p-8 border-2 border-amber-300 hover:-translate-y-0.5 hover:border-amber-600 hover:bg-amber-900 hover:text-amber-50 shadow-sm hover:shadow-md active:scale-[0.99] transition duration-200 flex flex-col justify-between gap-6 focus:outline-none focus:ring-2 focus:ring-amber-600"
+            className="scroll-mt-24 group min-w-0 rounded-3xl bg-white p-5 sm:p-8 border-2 border-amber-300 hover:-translate-y-0.5 hover:border-amber-600 hover:bg-amber-900 hover:text-amber-50 shadow-sm hover:shadow-md active:scale-[0.99] transition duration-200 flex flex-col justify-between gap-6 focus:outline-none focus:ring-2 focus:ring-amber-600"
           >
             <div className="flex items-start gap-4 min-w-0">
               <div className="w-14 h-14 rounded-2xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-sm group-hover:bg-amber-500 transition-colors duration-200">
@@ -76,8 +77,9 @@ export default function DonationSection() {
 
           {/* Card 2: Education & General Trust Fund -> /donate/education-trust */}
           <Link
+            id="donate-form"
             href="/donate/education-trust"
-            className="group min-w-0 rounded-3xl bg-white p-5 sm:p-8 border-2 border-amber-300 hover:-translate-y-0.5 hover:border-amber-600 hover:bg-amber-900 hover:text-amber-50 shadow-sm hover:shadow-md active:scale-[0.99] transition duration-200 flex flex-col justify-between gap-6 focus:outline-none focus:ring-2 focus:ring-amber-600"
+            className="scroll-mt-24 group min-w-0 rounded-3xl bg-white p-5 sm:p-8 border-2 border-amber-300 hover:-translate-y-0.5 hover:border-amber-600 hover:bg-amber-900 hover:text-amber-50 shadow-sm hover:shadow-md active:scale-[0.99] transition duration-200 flex flex-col justify-between gap-6 focus:outline-none focus:ring-2 focus:ring-amber-600"
           >
             <div className="flex items-start gap-4 min-w-0">
               <div className="w-14 h-14 rounded-2xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-sm group-hover:bg-amber-500 transition-colors duration-200">
