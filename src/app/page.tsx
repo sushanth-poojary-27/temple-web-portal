@@ -7,8 +7,11 @@ import ContactSection from "@/components/ContactSection";
 import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
 import FloatingSocialPill from "@/components/FloatingSocialPill";
+import { getGalleryCategories } from "@/lib/gallery.server";
 
 export default function Home() {
+  const galleryCategories = getGalleryCategories();
+
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-clip flex flex-col bg-amber-50 text-amber-900">
       {/* Sticky Navigation Header */}
@@ -25,8 +28,8 @@ export default function Home() {
         {/* Task 7: Upcoming Temple Festivals & Events with Countdown */}
         <EventsSection />
 
-        {/* Task 8: Temple Photo Gallery with Lightbox */}
-        <GallerySection />
+        {/* Task 8: Temple Photo Gallery (Level 1 Category Albums) */}
+        <GallerySection categories={galleryCategories} />
 
         {/* Task 9: Location & Contact Section with Google Maps Embed */}
         <ContactSection />

@@ -33,7 +33,7 @@ export default function Header() {
         <div className="flex items-center justify-between min-h-[5rem] py-2 gap-2 sm:gap-3">
           {/* Brand Logo & Trust Name */}
           <Link
-            href="#home"
+            href="/"
             className="flex items-center gap-2 sm:gap-3 group focus:outline-none flex-1 min-w-0 min-h-[44px]"
           >
             <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-amber-600 bg-white shrink-0 shadow-sm">

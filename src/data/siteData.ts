@@ -579,12 +579,12 @@ export const siteData: SiteData = {
     },
   ],
   navigation: [
-    { label: "Home", labelKn: "ಮುಖಪುಟ", href: "#home" },
-    { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "#about" },
-    { label: "Festivals", labelKn: "ಉತ್ಸವಗಳು", href: "#events" },
-    { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "#gallery" },
-    { label: "Donate", labelKn: "ಸೇವೆ / ದೇಣಿಗೆ", href: "#donate" },
-    { label: "Contact", labelKn: "ಸಂಪರ್ಕಿಸಿ", href: "#contact" },
+    { label: "Home", labelKn: "ಮುಖಪುಟ", href: "/#home" },
+    { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "/#about" },
+    { label: "Festivals", labelKn: "ಉತ್ಸವಗಳು", href: "/#events" },
+    { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "/gallery" },
+    { label: "Donate", labelKn: "ಸೇವೆ / ದೇಣಿಗೆ", href: "/#donate" },
+    { label: "Contact", labelKn: "ಸಂಪರ್ಕಿಸಿ", href: "/#contact" },
   ],
   heroCtas: [
     {
