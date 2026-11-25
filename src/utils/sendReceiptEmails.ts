@@ -1,113 +1,93 @@
-import emailjs from "@emailjs/browser";
-import type { EmailDeliveryStatus, ReceiptData } from "./generateReceipt";
+import {
+  createReceiptPdf,
+  formatAmountInWords,
+  getCleanSevaName,
+  getReceiptFileName,
+  IS_TEST_MODE,
+  resolveReceiptType,
+  type EmailDeliveryStatus,
+  type ReceiptData,
+} from "./generateReceipt";
 
 export async function sendReceiptEmails(
   data: ReceiptData
 ): Promise<EmailDeliveryStatus> {
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
-  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
+  const type = resolveReceiptType(data);
+  const fileName = getReceiptFileName(data);
+  const amountInWords = formatAmountInWords(data.amount);
+  const purposeOrSeva =
+    type === "seva" ? getCleanSevaName(data) : data.purpose;
+  const paymentMode =
+    data.paymentMode ||
+    (IS_TEST_MODE ? "Online (Razorpay Test)" : "Online (Razorpay)");
 
-  if (!serviceId || !templateId || !publicKey) {
+  let pdfBase64 = "";
+  try {
+    const doc = await createReceiptPdf(data);
+    const pdfDataUri = doc.output("datauristring");
+    pdfBase64 = pdfDataUri.split(",")[1] || "";
+  } catch (err) {
+    console.error("[sendReceiptEmails] Failed to generate receipt PDF:", err);
     return { devoteeSent: false, trustSent: false };
   }
 
-  const isSeva = Boolean(data.sevaDate && data.sevaDate !== "N/A");
-
-  // Email 1 — Devotee Confirmation (to_email: data.email)
-  const devoteeSubject = isSeva
-    ? `Seva Booking Receipt (${data.receiptNo}) - Shree Durgaparameshwari Sannidhana, Ullur`
-    : `Contribution Receipt (${data.receiptNo}) - Shree Durgaparameshwari Sannidhana, Ullur`;
-
-  const devoteeGreeting = isSeva
-    ? `Dear ${data.donorName}, thank you for booking ${data.purpose} at Shree Durgaparameshwari Sannidhana (Regd.), Ullur.`
-    : `Dear ${data.donorName}, thank you for your donation to Shree Durgaparameshwari Sannidhana (Regd.), Ullur.`;
-
-  const devoteeMessage = [
-    devoteeGreeting,
-    "",
-    "--- TRANSACTION RECEIPT SUMMARY ---",
-    `Receipt No.: ${data.receiptNo}`,
-    `Seva / Fund Name: ${data.purpose}`,
-    `Preferred Seva Date: ${data.sevaDate || "N/A"}`,
-    `Amount Paid: Rs. ${data.amount}/-`,
-    `Razorpay Payment ID: ${data.paymentId}`,
-    `Date & Time: ${data.dateTime}`,
-    "",
-    "Temple Address:",
-    "Shree Durgaparameshwari Sannidhana (Regd.)",
-    "Post Kemundel, Ulluru Village, Yellur, Udupi District, Karnataka - 574119",
-    "Plus Code: 5Q7W+92R | Email: shridurgaparameshwariullur@gmail.com",
-    "",
-    "NOTE: DEMO / TEST, not a valid receipt (OJT Prototype Simulation).",
-  ].join("\n");
-
-  const devoteeParams = {
-    to_email: data.email,
-    name: data.donorName,
-    subject: devoteeSubject,
-    greeting: devoteeGreeting,
-    message: devoteeMessage,
-    receipt_no: data.receiptNo,
-    purpose: data.purpose,
-    seva_date: data.sevaDate || "N/A",
-    amount: `Rs. ${data.amount}/-`,
-    payment_id: data.paymentId,
-    date_time: data.dateTime,
-  };
-
-  // Email 2 — Temple Trust Notification (to_email: 'shridurgaparameshwariullur@gmail.com')
-  const trustSubject = isSeva
-    ? `[DEMO/TEST] ${data.donorName} booked ${data.purpose} - Rs.${data.amount} (${data.receiptNo})`
-    : `[DEMO/TEST] ${data.donorName} donated Rs. ${data.amount} (${data.receiptNo})`;
-
-  const trustGreeting = isSeva
-    ? `${data.donorName} booked ${data.purpose} (Rs. ${data.amount}) for ${data.sevaDate}.`
-    : `${data.donorName} donated Rs. ${data.amount} towards ${data.purpose}.`;
-
-  const trustMessage = [
-    trustGreeting,
-    "",
-    "--- FULL DEVOTEE & PAYMENT RECORD ---",
-    `Receipt No.: ${data.receiptNo}`,
-    `Devotee Name: ${data.donorName}`,
-    `Mobile: ${data.mobile}`,
-    `Email: ${data.email}`,
-    `Postal Address: ${data.address}`,
-    `Seva / Fund Chosen: ${data.purpose}`,
-    `Preferred Seva Date: ${data.sevaDate || "N/A"}`,
-    `Amount Paid: Rs. ${data.amount}/-`,
-    `Razorpay Payment ID: ${data.paymentId}`,
-    `Date & Time: ${data.dateTime}`,
-    "",
-    "NOTE: DEMO / TEST, not a valid receipt.",
-  ].join("\n");
-
-  const trustParams = {
-    to_email: "shridurgaparameshwariullur@gmail.com",
-    name: data.donorName,
-    subject: trustSubject,
-    greeting: trustGreeting,
-    message: trustMessage,
-    receipt_no: data.receiptNo,
-    purpose: data.purpose,
-    seva_date: data.sevaDate || "N/A",
-    amount: `Rs. ${data.amount}/-`,
-    payment_id: data.paymentId,
-    date_time: data.dateTime,
-  };
+  if (!pdfBase64) {
+    console.error(
+      `[sendReceiptEmails] Refusing to send receipt ${data.receiptNo}: empty pdfBase64.`
+    );
+    return { devoteeSent: false, trustSent: false };
+  }
 
   try {
-    const [devoteeResult, trustResult] = await Promise.allSettled([
-      emailjs.send(serviceId, templateId, devoteeParams, { publicKey }),
-      emailjs.send(serviceId, templateId, trustParams, { publicKey }),
-    ]);
+    const response = await fetch("/api/send-receipt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type,
+        receiptNo: data.receiptNo,
+        donorName: data.donorName,
+        donorEmail: data.email,
+        donorPhone: data.mobile,
+        donorAddress: data.address,
+        amount: data.amount,
+        amountInWords,
+        purposeOrSeva,
+        sevaDate: data.sevaDate,
+        paymentId: data.paymentId,
+        paymentMode,
+        timestamp: data.dateTime,
+        pdfBase64,
+        fileName,
+        receipt: data,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error(
+        `[sendReceiptEmails] /api/send-receipt failed with HTTP ${response.status}`
+      );
+      return { devoteeSent: false, trustSent: false };
+    }
+
+    const apiResult = (await response.json()) as {
+      devoteeSent?: boolean;
+      trustSent?: boolean;
+      configured?: boolean;
+    };
+
+    if (!apiResult.configured) {
+      console.error(
+        "[sendReceiptEmails] Server SMTP mailer is not configured."
+      );
+      return { devoteeSent: false, trustSent: false };
+    }
 
     return {
-      devoteeSent: devoteeResult.status === "fulfilled",
-      trustSent: trustResult.status === "fulfilled",
+      devoteeSent: Boolean(apiResult.devoteeSent),
+      trustSent: Boolean(apiResult.trustSent),
     };
-  } catch {
+  } catch (err) {
+    console.error("[sendReceiptEmails] Error calling /api/send-receipt:", err);
     return { devoteeSent: false, trustSent: false };
   }
 }
