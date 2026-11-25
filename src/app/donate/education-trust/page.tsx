@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
-import type { ReceiptData } from "@/utils/generateReceipt";
+import { IS_TEST_MODE, type ReceiptData } from "@/utils/generateReceipt";
 import { sendReceiptEmails } from "@/utils/sendReceiptEmails";
 
 interface RazorpaySuccessResponse {
@@ -310,8 +310,12 @@ export default function EducationTrustDonationPage() {
           console.log(response.razorpay_payment_id);
           const now = new Date();
           const receiptData: ReceiptData = {
+            type: "donation",
             receiptNo: `DEMO-TRUST-${now.getTime().toString().slice(-6)}`,
             paymentId: response.razorpay_payment_id,
+            paymentMode: IS_TEST_MODE
+              ? "Online (Razorpay Test)"
+              : "Online (Razorpay)",
             dateTime: now.toLocaleString("en-IN", {
               dateStyle: "medium",
               timeStyle: "short",
