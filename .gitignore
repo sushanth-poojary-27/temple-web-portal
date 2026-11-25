@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 ojt_assistant_prompt.md
+
+desktop.ini
+Thumbs.db
