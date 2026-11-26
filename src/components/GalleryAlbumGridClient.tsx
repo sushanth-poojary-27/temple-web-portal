@@ -7,6 +7,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Home,
   Images,
   X,
   ZoomIn,
@@ -147,20 +148,25 @@ export default function GalleryAlbumGridClient({
 
       <main className="flex-1 min-w-0 max-w-full py-6 sm:py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-          {/* Top Bar: Back to [Category Name] + Album Heading */}
+          {/* Top Bar: 2-Button Escape Row (<- Category | Home) + Album Heading */}
           <div className="rounded-2xl bg-[#FDF8EE] border border-[#C59B27]/55 p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <Link
-              href={`/gallery/${category.slug}`}
-              className="inline-flex items-center gap-2 self-start min-h-[42px] rounded-full bg-[#FAF7F2] border border-[#C59B27]/70 px-4 py-2 text-xs sm:text-sm font-bold text-[#7A1C1C] hover:bg-[#F2E9D8] hover:border-[#7A1C1C]/70 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 shrink-0" />
-              <span>
-                {t(
-                  `Back to ${category.title}`,
-                  `${category.titleKn} ವಿಭಾಗಕ್ಕೆ ಹಿಂತಿರುಗಿ`
-                )}
-              </span>
-            </Link>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href={`/gallery/${category.slug}`}
+                className="inline-flex items-center gap-2 min-h-[42px] rounded-full bg-[#FAF7F2] border border-[#C59B27]/70 px-4 py-2 text-xs sm:text-sm font-bold text-[#7A1C1C] hover:bg-[#F2E9D8] hover:border-[#7A1C1C]/70 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4 shrink-0" />
+                <span>{t(category.title, category.titleKn)}</span>
+              </Link>
+
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 min-h-[42px] rounded-full bg-[#FAF7F2] border border-[#C59B27]/70 px-4 py-2 text-xs sm:text-sm font-bold text-[#7A1C1C] hover:bg-[#F2E9D8] hover:border-[#7A1C1C]/70 transition-colors"
+              >
+                <Home className="w-4 h-4 shrink-0" />
+                <span>{t("Home", "ಮುಖಪುಟ")}</span>
+              </Link>
+            </div>
 
             <div className="flex flex-wrap items-center gap-2 sm:justify-end">
               <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#7A1C1C] leading-snug">
@@ -209,11 +215,12 @@ export default function GalleryAlbumGridClient({
             ))}
           </div>
 
-          {/* Bottom Recommendation Buttons */}
+          {/* Bottom Recommendation Buttons (replace history to prevent back-button loops) */}
           <div className="rounded-2xl bg-[#FDF8EE] border border-[#C59B27]/55 p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {nextAlbumRecommendation && (
               <Link
                 href={nextAlbumRecommendation.href}
+                replace
                 className="inline-flex items-center justify-center gap-2 min-h-[46px] rounded-full bg-[#FAF7F2] hover:bg-[#F2E9D8] px-5 py-2.5 text-sm font-bold text-[#7A1C1C] border-2 border-[#C59B27]/70 hover:border-[#7A1C1C] transition-colors"
               >
                 <span>
@@ -228,6 +235,7 @@ export default function GalleryAlbumGridClient({
 
             <Link
               href={nextCategoryRecommendation.href}
+              replace
               className="inline-flex items-center justify-center gap-2 min-h-[46px] rounded-full bg-[#7A1C1C] hover:bg-[#5E1414] px-5 py-2.5 text-sm font-bold text-[#FFFDF7] border border-[#C59B27]/70 shadow-sm transition-colors sm:ml-auto"
             >
               <span>
