@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: `Official web portal of ${siteData.trustName}, ${siteData.fullAddress}`,
     images: [
       {
-        url: "/assets/banner(2).png",
+        url: "/assets/website-assets/first-temple-2008.png",
         alt: "Shri Durga Parameshwari Sannidhana, Ullur",
       },
     ],
