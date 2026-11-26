@@ -164,7 +164,7 @@ export const eventsData: EventItem[] = [
     isoDate: "2027-10-01T06:00:00+05:30",
     pastLabel: "Celebration Completed",
     pastLabelKn: "ಉತ್ಸವ ಸಂಪನ್ನಗೊಂಡಿದೆ",
-    image: "/images/sharannavaratri.png",
+    image: "/assets/website-assets/navaratri 2027.png",
     shortInviteNote:
       "Nine sacred days of Devi Alankara, Kumkumarchane, Deepotsava, and Vijayadashami celebrations.",
     shortInviteNoteKn:
@@ -477,8 +477,8 @@ export const siteData: SiteData = {
     "Post Kemundel, Ulluru Village, Yellur, Udupi District, Karnataka - 574119 (Plus Code: 5Q7W+92R)",
   fullAddressKn:
     "ಪೋಸ್ಟ್ ಕೆಮುಂಡೇಲ್, ಉಳ್ಳೂರು ಗ್ರಾಮ, ಎಲ್ಲೂರು, ಉಡುಪಿ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ - 574119 (ಪ್ಲಸ್ ಕೋಡ್: 5Q7W+92R)",
-  registrationNo: "Regd. Trust 2007",
-  registrationNoKn: "ನೋಂದಾಯಿತ ಟ್ರಸ್ಟ್ 2007",
+  registrationNo: "Regd. Trust 2008",
+  registrationNoKn: "ನೋಂದಾಯಿತ ಟ್ರಸ್ಟ್ 2008",
   announcementBar:
     "🙏 Om Shri Durgayai Namaha • Check Upcoming Festivals, Seva Details, Pre-Seva Bookings & Temple Updates — Thank You 🙏",
   announcementBarKn:
@@ -582,7 +582,7 @@ export const siteData: SiteData = {
     { label: "Home", labelKn: "ಮುಖಪುಟ", href: "/#home" },
     { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "/#about" },
     { label: "Festivals", labelKn: "ಉತ್ಸವಗಳು", href: "/#events" },
-    { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "/gallery" },
+    { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "/#gallery" },
     { label: "Donate", labelKn: "ಸೇವೆ / ದೇಣಿಗೆ", href: "/#donate" },
     { label: "Contact", labelKn: "ಸಂಪರ್ಕಿಸಿ", href: "/#contact" },
   ],
