@@ -233,10 +233,49 @@ function selectSubAlbumCover(
     return (exactDevi ?? anyDevi ?? photos[0]).src;
   }
 
+  if (categorySlug === "temple-moments") {
+    if (folderName === "monthly-pooname-pooja") {
+      const target =
+        photos.find((photo) =>
+          photo.filename
+            .toLowerCase()
+            .includes("a3e081fda88f18388cb2ac8d")
+        ) ?? photos[0];
+      return target.src;
+    }
+    if (folderName === "events-organized-extrenal") {
+      const target =
+        photos.find(
+          (photo) => photo.filename.toLowerCase() === "img-20261017-wa0015.jpg"
+        ) ?? photos[0];
+      return target.src;
+    }
+    if (folderName === "Donation-social-help") {
+      const target =
+        photos.find(
+          (photo) => photo.filename.toLowerCase() === "2026-donation.jpg"
+        ) ?? photos[0];
+      return target.src;
+    }
+    if (folderName === "great-personality") {
+      const target =
+        photos.find(
+          (photo) => photo.filename.toLowerCase() === "img-20260203-wa0031.jpg"
+        ) ?? photos[0];
+      return target.src;
+    }
+  }
+
   const preferred =
     photos.find((photo) => /devi/i.test(photo.filename)) ?? photos[0];
   return preferred.src;
 }
+
+const CATEGORY_CUSTOM_COVERS: Record<GalleryCategorySlug, string> = {
+  "varshik-pooja": `/assets/website-assets/${encodeUrlSegment("Varshik Pooja Temple gallery.png")}`,
+  navaratri: `/assets/website-assets/${encodeUrlSegment("navaratri temple gallery.png")}`,
+  "temple-moments": `/assets/website-assets/${encodeUrlSegment("Temple Rituals and Sacred Moments gallery.png")}`,
+};
 
 function sortSubFolderNames(
   names: string[],
@@ -282,7 +321,7 @@ function scanCategory(config: CategoryConfig): {
         subtitleKn: config.subtitleKn,
         description: config.description,
         descriptionKn: config.descriptionKn,
-        coverImage: "",
+        coverImage: CATEGORY_CUSTOM_COVERS[config.slug],
         albumCount: 0,
         photoCount: 0,
       },
@@ -350,7 +389,10 @@ function scanCategory(config: CategoryConfig): {
     });
   }
 
-  const categoryCover = subAlbums[0]?.summary.coverImage || "";
+  const categoryCover =
+    CATEGORY_CUSTOM_COVERS[config.slug] ||
+    subAlbums[0]?.summary.coverImage ||
+    "";
 
   return {
     summary: {
