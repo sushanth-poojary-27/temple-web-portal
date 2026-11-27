@@ -87,6 +87,10 @@ const TEMPLE_MOMENTS_SUBFOLDER_LABELS: Record<string, SubAlbumLabel> = {
     title: "Donation & Social Help",
     titleKn: "ದೇಣಿಗೆ ಮತ್ತು ಸಮಾಜ ಸೇವೆ",
   },
+  "events-organized-custom": {
+    title: "Events Organized",
+    titleKn: "ಆಯೋಜಿತ ವಿಶೇಷ ಕಾರ್ಯಕ್ರಮಗಳು",
+  },
   "events-organized-extrenal": {
     title: "Events Organized (External)",
     titleKn: "ಹೊರಗಿನ ಆಯೋಜಿತ ಕಾರ್ಯಕ್ರಮಗಳು",
@@ -104,6 +108,7 @@ const TEMPLE_MOMENTS_SUBFOLDER_LABELS: Record<string, SubAlbumLabel> = {
 const TEMPLE_MOMENTS_ORDER = [
   "monthly-pooname-pooja",
   "Donation-social-help",
+  "events-organized-custom",
   "events-organized-extrenal",
   "great-personality",
 ];
@@ -243,7 +248,10 @@ function selectSubAlbumCover(
         ) ?? photos[0];
       return target.src;
     }
-    if (folderName === "events-organized-extrenal") {
+    if (
+      folderName === "events-organized-custom" ||
+      folderName === "events-organized-extrenal"
+    ) {
       const target =
         photos.find(
           (photo) => photo.filename.toLowerCase() === "img-20261017-wa0015.jpg"
