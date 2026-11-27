@@ -7,10 +7,12 @@ import ContactSection from "@/components/ContactSection";
 import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
 import FloatingSocialPill from "@/components/FloatingSocialPill";
+import { getHomepageCommitteePreview } from "@/lib/committee.server";
 import { getGalleryCategories } from "@/lib/gallery.server";
 
 export default function Home() {
   const galleryCategories = getGalleryCategories();
+  const homepageLeaders = getHomepageCommitteePreview();
 
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-clip flex flex-col bg-amber-50 text-amber-900">
@@ -23,7 +25,7 @@ export default function Home() {
         <Hero />
 
         {/* Task 5: About, Temple History & Managing Committee Section */}
-        <AboutSection />
+        <AboutSection leaders={homepageLeaders} />
 
         {/* Task 7: Upcoming Temple Festivals & Events with Countdown */}
         <EventsSection />
