@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
+  ArrowRight,
   ChevronDown,
   ChevronUp,
   Clock,
@@ -10,10 +12,19 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
+import {
+  COMMITTEE_TERM_META,
+  type ResolvedCommitteeMember,
+} from "@/data/committee";
 import { siteData } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
+import CommitteeMemberCard from "@/components/CommitteeMemberCard";
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  leaders: ResolvedCommitteeMember[];
+}
+
+export default function AboutSection({ leaders }: AboutSectionProps) {
   const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -231,77 +242,51 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Part 2: Managing Committee & Temple Clergy */}
-        <div className="space-y-8">
+        {/* Part 2: Compact 4-Card Homepage #committee Preview */}
+        <div id="committee" className="scroll-mt-24 space-y-6 sm:space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
-              <Users className="w-3.5 h-3.5 text-amber-600" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7F0E2] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#7A1C1C] border border-[#C59B27]/65">
+              <Users className="w-3.5 h-3.5 text-[#9A7214]" />
               <span>
                 {t(
-                  "Trust Management & Clergy",
+                  "TRUST MANAGEMENT & CLERGY",
                   "ಆಡಳಿತ ಮಂಡಳಿ ಮತ್ತು ಅರ್ಚಕ ವೃಂದ"
                 )}
               </span>
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-amber-900 leading-relaxed break-words">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#7A1C1C] leading-snug break-words">
               {t(
                 "Managing Committee & Temple Priests",
                 "ವ್ಯವಸ್ಥಾಪನಾ ಸಮಿತಿ ಮತ್ತು ಪ್ರಧಾನ ಅರ್ಚಕರು"
               )}
             </h3>
-            <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
+            <p className="text-xs sm:text-base font-medium text-[#4A2511]/90 leading-relaxed break-words">
               {t(
-                `Dedicated office bearers and temple priests serving ${siteData.shortName}.`,
-                `${siteData.shortNameKn} ಕ್ಷೇತ್ರದ ಸೇವೆಯಲ್ಲಿ ತೊಡಗಿಸಿಕೊಂಡಿರುವ ಪದಾಧಿಕಾರಿಗಳು ಮತ್ತು ಅರ್ಚಕ ವೃಂದ.`
+                COMMITTEE_TERM_META.termShort,
+                COMMITTEE_TERM_META.termShortKn
               )}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {siteData.committee.map((member) => (
-              <div
-                key={member.id}
-                className="group min-w-0 flex items-center gap-4 rounded-2xl bg-white p-5 border border-amber-200 shadow-sm hover:-translate-y-0.5 hover:border-amber-600 hover:shadow-md transition duration-200"
-              >
-                {/* Member Photo or Initials Avatar */}
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-amber-600 bg-amber-100 shrink-0">
-                  {member.image ? (
-                    <Image
-                      src={member.image}
-                      alt={t(member.name, member.nameKn)}
-                      fill
-                      sizes="80px"
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-lg font-bold text-amber-900">
-                      {member.name.charAt(0)}
-                    </div>
-                  )}
-                </div>
-
-                {/* Member Details */}
-                <div className="min-w-0 flex-1 space-y-1">
-                  <span
-                    className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                      member.category === "clergy"
-                        ? "bg-amber-900 text-amber-50"
-                        : "bg-amber-100 text-amber-900 border border-amber-300"
-                    }`}
-                  >
-                    {t(member.role, member.roleKn)}
-                  </span>
-                  <h4 className="text-base sm:text-lg font-bold text-amber-900 leading-relaxed break-words">
-                    {t(member.name, member.nameKn)}
-                  </h4>
-                  <p className="text-xs text-amber-700 font-medium">
-                    {member.category === "clergy"
-                      ? t("Temple Clergy", "ಕ್ಷೇತ್ರದ ಅರ್ಚಕರು")
-                      : t("Managing Committee", "ವ್ಯವಸ್ಥಾಪನಾ ಸಮಿತಿ")}
-                  </p>
-                </div>
-              </div>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+            {leaders.map((member) => (
+              <CommitteeMemberCard key={member.id} member={member} />
             ))}
+          </div>
+
+          <div className="text-center pt-1">
+            <Link
+              href="/committee"
+              className="inline-flex items-center justify-center gap-2 min-h-[46px] rounded-full bg-[#7A1C1C] hover:bg-[#5E1414] px-6 py-2.5 text-sm sm:text-base font-bold text-[#FFFDF7] border-2 border-[#C59B27]/80 shadow-sm transition-colors"
+            >
+              <span>
+                {t(
+                  "View Full Committee (23 Members)",
+                  "ಸಂಪೂರ್ಣ ಸಮಿತಿ ವೀಕ್ಷಿಸಿ (23 ಸದಸ್ಯರು)"
+                )}
+              </span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </Link>
           </div>
         </div>
       </div>
