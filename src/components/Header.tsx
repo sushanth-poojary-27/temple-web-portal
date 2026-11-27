@@ -65,7 +65,7 @@ export default function Header() {
           {/* Desktop Navigation Links & Language Switcher */}
           <nav
             aria-label={t("Main Navigation", "ಮುಖ್ಯ ಸಂಚಾರ ಪಟ್ಟಿ")}
-            className="hidden lg:flex items-center gap-5"
+            className="hidden lg:flex items-center gap-3.5 xl:gap-5"
           >
             {siteData.navigation.map((item) => (
               <Link
