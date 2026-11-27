@@ -1,3 +1,5 @@
+import { COMMITTEE_ROSTER_2026_2028 } from "./committee";
+
 export interface SupervisorInfo {
   name: string;
   nameKn: string;
@@ -581,6 +583,7 @@ export const siteData: SiteData = {
   navigation: [
     { label: "Home", labelKn: "ಮುಖಪುಟ", href: "/#home" },
     { label: "About & Trust", labelKn: "ಕ್ಷೇತ್ರ ಪರಿಚಯ ಮತ್ತು ಟ್ರಸ್ಟ್", href: "/#about" },
+    { label: "Our Committee", labelKn: "ನಮ್ಮ ಸಮಿತಿ", href: "/committee" },
     { label: "Festivals", labelKn: "ಉತ್ಸವಗಳು", href: "/#events" },
     { label: "Gallery", labelKn: "ಛಾಯಾಚಿತ್ರಗಳು", href: "/#gallery" },
     { label: "Donate", labelKn: "ಸೇವೆ / ದೇಣಿಗೆ", href: "/#donate" },
@@ -609,62 +612,18 @@ export const siteData: SiteData = {
       variant: "accent",
     },
   ],
-  committee: [
-    {
-      id: "president",
-      role: "President",
-      roleKn: "ಅಧ್ಯಕ್ಷರು",
-      name: "Shri Shekhar Shanthi",
-      nameKn: "ಶ್ರೀ ಶೇಖರ್ ಶಾಂತಿ",
-      category: "executive",
-      image: "/assets/committee-members/shekhar-shanti.png",
-    },
-    {
-      id: "vp-1",
-      role: "Vice President",
-      roleKn: "ಉಪಾಧ್ಯಕ್ಷರು",
-      name: "Shri Jagannath T. Kotian",
-      nameKn: "ಶ್ರೀ ಜಗನ್ನಾಥ್ ಟಿ. ಕೋಟ್ಯಾನ್",
-      category: "executive",
-      image: "/assets/committee-members/jaganath-kotian.png",
-    },
-    {
-      id: "gen-secretary",
-      role: "Honorary General Secretary",
-      roleKn: "ಗೌರವ ಪ್ರಧಾನ ಕಾರ್ಯದರ್ಶಿ",
-      name: "Shri Harish Kotian",
-      nameKn: "ಶ್ರೀ ಹರೀಶ್ ಕೋಟ್ಯಾನ್",
-      category: "executive",
-      image: "/assets/committee-members/harish-kotian.jpg",
-    },
-    {
-      id: "treasurer",
-      role: "Treasurer",
-      roleKn: "ಕೋಶಾಧಿಕಾರಿ",
-      name: "CS Jayarama U. Poojary",
-      nameKn: "ಸಿ.ಎಸ್. ಜಯರಾಮ ಯು. ಪೂಜಾರಿ",
-      category: "executive",
-      image: "/assets/committee-members/jayaram-poojary.png",
-    },
-    {
-      id: "convener",
-      role: "Convener",
-      roleKn: "ಸಂಚಾಲಕರು",
-      name: "Shri Dhananjay Shanthi",
-      nameKn: "ಶ್ರೀ ಧನಂಜಯ ಶಾಂತಿ",
-      category: "executive",
-      image: "/assets/committee-members/dhananjay-shanti.png",
-    },
-    {
-      id: "head-priest",
-      role: "Head Priest",
-      roleKn: "ಪ್ರಧಾನ ಅರ್ಚಕರು",
-      name: "Shri Dinesh Shanthi",
-      nameKn: "ಶ್ರೀ ದಿನೇಶ್ ಶಾಂತಿ",
-      category: "clergy",
-      image: "/assets/committee-members/dinesh-shanti.png",
-    },
-  ],
+  committee: COMMITTEE_ROSTER_2026_2028.map((member) => ({
+    id: member.id,
+    role: member.role,
+    roleKn: member.roleKn,
+    name: member.name,
+    nameKn: member.nameKn,
+    category:
+      member.sectionId === "priests-and-convener" &&
+      member.id !== "dhananjay-shanthi"
+        ? "clergy"
+        : "executive",
+  })),
   aartiTimings: [
     {
       id: "kakad-aarti",
