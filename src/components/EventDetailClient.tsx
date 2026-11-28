@@ -15,7 +15,7 @@ import type { EventItem } from "@/data/siteData";
 import { useLanguage } from "@/context/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingSocialPill from "@/components/FloatingSocialPill";
+import FloatingLanguageSwitcher from "@/components/FloatingLanguageSwitcher";
 import SocialIcon from "@/components/SocialIcon";
 
 interface TimeLeft {
@@ -242,7 +242,7 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
       </main>
 
       <Footer />
-      <FloatingSocialPill />
+      <FloatingLanguageSwitcher />
     </div>
   );
 }
