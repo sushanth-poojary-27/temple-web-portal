@@ -6,7 +6,7 @@ import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import DonationSection from "@/components/DonationSection";
 import Footer from "@/components/Footer";
-import FloatingSocialPill from "@/components/FloatingSocialPill";
+import FloatingLanguageSwitcher from "@/components/FloatingLanguageSwitcher";
 import { getHomepageCommitteePreview } from "@/lib/committee.server";
 import { getGalleryCategories } from "@/lib/gallery.server";
 
@@ -43,8 +43,8 @@ export default function Home() {
       {/* Temple Trust Footer */}
       <Footer />
 
-      {/* Floating Social Connect Pill */}
-      <FloatingSocialPill />
+      {/* Floating Kannada / English Language Switcher */}
+      <FloatingLanguageSwitcher />
     </div>
   );
 }
