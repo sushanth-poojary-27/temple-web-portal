@@ -17,7 +17,7 @@ import type { GalleryAlbumPageData } from "@/types/gallery";
 import { useLanguage } from "@/context/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingSocialPill from "@/components/FloatingSocialPill";
+import FloatingLanguageSwitcher from "@/components/FloatingLanguageSwitcher";
 
 interface GalleryAlbumGridClientProps {
   data: GalleryAlbumPageData;
@@ -383,7 +383,7 @@ export default function GalleryAlbumGridClient({
       )}
 
       <Footer />
-      <FloatingSocialPill />
+      <FloatingLanguageSwitcher />
     </div>
   );
 }
