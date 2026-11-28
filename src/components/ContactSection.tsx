@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  ArrowUpRight,
   Check,
   Clock,
   Copy,
@@ -32,22 +33,22 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-24 py-12 md:py-20 bg-amber-50 text-amber-900"
+      className="scroll-mt-24 py-10 sm:py-14 md:py-18 bg-amber-50 text-[#2B1810]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 border border-amber-200">
-            <MapPin className="w-3.5 h-3.5 text-amber-600" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7 sm:space-y-9">
+        {/* Compact Section Header */}
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7F0E2] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#7A1C1C] border border-[#C59B27]/60">
+            <MapPin className="w-3.5 h-3.5 text-[#9A7214]" />
             <span>{t("Visit the Sannidhana", "ಶ್ರೀ ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಿ")}</span>
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 leading-relaxed break-words">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#7A1C1C] leading-snug break-words">
             {t(
               "Location & Contact Details",
               "ಶ್ರೀ ಕ್ಷೇತ್ರದ ವಿಳಾಸ ಮತ್ತು ಸಂಪರ್ಕ ವಿವರ"
             )}
           </h2>
-          <p className="text-sm sm:text-base text-amber-800 leading-relaxed break-words">
+          <p className="text-xs sm:text-base text-[#4A2511]/90 leading-relaxed break-words">
             {t(
               `Plan your visit to ${siteData.trustName} or reach out to the trust office for seva and temple inquiries.`,
               `${siteData.trustNameKn} ಕ್ಷೇತ್ರಕ್ಕೆ ಭೇಟಿ ನೀಡಲು ಹಾಗೂ ಸೇವಾ ವಿವರಗಳಿಗಾಗಿ ಟ್ರಸ್ಟ್ ಕಚೇರಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ.`
@@ -55,226 +56,197 @@ export default function ContactSection() {
           </p>
         </div>
 
-        {/* Two-Column Responsive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left Column: Address, Office Hours, and Action Buttons */}
-          <div className="lg:col-span-5 min-w-0 flex flex-col justify-between rounded-3xl bg-white p-5 sm:p-8 border border-amber-200 shadow-sm space-y-6">
-            <div className="space-y-6">
-              <div>
-                <span className="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 border border-amber-200">
-                  {t(siteData.registrationNo, siteData.registrationNoKn)}
+        {/* Single Unified 2-Column Card */}
+        <div className="rounded-2xl border border-[#C59B27]/40 bg-[#FFFDF8] p-5 sm:p-7 lg:p-8 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            {/* Left Column (lg:col-span-7): Contact, Hours & Social Buttons */}
+            <div className="lg:col-span-7 min-w-0 space-y-4">
+              {/* Regd. Pill + Temple Title */}
+              <div className="space-y-1.5">
+                <span className="inline-block rounded-full bg-[#F7F0E2] px-3 py-0.5 text-xs font-bold text-[#7A1C1C] border border-[#C59B27]/60">
+                  {t("Regd. Trust 2008", "ನೋಂದಾಯಿತ ಟ್ರಸ್ಟ್ 2008")}
                 </span>
-                <h3 className="mt-2 text-xl sm:text-2xl font-bold text-amber-900 leading-relaxed sm:leading-snug break-words">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-[#7A1C1C] leading-snug break-words">
                   {t(siteData.trustName, siteData.trustNameKn)}
                 </h3>
               </div>
 
-              <div className="space-y-4 text-sm sm:text-base text-amber-800">
-                {/* Full Postal Address & Pincode */}
-                <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
-                  <MapPin className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="min-w-0 flex-1 space-y-1">
-                    <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
+              {/* Streamlined 2-Row Address & Hours (Hairline Dividers — No Heavy Nested Sub-Boxes) */}
+              <div className="border-y border-[#C59B27]/35 divide-y divide-[#C59B27]/30 text-sm text-[#2B1810]">
+                {/* Row 1: Address + Plus Code */}
+                <div className="py-3 flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-[#9A7214] shrink-0 mt-1" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#7A1C1C]">
                       {t("Temple Postal Address", "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಂಚೆ ವಿಳಾಸ")}
                     </p>
-                    <p className="font-semibold text-amber-900 break-words">
-                      {t(siteData.address, siteData.addressKn)}
-                    </p>
-                    <p className="text-xs font-bold text-amber-700 break-words">
-                      {t("Pincode", "ಪಿನ್ ಕೋಡ್")}: {siteData.contact.pincode} •{" "}
-                      {t("Plus Code", "ಪ್ಲಸ್ ಕೋಡ್")}:{" "}
-                      {siteData.contact.plusCode}
+                    <p className="text-xs sm:text-sm font-semibold text-[#2B1810] leading-relaxed break-words">
+                      {t(
+                        "Post Kemundel, Ulluru Village, Yellur, Udupi – 574 119 • Plus Code: 5Q7W+92R",
+                        "ಪೋಸ್ಟ್ ಕೆಮುಂಡೇಲ್, ಉಳ್ಳೂರು ಗ್ರಾಮ, ಎಲ್ಲೂರು, ಉಡುಪಿ – 574 119 • ಪ್ಲಸ್ ಕೋಡ್: 5Q7W+92R"
+                      )}
                     </p>
                   </div>
                 </div>
 
-                {/* Office & Darshan Hours */}
-                <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
-                  <Clock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="min-w-0 flex-1 space-y-1">
-                    <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
+                {/* Row 2: Temple & Office Hours */}
+                <div className="py-3 flex items-start gap-3">
+                  <Clock className="w-4 h-4 text-[#9A7214] shrink-0 mt-1" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#7A1C1C]">
                       {t("Temple & Office Hours", "ದರ್ಶನ ಮತ್ತು ಕಚೇರಿ ಸಮಯ")}
                     </p>
-                    <p className="font-semibold text-amber-900 break-words">
-                      {t("Morning", "ಬೆಳಿಗ್ಗೆ")}:{" "}
+                    <p className="text-xs sm:text-sm font-semibold text-[#2B1810] leading-relaxed break-words">
                       {t(
-                        siteData.darshanTimings.morning,
-                        siteData.darshanTimings.morningKn
-                      )}
-                    </p>
-                    <p className="font-semibold text-amber-900 break-words">
-                      {t("Evening", "ಸಂಜೆ")}:{" "}
-                      {t(
-                        siteData.darshanTimings.evening,
-                        siteData.darshanTimings.eveningKn
+                        "Morning: 6:00 AM – 2:00 PM | Evening: 4:00 PM – 8:30 PM",
+                        "ಬೆಳಿಗ್ಗೆ: 6:00 – ಮಧ್ಯಾಹ್ನ 2:00 | ಸಂಜೆ: 4:00 – ರಾತ್ರಿ 8:30"
                       )}
                     </p>
                   </div>
                 </div>
+              </div>
 
-                {/* Trust Administrator & Contact Info */}
-                <div className="flex items-start gap-3.5 rounded-2xl bg-amber-50/80 p-4 border border-amber-200/80">
-                  <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div className="min-w-0 flex-1 space-y-1.5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-amber-700">
-                      {t("Trust Office Contact", "ಟ್ರಸ್ಟ್ ಕಚೇರಿ ಸಂಪರ್ಕ")}
-                    </p>
-                    <p className="font-bold text-amber-900 break-words">
+              {/* Tactile Contact Action Buttons */}
+              <div className="space-y-2.5 pt-0.5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#4A1C1C]">
+                    <ShieldCheck className="w-4 h-4 text-[#9A7214] shrink-0" />
+                    <span>
                       {t(
-                        `${siteData.supervisor.name} (${siteData.supervisor.designation})`,
-                        `${siteData.supervisor.nameKn} (${siteData.supervisor.designationKn})`
+                        `${siteData.supervisor.designation}: ${siteData.supervisor.name}`,
+                        `${siteData.supervisor.designationKn}: ${siteData.supervisor.nameKn}`
                       )}
-                    </p>
-                    <p className="text-xs sm:text-sm flex items-start gap-2 text-amber-800">
-                      <Phone className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <a
-                        href={siteData.contact.phoneHref}
-                        className="font-semibold text-amber-900 hover:text-amber-600 underline underline-offset-2 min-w-0 break-words transition-colors"
-                      >
-                        {t(
-                          siteData.contact.phoneDisplay,
-                          siteData.contact.phoneDisplayKn
-                        )}
-                      </a>
-                    </p>
-                    <div className="text-xs sm:text-sm flex flex-wrap items-center gap-2 text-amber-800">
-                      <Mail className="w-4 h-4 text-amber-600 shrink-0" />
-                      <a
-                        href={siteData.contact.emailHref}
-                        className="font-semibold text-amber-900 hover:text-amber-600 underline underline-offset-2 break-all transition-colors"
-                      >
-                        {siteData.contact.emailDisplay}
-                      </a>
-                      <button
-                        type="button"
-                        onClick={handleCopyEmail}
-                        className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 hover:bg-amber-100 active:scale-[0.98] transition cursor-pointer"
-                        aria-label={t("Copy email address", "ಇಮೇಲ್ ವಿಳಾಸ ನಕಲಿಸಿ")}
-                      >
-                        {emailCopied ? (
-                          <>
-                            <Check className="w-3 h-3 text-emerald-600 shrink-0" />
-                            <span>{t("Copied", "ನಕಲಿಸಲಾಗಿದೆ")}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3 h-3 text-amber-600 shrink-0" />
-                            <span>{t("Copy Email", "ಇಮೇಲ್ ನಕಲಿಸಿ")}</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
+                    </span>
+                  </p>
+                  <span className="text-xs font-medium text-[#6B4A35] break-all">
+                    {siteData.contact.emailDisplay}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {/* 1. Primary Maroon Call Button */}
+                  <a
+                    href="tel:+919820790032"
+                    aria-label={t(
+                      "Call Temple Office at +91 98207 90032",
+                      "ಟ್ರಸ್ಟ್ ಕಚೇರಿಗೆ ಕರೆ ಮಾಡಿ +91 98207 90032"
+                    )}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 min-h-[44px] rounded-xl bg-[#7A1C1C] hover:bg-[#5E1414] active:scale-[0.99] px-4 py-2.5 text-xs sm:text-sm font-bold text-[#FFFDF7] border border-[#C59B27]/75 shadow-xs transition"
+                  >
+                    <Phone className="w-4 h-4 text-[#F4D078] shrink-0" />
+                    <span className="whitespace-nowrap">
+                      {t("Call +91 98207 90032", "ಕರೆ ಮಾಡಿ +91 98207 90032")}
+                    </span>
+                  </a>
+
+                  {/* 2. Secondary Gold-Border Email Button */}
+                  <a
+                    href={siteData.contact.emailHref}
+                    aria-label={t(
+                      `Email Temple Office at ${siteData.contact.emailDisplay}`,
+                      `ಟ್ರಸ್ಟ್ ಕಚೇರಿಗೆ ಇಮೇಲ್ ಕಳುಹಿಸಿ ${siteData.contact.emailDisplay}`
+                    )}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 min-h-[44px] rounded-xl border border-[#C59B27]/75 bg-[#FDF8EE] hover:bg-[#F3E9D4] hover:border-[#7A1C1C] active:scale-[0.99] px-4 py-2.5 text-xs sm:text-sm font-bold text-[#7A1C1C] shadow-xs transition"
+                  >
+                    <Mail className="w-4 h-4 text-[#9A7214] shrink-0" />
+                    <span className="whitespace-nowrap">
+                      {t("Email Temple Office", "ಟ್ರಸ್ಟ್ ಕಚೇರಿಗೆ ಇಮೇಲ್")}
+                    </span>
+                  </a>
+
+                  {/* Paired Compact Copy Email Button */}
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    aria-label={t(
+                      `Copy email address ${siteData.contact.emailDisplay}`,
+                      `ಇಮೇಲ್ ವಿಳಾಸ ನಕಲಿಸಿ ${siteData.contact.emailDisplay}`
+                    )}
+                    className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-xl border border-[#C59B27]/60 bg-[#FAF7F2] hover:bg-[#F3E9D4] hover:border-[#7A1C1C] active:scale-[0.99] px-3.5 py-2.5 text-xs font-bold text-[#4A1C1C] shadow-xs transition cursor-pointer"
+                  >
+                    {emailCopied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                        <span>{t("Copied", "ನಕಲಿಸಲಾಗಿದೆ")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-[#9A7214] shrink-0" />
+                        <span>{t("Copy Email", "ಇಮೇಲ್ ನಕಲಿಸಿ")}</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Compact Tactile Social Buttons Below Hairline Divider */}
+              <div className="border-t border-[#C59B27]/35 pt-4 space-y-2.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#7A1C1C]">
+                  {t("CONNECT WITH US", "ನಮ್ಮೊಂದಿಗೆ ಸಂಪರ್ಕದಲ್ಲಿರಿ")}
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {siteData.socialLinks.map((item) => (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t(
+                        `Follow ${siteData.shortName} on ${item.label}`,
+                        `${siteData.shortNameKn} ${item.labelKn} ಪುಟಕ್ಕೆ ಭೇಟಿ ನೀಡಿ`
+                      )}
+                      className="min-w-0 inline-flex items-center justify-center gap-2 min-h-[44px] px-3 rounded-xl border border-[#C59B27]/50 bg-[#FDF8EE] text-[#4A1C1C] font-medium text-sm shadow-xs hover:border-[#7A1C1C] hover:bg-[#F5EBDA] active:scale-[0.99] transition"
+                    >
+                      <SocialIcon platform={item.id} className="w-4 h-4 shrink-0" />
+                      <span className="truncate">
+                        {t(item.label, item.labelKn)}
+                      </span>
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons: Email via Mailto & Google Maps Directions */}
-            <div className="pt-4 border-t border-amber-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a
-                href={siteData.contact.emailHref}
-                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-amber-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-900 hover:brightness-105 active:scale-[0.99] transition duration-200 text-center leading-snug"
-              >
-                <Mail className="w-4 h-4 shrink-0" />
-                <span>{t("Email on Gmail", "ಜಿಮೇಲ್ ಮೂಲಕ ಇಮೇಲ್ ಮಾಡಿ")}</span>
-              </a>
+            {/* Right Column (lg:col-span-5): Compact Map + Attached Directions CTA */}
+            <div className="lg:col-span-5 min-w-0 flex flex-col gap-3">
+              <div className="relative w-full h-[240px] sm:h-[300px] rounded-xl overflow-hidden border border-[#C59B27]/50 bg-[#EFE6D4] shadow-xs">
+                <iframe
+                  title={t(
+                    `Google Maps location for ${siteData.trustName}`,
+                    `${siteData.trustNameKn} ಗೂಗಲ್ ಮ್ಯಾಪ್ ಸ್ಥಳ`
+                  )}
+                  src={siteData.contact.googleMapsEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
 
               <a
                 href={siteData.contact.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full border-2 border-amber-600 bg-amber-50 px-5 py-3 text-sm font-bold text-amber-900 hover:bg-amber-600 hover:text-white hover:brightness-105 active:scale-[0.99] transition duration-200 text-center leading-snug"
-              >
-                <Navigation className="w-4 h-4 shrink-0" />
-                <span>{t("Get Directions", "ಗೂಗಲ್ ಮ್ಯಾಪ್ ಮಾರ್ಗಸೂಚಿ")}</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Responsive Google Maps Embed */}
-          <div className="lg:col-span-7 min-w-0 flex flex-col rounded-3xl overflow-hidden border-2 border-amber-600 bg-white shadow-md min-h-[380px] sm:min-h-[460px]">
-            <div className="bg-amber-900 text-amber-50 px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-semibold">
-              <span className="flex items-start sm:items-center gap-2 leading-relaxed min-w-0">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
-                <span className="min-w-0 break-words">
-                  {t(siteData.shortName, siteData.shortNameKn)} •{" "}
-                  {t(siteData.contact.village, siteData.contact.villageKn)} (
-                  {siteData.contact.pincode})
-                </span>
-              </span>
-              <a
-                href={siteData.contact.googleMapsDirectionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-amber-300 hover:text-white underline underline-offset-2 shrink-0 py-1 leading-snug transition-colors duration-200"
-              >
-                {t("Open in Maps ↗", "ನಕ್ಷೆ ತೆರೆಯಿರಿ ↗")}
-              </a>
-            </div>
-
-            <div className="relative flex-1 w-full max-w-full min-h-[340px]">
-              <iframe
-                title={t(
-                  `Google Maps location for ${siteData.trustName}`,
-                  `${siteData.trustNameKn} ಗೂಗಲ್ ಮ್ಯಾಪ್ ಸ್ಥಳ`
+                aria-label={t(
+                  `Get Directions on Google Maps to ${siteData.trustName}`,
+                  `${siteData.trustNameKn} ಗೂಗಲ್ ಮ್ಯಾಪ್ ಮಾರ್ಗಸೂಚಿ ಪಡೆಯಿರಿ`
                 )}
-                src={siteData.contact.googleMapsEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full max-w-full h-full"
-              />
+                className="w-full inline-flex items-center justify-center gap-2 min-h-[44px] rounded-xl bg-[#7A1C1C] hover:bg-[#5E1414] active:scale-[0.99] px-4 py-2.5 text-xs sm:text-sm font-bold text-[#FFFDF7] border border-[#C59B27]/75 shadow-sm transition text-center"
+              >
+                <Navigation className="w-4 h-4 text-[#F4D078] shrink-0" />
+                <span>
+                  {t(
+                    "Get Directions on Google Maps",
+                    "ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ಮಾರ್ಗಸೂಚಿ ಪಡೆಯಿರಿ"
+                  )}
+                </span>
+                <ArrowUpRight className="w-4 h-4 text-[#F4D078] shrink-0" />
+              </a>
             </div>
-          </div>
-        </div>
-
-        {/* Connect With Us Social Block */}
-        <div className="rounded-3xl bg-white p-5 sm:p-8 border border-amber-200 shadow-sm space-y-5">
-          <div className="text-center space-y-1">
-            <h3 className="text-lg sm:text-xl font-bold text-amber-900 leading-relaxed break-words">
-              {t(
-                siteData.socialConnectLabels.sectionHeading,
-                siteData.socialConnectLabels.sectionHeadingKn
-              )}
-            </h3>
-            <p className="text-xs sm:text-sm text-amber-800 leading-relaxed break-words">
-              {t(
-                "Follow official temple updates, festival announcements, and live darshan highlights.",
-                "ಶ್ರೀ ಕ್ಷೇತ್ರದ ಅಧಿಕೃತ ಪ್ರಕಟಣೆಗಳು, ಉತ್ಸವಗಳ ಮಾಹಿತಿ ಮತ್ತು ವಿಶೇಷ ದರ್ಶನಕ್ಕಾಗಿ ಸಂಪರ್ಕದಲ್ಲಿರಿ."
-              )}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {siteData.socialLinks.map((item) => {
-              const brandClasses =
-                item.id === "youtube"
-                  ? "bg-[#FF0000] hover:bg-[#D90000]"
-                  : item.id === "instagram"
-                    ? "bg-gradient-to-r from-[#E1306C] via-[#F56040] to-[#F77737] hover:brightness-105"
-                    : item.id === "facebook"
-                      ? "bg-[#1877F2] hover:bg-[#1464D0]"
-                      : "bg-[#25D366] hover:bg-[#1EBE5D]";
-
-              return (
-                <a
-                  key={item.id}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group min-w-0 inline-flex items-center justify-center gap-2.5 min-h-[44px] rounded-full border border-transparent px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-200 leading-snug text-center ${brandClasses}`}
-                >
-                  <SocialIcon
-                    platform={item.id}
-                    className="w-4 h-4 shrink-0"
-                    white
-                  />
-                  <span className="truncate">{t(item.label, item.labelKn)}</span>
-                </a>
-              );
-            })}
           </div>
         </div>
       </div>
