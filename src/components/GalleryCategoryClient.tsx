@@ -6,7 +6,7 @@ import type { GalleryCategoryDetail } from "@/types/gallery";
 import { useLanguage } from "@/context/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingSocialPill from "@/components/FloatingSocialPill";
+import FloatingLanguageSwitcher from "@/components/FloatingLanguageSwitcher";
 
 interface GalleryCategoryClientProps {
   category: GalleryCategoryDetail;
@@ -98,7 +98,7 @@ export default function GalleryCategoryClient({
       </main>
 
       <Footer />
-      <FloatingSocialPill />
+      <FloatingLanguageSwitcher />
     </div>
   );
 }
